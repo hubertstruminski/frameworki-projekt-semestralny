@@ -1,16 +1,14 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { HeaderProps } from '../../../entities/headerInterfaces/header';
 import styled from 'styled-components';
 import house2 from '../../../svgs/house2';
 import { Colors } from '../../../styledHelpers/Colors';
-import house from '../../../svgs/house';
-import comments from '../../../svgs/comments';
-import bell from '../../../svgs/bell';
+import HeaderInput from './HeaderInput';
 
 const Container = styled.div`
   width: 100%;
   background-color: ${Colors.white};
-  height: 50px;
+  height: 55px;
   position: fixed;
   margin-top: 0;
   box-shadow: 0px 5px 2px ${Colors.headerShadow};
@@ -42,11 +40,6 @@ const TextContainer = styled.div`
   color: ${Colors.black};
 `;
 
-const Logo = styled.img`
-  width: 25px;
-  height: 25px;
-`;
-
 const CircleWhiteDiv = styled(CircleDiv)`
   background-color: ${Colors.white};
 `;
@@ -66,28 +59,42 @@ const CounterContainer = styled.div`
   z-index: 1000;
 `;
 
+const ArrowDownMenuContainer = styled.div`
+  width: 150px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;  
+
 const Header = (props: HeaderProps): ReactElement => {
+  
+  useEffect(() => {
+    
+  }, []);
+
   return (
     <Container>
       <PartialContainer>
-        <Logo src="" />
+        <img style={{ margin: '15px' }} src={process.env.PUBLIC_URL + '/media/logo.png'} alt="" width="35" height="35" />
         { house2() }
-        <TextContainer>Home</TextContainer>
+        <TextContainer style={{margin: '15px'}}>Home</TextContainer>
+        <ArrowDownMenuContainer>
+          <img src={process.env.PUBLIC_URL + '/media/icons/arrow-down.svg'} alt="" />
+        </ArrowDownMenuContainer>
       </PartialContainer>
-      <PartialContainer>
-        
-      </PartialContainer>
+      <HeaderInput />
       <PartialContainer>
         <CircleWhiteDiv>
-          { house() }
+          <img src={process.env.PUBLIC_URL + '/media/icons/house.svg'} alt="" />
         </CircleWhiteDiv>  
         <CircleDiv>
           <CounterContainer>3</CounterContainer>
-          { comments() }
+          <img src={process.env.PUBLIC_URL + '/media/icons/comments.svg'} alt="" />
         </CircleDiv>   
         <CircleDiv>
           <CounterContainer>3</CounterContainer>
-          { bell() }
+          <img src={process.env.PUBLIC_URL + '/media/icons/bell.svg'} alt="" />
         </CircleDiv>   
       </PartialContainer>
     </Container>

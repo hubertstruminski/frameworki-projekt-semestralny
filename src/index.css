@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#searchLegalclusterInput::placeholder {
+  color: #989ba0;
+  text-align: center;
+}
