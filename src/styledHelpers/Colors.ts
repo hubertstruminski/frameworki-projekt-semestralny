@@ -9,4 +9,5 @@ export const Colors = {
     headerInputColor: '#989BA0',
     profileTextColor: '#4456A9',
     subProfileTextColor: '#B9BBBF',
+    profileItemTextColor: '#7A8090',
 }

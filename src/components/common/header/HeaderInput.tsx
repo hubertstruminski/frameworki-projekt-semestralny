@@ -7,7 +7,7 @@ interface HeaderInputProps {
 }
 
 const Container = styled.div`
-  width: 450px;
+  width: 350px;
   height: 25px;
   border-radius: 5px;
   border: 1.5px solid ${Colors.headerInputBorder};

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import house2 from '../../../svgs/house2';
 import { Colors } from '../../../styledHelpers/Colors';
 import HeaderInput from './HeaderInput';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
@@ -65,6 +66,7 @@ const ArrowDownMenuContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-right: 10px;
 `;  
 
 const Header = (props: HeaderProps): ReactElement => {
@@ -78,7 +80,9 @@ const Header = (props: HeaderProps): ReactElement => {
       <PartialContainer>
         <img style={{ margin: '15px' }} src={process.env.PUBLIC_URL + '/media/logo.png'} alt="" width="35" height="35" />
         { house2() }
-        <TextContainer style={{margin: '15px'}}>Home</TextContainer>
+        <TextContainer style={{margin: '15px'}}>
+          <Link style={{ textDecoration: 'none' }} to="/">Home</Link>
+        </TextContainer>
         <ArrowDownMenuContainer>
           <img src={process.env.PUBLIC_URL + '/media/icons/arrow-down.svg'} alt="" />
         </ArrowDownMenuContainer>
