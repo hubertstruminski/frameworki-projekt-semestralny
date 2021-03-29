@@ -12,14 +12,15 @@ interface MainViewElementProps {
 
 const Container = styled.div`
   height: 100%;
-  /* background-image: url(${(props: MainViewElementProps) => props.backgroundImageUrl}); */
+  background-image: url(${(props: MainViewElementProps) => props.backgroundImageUrl});
+  background-size: 100% 100%;
   align-items: flex-start;
   justify-content: flex-end;
   display: flex;
-  /* background-color: green; */
   padding-left: 15px;
   padding-right: 50px;
   flex-direction: column;
+  /* margin-bottom: 25px; */
 `;
 
 const BodySpan = styled.span`
@@ -32,6 +33,7 @@ const DetailsContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 5px;
 `;
 
 const DetailsSpan = styled.span`
@@ -57,12 +59,14 @@ const MainViewElement = (props: MainViewElementProps): ReactElement => {
   
   return (
     <Container backgroundImageUrl={backgroundImageUrl}>
+      <div style={{ marginBottom: 25}}>
       <BodySpan>{body}</BodySpan>
       <DetailsContainer>
         <DetailsSpan>7 Jan 2020</DetailsSpan>
         <img src={userPhotoUrl} alt="" style={imgStyles} />
         <DetailsSpan>{userName}</DetailsSpan>
       </DetailsContainer>
+      </div>
     </Container>
   );
 }
