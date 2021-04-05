@@ -10,4 +10,5 @@ export const Colors = {
     profileTextColor: '#4456A9',
     subProfileTextColor: '#B9BBBF',
     profileItemTextColor: '#7A8090',
+    workspaceTitleColor: '#303952',
 }
