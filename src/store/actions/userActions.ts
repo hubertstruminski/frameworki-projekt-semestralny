@@ -7,7 +7,8 @@ export interface User {
   name: string;
   company: {
     name: string;
-  }
+  },
+  username?: string;
 }
 
 export interface UserPhoto {

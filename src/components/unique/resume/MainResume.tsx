@@ -4,7 +4,11 @@ import { Colors } from '../../../styledHelpers/Colors';
 import { fontSize } from '../../../styledHelpers/FontSizes';
 
 interface MainResumeProps {
-
+  commentName: string;
+  body: string;
+  photoUrl: string;
+  username: string | undefined;
+  name: string;
 }
 
 const Container = styled.div`
@@ -43,19 +47,20 @@ const ItemContainer = styled.div`
 
 
 const MainResume = (props: MainResumeProps): ReactElement => {
+  const { commentName, body, photoUrl, username, name } = props;
   return (
     <Container>
-      <TitleContainer>World company SAS</TitleContainer>
-      <MessageContainer>quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione</MessageContainer>
+      <TitleContainer>{commentName}</TitleContainer>
+      <MessageContainer>{body}</MessageContainer>
       <DetailsContainer>
         <ItemContainer>
           <img 
-            src={process.env.PUBLIC_URL + '/media/icons/arrow-down.svg'} 
+            src={photoUrl} 
             alt="" 
             style={{ borderRadius: 15/2, width: 15, height: 15, borderColor: 'green', borderWidth: 1}} 
           />
         </ItemContainer>
-        <ItemContainer>Subsid corp.</ItemContainer>
+        <ItemContainer>{username}</ItemContainer>
         <ItemContainer style={{marginTop: -5}}>.</ItemContainer>
         <ItemContainer>
           <img 
@@ -66,7 +71,7 @@ const MainResume = (props: MainResumeProps): ReactElement => {
         </ItemContainer>
         <ItemContainer>Corporate</ItemContainer>
         <ItemContainer style={{marginTop: -5}}>.</ItemContainer>
-        <ItemContainer style={{ fontWeight: 400}}>Updated 3 days ago by John Doe</ItemContainer>
+        <ItemContainer style={{ fontWeight: 400}}>Updated 3 days ago by {name}</ItemContainer>
       </DetailsContainer>
     </Container>
   );

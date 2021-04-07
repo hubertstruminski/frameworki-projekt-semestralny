@@ -9,7 +9,6 @@ import PublicationView from './publications/PublicationView';
 import SliderItem from './workspaces/SliderItem';
 import { Colors } from '../../styledHelpers/Colors';
 import { fontSize } from '../../styledHelpers/FontSizes';
-// import { Carousel } from 'react-responsive-carousel';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -93,7 +92,6 @@ const HomePage = (props: HomePageProps) => {
       }
     });
     setWorkspaces(titles);
-    console.log(titles);
   }, [publications, userList, photos]);
 
   const renderSlider = () => {

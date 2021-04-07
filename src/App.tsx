@@ -14,7 +14,7 @@ import TestPage from './components/unique/testPage/TestPage';
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: ${Colors.background};
   display: flex;
 `;

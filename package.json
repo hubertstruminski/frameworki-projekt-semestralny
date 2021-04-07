@@ -13,8 +13,12 @@
     "@types/styled-components": "^5.1.9",
     "@types/styled-components-react-native": "^5.1.1",
     "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",
+    "react-js-pagination": "^3.0.3",
+    "react-paginate": "^7.1.2",
     "react-redux": "^7.2.3",
     "react-responsive-carousel": "^3.2.18",
     "react-router-dom": "^5.2.0",
@@ -53,6 +57,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-js-pagination": "^3.0.3",
+    "@types/react-paginate": "^6.2.1",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-slick": "^0.23.4"
   }
