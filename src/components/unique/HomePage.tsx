@@ -117,7 +117,7 @@ const HomePage = (props: HomePageProps) => {
       <BasicContainer>
         Workspaces
       </BasicContainer> 
-      <div style={{ width: '90%', height: 200, position: 'relative', marginTop: 25}}>
+      <div style={{ width: '90%', height: 200, position: 'relative', marginTop: 25, marginBottom: 25}}>
         <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}>
           <Slider  
             infinite 

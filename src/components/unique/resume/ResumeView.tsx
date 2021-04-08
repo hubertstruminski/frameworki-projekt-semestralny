@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { fetchAllComments } from '../../../store/actions/commentActions';
 import { StoreState } from '../../../store/reducers';
@@ -12,6 +12,7 @@ import { Comment } from '../../../store/actions/commentActions';
 import { User } from '../../../store/actions/userActions';
 import { Photo } from '../../../store/actions/photoActions';
 import ReactPaginate from 'react-paginate';
+import ResumeList from './ResumeList';
 
 interface ResumeViewProps {
  title?: string;
@@ -30,6 +31,7 @@ const Container = styled.div`
   width: 90%;
   margin-top: 25px;
   margin-bottom: 25px;
+  position: relative;
 `;
 
 const TopContainer = styled.div`
@@ -56,12 +58,13 @@ const FeaturesContainer = styled.div`
 const ResumeView = (props: ResumeViewProps): ReactElement => {
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [activePage, setActivePage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const { fetchAllComments } = props;
   
-  const comments = useSelector((state: StoreState) => state.comments.comments);
-  const userList = useSelector((state: StoreState) => state.user.userList);
-  const photos = useSelector((state: StoreState) => state.photos.photos);
+  const comments = useSelector((state: StoreState): Comment[] => state.comments.comments);
+  const userList = useSelector((state: StoreState): User[] => state.user.userList);
+  const photos = useSelector((state: StoreState): Photo[] => state.photos.photos);
 
   useEffect(() => {
     fetchAllComments();
@@ -89,23 +92,19 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
     setResumes(result);
   }, [comments, userList, photos]);
 
-  const renderResumes = (offset: number) => {
-    return resumes.slice(offset, offset + PER_PAGE).map((resume: Resume): ReactElement => {
-      const { commentName, photoUrl, username, name, body } = resume;
-      return (
-        <MainResume 
-          commentName={commentName}
-          body={body}
-          photoUrl={photoUrl}
-          username={username}
-          name={name}
-        />
-      );
-    });
+  
+
+  const editSearchTerm = (e: ChangeEvent<HTMLInputElement>) => {
+    const { target: { value } } = e;
+    setSearchTerm(value === null ? '' : value);
   }
 
   const handlePageChange = (data: any) => {
     setActivePage(data.selected);
+  }
+
+  const dynamicSearch = () => {
+    return resumes.filter((resume: Resume): boolean => resume.commentName.toLowerCase().includes(searchTerm.toLowerCase()));
   }
 
   const PER_PAGE = 10;
@@ -117,13 +116,14 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
       <TopContainer>
         <TitleContainer>Resume your work</TitleContainer>
         <FeaturesContainer>
-          <Input placeholder="Filter by title..." />
+          <Input placeholder="Filter by title..." value={searchTerm} onChange={editSearchTerm} />
           <FollowedButton />
         </FeaturesContainer>
       </TopContainer>
       <div className="pagination" style={{width: '100%'}}>
         <div style={{marginBottom: 25, width: '100%'}}>
-          { renderResumes(offset) }
+          {/* { renderResumes(offset) } */}
+          <ResumeList offset={offset} resumes={dynamicSearch()} PER_PAGE={PER_PAGE} />
         </div>
       </div>
       <ReactPaginate

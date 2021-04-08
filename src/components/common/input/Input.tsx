@@ -1,9 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { ChangeEventHandler, ReactElement } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 
 interface InputProps {
   placeholder: string;
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 const Container = styled.div`
@@ -27,13 +29,15 @@ const inputStyles = {
 }
 
 const Input = (props: InputProps): ReactElement => {
-  const { placeholder } = props;
+  const { placeholder, value, onChange } = props;
   return (
     <Container>
       <input
         type="text" 
         style={inputStyles}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
       <img src={process.env.PUBLIC_URL + '/media/icons/search.svg'} alt="" />
     </Container>
