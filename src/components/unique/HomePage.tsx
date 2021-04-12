@@ -18,6 +18,7 @@ interface HomePageProps {
   fetchAllPublications: Function;
   fetchAllUsers: Function;
   fetchAllPhotos: Function;
+  showHamburgerMenu: boolean;
 }
 
 interface Workspace {
@@ -36,6 +37,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   margin-top: 55px;
+  /* background-color: red; */
 `;
 
 
@@ -45,14 +47,15 @@ const BasicContainer = styled.div`
   margin-left: 45px;
   color: ${Colors.profileItemTextColor};
   font-weight: bold;
-  font-size: ${fontSize[20]};
 `;
 
 const HomePage = (props: HomePageProps) => {
+  const [sliderWidth, setSliderWidth] = useState<number>((window.innerWidth * 0.9)- 285);
   const { 
     fetchAllPublications, 
     fetchAllUsers,
     fetchAllPhotos,
+    showHamburgerMenu
   } = props;
 
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
@@ -60,6 +63,20 @@ const HomePage = (props: HomePageProps) => {
   const publications = useSelector((state: StoreState) => state.publications.publications);
   const userList = useSelector((state: StoreState) => state.user.userList);
   const photos = useSelector((state: StoreState) => state.photos.photos);
+
+  useEffect(() => {
+    window.addEventListener('resize', updateLayout);
+    return () => window.removeEventListener('resize', updateLayout);
+  }, []);
+
+  const updateLayout = () => {
+    if(window.innerWidth < 800) {
+      setSliderWidth((window.innerWidth * 0.9) - 15);
+    } else {
+      setSliderWidth((window.innerWidth * 0.9) - 285);
+    }
+    
+  }
 
   useEffect(() => {
     fetchAllPublications();
@@ -106,6 +123,8 @@ const HomePage = (props: HomePageProps) => {
           users={users}
           icon={icon}
           days={days}
+          isRelative={index === (workspaces.length - 1) ? true : false}
+          showHamburgerMenu={showHamburgerMenu}
         />
       );
     });
@@ -113,12 +132,12 @@ const HomePage = (props: HomePageProps) => {
 
   return (
     <Container>
-      <PublicationView />
-      <BasicContainer>
+      <PublicationView showHamburgerMenu={showHamburgerMenu} />
+      <BasicContainer style={{ fontSize: showHamburgerMenu ? '2.5vw' : '1vw'}}>
         Workspaces
-      </BasicContainer> 
-      <div style={{ width: '90%', height: 200, position: 'relative', marginTop: 25, marginBottom: 25}}>
-        <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}>
+      </BasicContainer>
+      <div style={{ maxWidth: sliderWidth, marginTop: 25}}>
+        {/* <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}> */}
           <Slider  
             infinite 
             autoplay 
@@ -126,12 +145,13 @@ const HomePage = (props: HomePageProps) => {
             arrows={false}
             slidesToShow={5}
             variableWidth
+            adaptiveHeight
           >
             { renderSlider() }
           </Slider>
-        </div>
+        {/* </div> */}
       </div>
-      <ResumeView />
+      <ResumeView showHamburgerMenu={showHamburgerMenu} />
     </Container>
   );
 }

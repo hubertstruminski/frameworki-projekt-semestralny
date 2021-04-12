@@ -8,6 +8,7 @@ interface WorkspaceDetailsProps {
   type: string;
   users: number;
   icon: string;
+  showHamburgerMenu: boolean;
 }
 
 const Container = styled.div`
@@ -18,30 +19,37 @@ const Container = styled.div`
 `;
 const ItemContainer = styled.div`
   color: ${Colors.subProfileTextColor};
-  font-size: ${fontSize[14]};
+  /* font-size: ${fontSize[14]}; */
   margin: 5px;
 `;
 
-const smallIconStyles = {
-  width: 15, 
-  height: 15
-}
+
 
 const WorkspaceDetails = (props: WorkspaceDetailsProps): ReactElement => {
-  const { type, users, icon } = props;
+  const { type, users, icon, showHamburgerMenu } = props;
+
+  const smallIconStyles = {
+    width: showHamburgerMenu ? 7.5 : 15, 
+    height: showHamburgerMenu ? 7.5 : 15
+  }
+
+  const itemContainerStyles = {
+    fontSize: showHamburgerMenu ? '1.5vw' : '0.7vw'
+  }
+
   return (
     <Container>
       <ItemContainer>
         <img src={process.env.PUBLIC_URL + icon} alt="" style={smallIconStyles} />
       </ItemContainer>
-      <ItemContainer>
+      <ItemContainer style={itemContainerStyles}>
         {type}
       </ItemContainer>
-      <ItemContainer style={{ fontWeight: 'bold' }}>.</ItemContainer>
+      <ItemContainer style={itemContainerStyles}>.</ItemContainer>
       <ItemContainer>
         <img src={process.env.PUBLIC_URL + "/media/icons/people.png"} alt="" style={smallIconStyles} />
       </ItemContainer>
-      <ItemContainer>{users} users</ItemContainer>
+      <ItemContainer style={itemContainerStyles}>{users} users</ItemContainer>
     </Container>
   );
 }

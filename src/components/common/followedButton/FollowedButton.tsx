@@ -5,7 +5,8 @@ import { fontSize } from '../../../styledHelpers/FontSizes';
 import useDropdown from 'react-dropdown-hook';
 
 interface FollowedButtonProps {
-  onClick?: () => {}
+  onClick?: () => {};
+  showHamburgerMenu: boolean;
 }
 
 const Container = styled.div`
@@ -39,7 +40,7 @@ const ItemContainer = styled.div`
 `;
 
 const FollowedButton = (props: FollowedButtonProps) => {
-  const { onClick } = props;
+  const { onClick, showHamburgerMenu } = props;
   const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
 
   return (
@@ -50,8 +51,8 @@ const FollowedButton = (props: FollowedButtonProps) => {
         <SmallestContainer>o</SmallestContainer>
         <SmallerContainer>)</SmallerContainer>
         ) 
-        <div style={{marginLeft: 10, marginTop: 2}}>Followed</div>
-        <div style={{marginLeft: 10, marginTop: -2}}>
+        <div style={{marginLeft: showHamburgerMenu ? 2 : 10, marginTop: 2, fontSize: showHamburgerMenu ? '2.5vw' : '0.9vw'}}>Followed</div>
+        <div style={{marginLeft: showHamburgerMenu ? 2 : 10, marginTop: -2}}>
           <img src={process.env.PUBLIC_URL + "/media/icons/arrow-down.svg"} alt="" />
         </div>
       </Container>

@@ -17,6 +17,7 @@ import ResumeList from './ResumeList';
 interface ResumeViewProps {
  title?: string;
  fetchAllComments: Function;
+ showHamburgerMenu: boolean;
 }
 
 interface Resume {
@@ -31,7 +32,7 @@ const Container = styled.div`
   width: 90%;
   margin-top: 25px;
   margin-bottom: 25px;
-  position: relative;
+  /* position: relative; */
 `;
 
 const TopContainer = styled.div`
@@ -46,7 +47,6 @@ const TopContainer = styled.div`
 const TitleContainer = styled.div`
   color: ${Colors.profileItemTextColor};
   font-weight: bold;
-  font-size: ${fontSize[20]};
 `;
 
 const FeaturesContainer = styled.div`
@@ -60,7 +60,7 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
   const [activePage, setActivePage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const { fetchAllComments } = props;
+  const { fetchAllComments, showHamburgerMenu } = props;
   
   const comments = useSelector((state: StoreState): Comment[] => state.comments.comments);
   const userList = useSelector((state: StoreState): User[] => state.user.userList);
@@ -114,16 +114,21 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
   return (
     <Container>
       <TopContainer>
-        <TitleContainer>Resume your work</TitleContainer>
+        <TitleContainer style={{ fontSize: showHamburgerMenu ? '2.5vw' : '1vw' }}>Resume your work</TitleContainer>
         <FeaturesContainer>
           <Input placeholder="Filter by title..." value={searchTerm} onChange={editSearchTerm} />
-          <FollowedButton />
+          <FollowedButton showHamburgerMenu={showHamburgerMenu} />
         </FeaturesContainer>
       </TopContainer>
       <div className="pagination" style={{width: '100%'}}>
         <div style={{marginBottom: 25, width: '100%'}}>
           {/* { renderResumes(offset) } */}
-          <ResumeList offset={offset} resumes={dynamicSearch()} PER_PAGE={PER_PAGE} />
+          <ResumeList 
+            offset={offset} 
+            resumes={dynamicSearch()} 
+            PER_PAGE={PER_PAGE}
+            showHamburgerMenu={showHamburgerMenu} 
+          />
         </div>
       </div>
       <ReactPaginate

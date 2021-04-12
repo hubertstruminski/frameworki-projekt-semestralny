@@ -61,7 +61,7 @@ const CounterContainer = styled.div`
 `;
 
 const ArrowDownMenuContainer = styled.div`
-  width: 150px;
+  /* width: 150px; */
   height: 100%;
   display: flex;
   align-items: center;
@@ -70,6 +70,7 @@ const ArrowDownMenuContainer = styled.div`
 `;  
 
 const Header = (props: HeaderProps): ReactElement => {
+  const { showHamburgerMenu } = props;
   
   useEffect(() => {
     
@@ -83,11 +84,11 @@ const Header = (props: HeaderProps): ReactElement => {
         <TextContainer style={{margin: '15px'}}>
           <Link style={{ textDecoration: 'none' }} to="/">Home</Link>
         </TextContainer>
-        <ArrowDownMenuContainer>
+        <ArrowDownMenuContainer style={{ width: showHamburgerMenu ? 50 : 150}}>
           <img src={process.env.PUBLIC_URL + '/media/icons/arrow-down.svg'} alt="" />
         </ArrowDownMenuContainer>
       </PartialContainer>
-      <HeaderInput />
+      { !showHamburgerMenu && <HeaderInput /> }
       <PartialContainer>
         <CircleWhiteDiv>
           <img src={process.env.PUBLIC_URL + '/media/icons/house.svg'} alt="" />

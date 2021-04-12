@@ -9,6 +9,7 @@ interface MainResumeProps {
   photoUrl: string;
   username: string | undefined;
   name: string;
+  showHamburgerMenu: boolean;
 }
 
 const Container = styled.div`
@@ -21,7 +22,6 @@ const Container = styled.div`
 const TitleContainer = styled.div`
   color: ${Colors.profileTextColor};
   font-weight: 700;
-  font-size: ${fontSize[20]};
 `;
 
 const MessageContainer = styled.div`
@@ -47,11 +47,23 @@ const ItemContainer = styled.div`
 
 
 const MainResume = (props: MainResumeProps): ReactElement => {
-  const { commentName, body, photoUrl, username, name } = props;
+  const { 
+    commentName, 
+    body, 
+    photoUrl, 
+    username, 
+    name,
+    showHamburgerMenu
+  } = props;
+
+  const inlineFontStyles = {
+    fontSize: showHamburgerMenu ? '2vw' : '0.7vw',
+  }
+
   return (
     <Container>
-      <TitleContainer>{commentName}</TitleContainer>
-      <MessageContainer>{body}</MessageContainer>
+      <TitleContainer style={{ fontSize: showHamburgerMenu ? '3vw' : '0.95vw' }}>{commentName}</TitleContainer>
+      <MessageContainer style={{ fontSize: showHamburgerMenu ? '2.7vw' : '0.85vw' }}>{body}</MessageContainer>
       <DetailsContainer>
         <ItemContainer>
           <img 
@@ -60,7 +72,7 @@ const MainResume = (props: MainResumeProps): ReactElement => {
             style={{ borderRadius: 15/2, width: 15, height: 15, borderColor: 'green', borderWidth: 1}} 
           />
         </ItemContainer>
-        <ItemContainer>{username}</ItemContainer>
+        <ItemContainer style={inlineFontStyles}>{username}</ItemContainer>
         <ItemContainer style={{marginTop: -5}}>.</ItemContainer>
         <ItemContainer>
           <img 
@@ -69,9 +81,9 @@ const MainResume = (props: MainResumeProps): ReactElement => {
             style={{ width: 15, height: 15, marginRight: 5 }}
           />
         </ItemContainer>
-        <ItemContainer>Corporate</ItemContainer>
+        <ItemContainer style={inlineFontStyles}>Corporate</ItemContainer>
         <ItemContainer style={{marginTop: -5}}>.</ItemContainer>
-        <ItemContainer style={{ fontWeight: 400}}>Updated 3 days ago by {name}</ItemContainer>
+        <ItemContainer style={{fontSize: showHamburgerMenu ? '2vw' : '0.7vw', fontWeight: 400 }}>Updated 3 days ago by {name}</ItemContainer>
       </DetailsContainer>
     </Container>
   );

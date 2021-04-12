@@ -7,7 +7,8 @@ interface MainViewElementProps {
   userName?: string;
   userPhotoUrl?: string;
   body?: string;
-  backgroundImageUrl?: string
+  backgroundImageUrl?: string;
+  showHamburgerMenu?: boolean;
 }
 
 const Container = styled.div`
@@ -25,7 +26,6 @@ const Container = styled.div`
 
 const BodySpan = styled.span`
   color: ${Colors.white};
-  font-size: ${fontSize[16]};
 `;
 
 const DetailsContainer = styled.div`
@@ -54,17 +54,18 @@ const MainViewElement = (props: MainViewElementProps): ReactElement => {
     userName, 
     userPhotoUrl, 
     body,
-    backgroundImageUrl
+    backgroundImageUrl,
+    showHamburgerMenu
   } = props;
   
   return (
-    <Container backgroundImageUrl={backgroundImageUrl}>
+    <Container backgroundImageUrl={backgroundImageUrl} style={{paddingTop: showHamburgerMenu ? 10 : 0}} >
       <div style={{ marginBottom: 25}}>
-      <BodySpan>{body}</BodySpan>
+      <BodySpan style={{ fontSize: showHamburgerMenu ? '1.7vw' : '1vw'}}>{body}</BodySpan>
       <DetailsContainer>
-        <DetailsSpan>7 Jan 2020</DetailsSpan>
+        <DetailsSpan style={{ fontSize: showHamburgerMenu ? '1.4vw' : '0.7vw'}}>7 Jan 2020</DetailsSpan>
         <img src={userPhotoUrl} alt="" style={imgStyles} />
-        <DetailsSpan>{userName}</DetailsSpan>
+        <DetailsSpan style={{ fontSize: showHamburgerMenu ? '1.4vw' : '0.7vw'}}>{userName}</DetailsSpan>
       </DetailsContainer>
       </div>
     </Container>

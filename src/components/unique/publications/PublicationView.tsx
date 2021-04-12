@@ -12,22 +12,20 @@ import { Photo } from '../../../store/actions/photoActions';
 import { PublicationDto } from '../../../entities/headerInterfaces/publication';
 
 interface PublicationListProps {
-
+  showHamburgerMenu: boolean;
 }
 
 
 const Container = styled.div`
   width: 90%;
-  height: 315px;
   margin-top: 25px;
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
 `;
 
 const LeftContainer = styled.div`
-  width: 30%;
+  /* width: 30%; */
   background-color: red;
-  /* padding-bottom: 25px; */
 
 `;
 
@@ -36,7 +34,7 @@ const LeftWrapper = styled.div`
 `;
 
 const RightContainer = styled.div`
-  width: 70%;
+  /* width: 70%; */
   background-color: ${Colors.white};
   padding-top: 10px;
   padding-bottom: 10px;
@@ -53,24 +51,14 @@ const RightWrapper = styled.div`
   padding-right: 20px;
 `;
 
-const latestStyles = {
-  color: Colors.profileItemTextColor,
-  fontWeight: 700,
-  fontSize: fontSize[20],
-}
-
-const moreStyles = {
-  color: Colors.profileTextColor,
-  fontWeight: 700,
-  fontSize: fontSize[16],
-}
-
 const PublicationView = (props: PublicationListProps): ReactElement => {
   const [collection, setCollection] = useState<PublicationDto[]>([]);
 
   const publications = useSelector((state: StoreState) => state.publications.publications);
   const userList = useSelector((state: StoreState) => state.user.userList);
   const photos = useSelector((state: StoreState) => state.photos.photos);
+
+  const { showHamburgerMenu } = props;
   
   useEffect(() => {
     const tmp: PublicationDto[] = []
@@ -98,22 +86,35 @@ const PublicationView = (props: PublicationListProps): ReactElement => {
     setCollection(tmp);
   }, [photos, publications, userList]);
 
+  const latestStyles = {
+    color: Colors.profileItemTextColor,
+    fontWeight: 700,
+    fontSize: showHamburgerMenu ? '2.7vw' : '0.95vw'
+  }
+  
+  const moreStyles = {
+    color: Colors.profileTextColor,
+    fontWeight: 700,
+    fontSize: showHamburgerMenu ? '2.7vw' : '0.95vw'
+  }
+
   return (
-    <Container>
-      <LeftContainer>
+    <Container style={{ flexDirection: showHamburgerMenu ? 'column' : 'row' }}>
+      <LeftContainer style={{ width: showHamburgerMenu ? '100%' : '30%' }}>
         <LeftWrapper>
           <MainViewElement 
             body={collection.length !== 0 ? collection[0].body : ''}
             userName={collection.length !== 0 ? collection[0].name : ''}
             userPhotoUrl={collection.length !== 0 && collection[0].urls[0] ? collection[0].urls[0] : ''}
             backgroundImageUrl={collection.length !== 0 && collection[0].urls[1] ? collection[0].urls[1] : ''}
+            showHamburgerMenu={showHamburgerMenu}
           />
         </LeftWrapper>
       </LeftContainer>
-      <RightContainer>
+      <RightContainer style={{ width: showHamburgerMenu ? '100%' : '70%' }}>
         <RightWrapper>
           <span style={latestStyles}>Latest publications</span>
-          <PublicationList collection={collection.slice(1, 4)} />
+          <PublicationList collection={collection.slice(1, 4)} showHamburgerMenu={showHamburgerMenu} />
           <span style={moreStyles}>See more publications</span>
         </RightWrapper>
       </RightContainer>

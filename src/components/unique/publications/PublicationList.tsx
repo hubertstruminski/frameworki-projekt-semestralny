@@ -4,7 +4,8 @@ import { PublicationDto } from '../../../entities/headerInterfaces/publication';
 import PublicationComponent from './PublicationComponent';
 
 interface PublicationListProps {
-  collection: PublicationDto[]
+  collection: PublicationDto[];
+  showHamburgerMenu: boolean;
 }
 
 const Container = styled.div`
@@ -14,7 +15,7 @@ const Container = styled.div`
 `;
 
 const PublicationList = (props: PublicationListProps): ReactElement => {
-  const { collection } = props;
+  const { collection, showHamburgerMenu } = props;
   
   const renderPublications = () => {
     return collection.map((publication: PublicationDto, index: number): ReactElement => {
@@ -22,6 +23,7 @@ const PublicationList = (props: PublicationListProps): ReactElement => {
         <PublicationComponent
           key={index} 
           publication={publication} 
+          showHamburgerMenu={showHamburgerMenu}
         />
       );
     })

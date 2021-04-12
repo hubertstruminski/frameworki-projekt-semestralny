@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import './App.css';
 import Header from './components/common/header/Header';
 import styled from 'styled-components';
@@ -22,22 +22,48 @@ const Container = styled.div`
 const Wrapper = styled.div`
   flex: 1;
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
 `;
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
 function App() {
+  const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
+  const [rowFlexDirection, setRowFlexDirection] = useState(true);
+
+  useLayoutEffect(() => {
+    window.addEventListener('resize', updateLayout);
+    return () => window.removeEventListener('resize', updateLayout);
+  }, []);
+
+  const updateLayout = () => {
+    if(window.innerWidth < 800) {
+      setShowHamburgerMenu(true)
+      setRowFlexDirection(false);
+    } else {
+      setShowHamburgerMenu(false)
+      setRowFlexDirection(true);
+    }
+  }
+
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Container>
-          <Header />
-          <Wrapper>
-            <LeftMenu />
+          <Header showHamburgerMenu={showHamburgerMenu} />
+          <Wrapper style={{flexDirection: rowFlexDirection ? 'row' : 'column'}}>
+            { !showHamburgerMenu && <LeftMenu />}
             <Switch>
-              <Route exact path="/" component={HomePage}></Route>
-              <Route exact path="/test" component={TestPage}></Route>
+              <Route 
+                exact 
+                path="/" 
+                component={() => (
+                  <HomePage 
+                    showHamburgerMenu={showHamburgerMenu} 
+                  />
+                )}
+              ></Route>
+              <Route exact path="/test" component={() => (<TestPage />)}></Route>
             </Switch>
           </Wrapper>
         </Container>
