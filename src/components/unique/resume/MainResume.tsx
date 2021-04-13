@@ -1,7 +1,11 @@
 import React, { ReactElement } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
-import { fontSize } from '../../../styledHelpers/FontSizes';
+import {
+  Container,
+  DetailsContainer,
+  ItemContainer,
+  MessageContainer,
+  TitleContainer
+} from '../../../styledHelpers/MainResumeComponents';
 
 interface MainResumeProps {
   commentName: string;
@@ -11,40 +15,6 @@ interface MainResumeProps {
   name: string;
   showHamburgerMenu: boolean;
 }
-
-const Container = styled.div`
-  margin-top: 10px;
-  flex: 1;
-  background-color: ${Colors.white};
-  padding: 15px;
-`;
-
-const TitleContainer = styled.div`
-  color: ${Colors.profileTextColor};
-  font-weight: 700;
-`;
-
-const MessageContainer = styled.div`
-  color: ${Colors.subProfileTextColor};
-  font-size: ${fontSize[18]};
-  font-weight: 500;
-  margin-top: 10px;
-`;
-
-const DetailsContainer = styled.div`
-  color: ${Colors.subProfileTextColor};
-  font-size: ${fontSize[14]};
-  font-weight: 600;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 10px;
-`;
-
-const ItemContainer = styled.div`
-  margin-right: 10px;
-`;
-
 
 const MainResume = (props: MainResumeProps): ReactElement => {
   const { 

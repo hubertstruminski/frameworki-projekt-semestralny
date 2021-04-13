@@ -1,18 +1,20 @@
 import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { fetchAllComments } from '../../../store/actions/commentActions';
 import { StoreState } from '../../../store/reducers';
-import { Colors } from '../../../styledHelpers/Colors';
-import { fontSize } from '../../../styledHelpers/FontSizes';
 import FollowedButton from '../../common/followedButton/FollowedButton';
 import Input from '../../common/input/Input';
-import MainResume from './MainResume';
 import { connect, useSelector } from 'react-redux';
 import { Comment } from '../../../store/actions/commentActions';
 import { User } from '../../../store/actions/userActions';
 import { Photo } from '../../../store/actions/photoActions';
 import ReactPaginate from 'react-paginate';
 import ResumeList from './ResumeList';
+import {
+  Container,
+  FeaturesContainer,
+  TitleContainer,
+  TopContainer
+} from '../../../styledHelpers/ResumeViewComponents';
 
 interface ResumeViewProps {
  title?: string;
@@ -28,43 +30,21 @@ interface Resume {
   photoUrl: string;
 }
 
-const Container = styled.div`
-  width: 90%;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  /* position: relative; */
-`;
-
-const TopContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 25px;
-  padding-right: 25px;
-`;
-
-const TitleContainer = styled.div`
-  color: ${Colors.profileItemTextColor};
-  font-weight: bold;
-`;
-
-const FeaturesContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
 const ResumeView = (props: ResumeViewProps): ReactElement => {
   const [resumes, setResumes] = useState<Resume[]>([]);
   const [activePage, setActivePage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchUsernameTerm, setSearchUsernameTerm] = useState<string>('');
 
   const { fetchAllComments, showHamburgerMenu } = props;
   
   const comments = useSelector((state: StoreState): Comment[] => state.comments.comments);
   const userList = useSelector((state: StoreState): User[] => state.user.userList);
   const photos = useSelector((state: StoreState): Photo[] => state.photos.photos);
+
+  useEffect(() => {
+    console.log(searchUsernameTerm);
+  }, [searchUsernameTerm]);
 
   useEffect(() => {
     fetchAllComments();
@@ -90,6 +70,7 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
       }
     });
     setResumes(result);
+    console.log(result);
   }, [comments, userList, photos]);
 
   
@@ -104,7 +85,12 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
   }
 
   const dynamicSearch = () => {
-    return resumes.filter((resume: Resume): boolean => resume.commentName.toLowerCase().includes(searchTerm.toLowerCase()));
+    return resumes.filter(
+      (resume: Resume): boolean => {
+        return resume.commentName.toLowerCase().includes(searchTerm.toLowerCase())
+        &&
+        resume.name.toLowerCase().includes(searchUsernameTerm.toLowerCase())
+      });
   }
 
   const PER_PAGE = 10;
@@ -117,7 +103,7 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
         <TitleContainer style={{ fontSize: showHamburgerMenu ? '2.5vw' : '1vw' }}>Resume your work</TitleContainer>
         <FeaturesContainer>
           <Input placeholder="Filter by title..." value={searchTerm} onChange={editSearchTerm} />
-          <FollowedButton showHamburgerMenu={showHamburgerMenu} />
+          <FollowedButton showHamburgerMenu={showHamburgerMenu} setSearchTerm={setSearchUsernameTerm} />
         </FeaturesContainer>
       </TopContainer>
       <div className="pagination" style={{width: '100%'}}>

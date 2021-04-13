@@ -1,47 +1,31 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
-import { fontSize } from '../../../styledHelpers/FontSizes';
 import useDropdown from 'react-dropdown-hook';
+import { StoreState } from '../../../store/reducers';
+import { connect, useSelector } from 'react-redux';
+import { 
+  Container,
+  ItemContainer,
+  SmallerContainer,
+  SmallestContainer
+} from '../../../styledHelpers/FollowedButtonComponents';
 
 interface FollowedButtonProps {
   onClick?: () => {};
   showHamburgerMenu: boolean;
+  setSearchTerm: Function;
 }
 
-const Container = styled.div`
-  background-color: transparent;
-  color: ${Colors.profileTextColor};
-  font-weight: 700;
-  font-size: ${fontSize[16]};
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const SmallerContainer = styled.div`
-  font-size: ${fontSize[14]};
-`;
-
-const SmallestContainer = styled.div`
-  font-size: ${fontSize[12]};
-`;
-
-const ItemContainer = styled.div`
-  width: 100%;
-  background-color: red;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  
-`;
-
 const FollowedButton = (props: FollowedButtonProps) => {
-  const { onClick, showHamburgerMenu } = props;
+  const { showHamburgerMenu, setSearchTerm } = props;
   const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
+  
+  const userMe = useSelector((state: StoreState) => state.user.user);
+  const { name } = userMe;
+
+  const searchResumes = (value: string) => {
+    setSearchTerm(value);
+    closeDropdown();
+  }
 
   return (
     <div ref={wrapperRef}>
@@ -58,14 +42,18 @@ const FollowedButton = (props: FollowedButtonProps) => {
       </Container>
       { dropdownOpen &&
         <div style={{position: 'relative'}}>
-        <div style={{position: 'absolute', width: '100%'}}>
-          <ItemContainer>My</ItemContainer>
-          <ItemContainer>All</ItemContainer>
-        </div>
+          <div style={{position: 'absolute', width: '100%'}}>
+            <ItemContainer onClick={() => searchResumes(name)}>My</ItemContainer>
+            <ItemContainer onClick={() => searchResumes('')}>All</ItemContainer>
+          </div>
         </div>
       }
     </div>
   ); 
 }
 
-export default FollowedButton;
+function mapStateToProps(state: StoreState) {
+  return {};
+}
+
+export default connect(mapStateToProps, { })(FollowedButton);

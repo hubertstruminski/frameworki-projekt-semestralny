@@ -1,16 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Container } from '../../../styledHelpers/TestPageComponents';
 
 interface TestPageProps {
 
 }
-
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const TestPage = (props: TestPageProps) => {
   return (

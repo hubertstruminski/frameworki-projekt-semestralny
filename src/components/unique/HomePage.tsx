@@ -1,5 +1,4 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { connect, useSelector } from 'react-redux';
 import { StoreState } from '../../store/reducers';
 import { fetchAllPublications } from '../../store/actions/publicationActions'
@@ -7,12 +6,12 @@ import { fetchAllUsers } from '../../store/actions/userActions';
 import { fetchAllPhotos } from '../../store/actions/photoActions';
 import PublicationView from './publications/PublicationView';
 import SliderItem from './workspaces/SliderItem';
-import { Colors } from '../../styledHelpers/Colors';
-import { fontSize } from '../../styledHelpers/FontSizes';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ResumeView from './resume/ResumeView';
+import LeftMenu from '../common/leftMenu/LeftMenu';
+import { BasicContainer, Container } from '../../styledHelpers/HomePageComponents';
 
 interface HomePageProps {
   fetchAllPublications: Function;
@@ -29,25 +28,6 @@ interface Workspace {
   url: string;
   icon: string;
 }
-
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 55px;
-  /* background-color: red; */
-`;
-
-
-const BasicContainer = styled.div`
-  width: 90%;
-  margin-top: 20px;
-  margin-left: 45px;
-  color: ${Colors.profileItemTextColor};
-  font-weight: bold;
-`;
 
 const HomePage = (props: HomePageProps) => {
   const [sliderWidth, setSliderWidth] = useState<number>((window.innerWidth * 0.9)- 285);
@@ -75,7 +55,6 @@ const HomePage = (props: HomePageProps) => {
     } else {
       setSliderWidth((window.innerWidth * 0.9) - 285);
     }
-    
   }
 
   useEffect(() => {
@@ -132,6 +111,7 @@ const HomePage = (props: HomePageProps) => {
 
   return (
     <Container>
+      { showHamburgerMenu && <LeftMenu showHamburgerMenu={showHamburgerMenu} />}
       <PublicationView showHamburgerMenu={showHamburgerMenu} />
       <BasicContainer style={{ fontSize: showHamburgerMenu ? '2.5vw' : '1vw'}}>
         Workspaces

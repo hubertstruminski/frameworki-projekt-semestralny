@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
-import { fontSize } from '../../../styledHelpers/FontSizes';
+import {
+  Container,
+  ItemContainer
+} from '../../../styledHelpers/WorkspaceDetailsComponents';
 
 interface WorkspaceDetailsProps {
   photoUrl: string;
@@ -10,20 +11,6 @@ interface WorkspaceDetailsProps {
   icon: string;
   showHamburgerMenu: boolean;
 }
-
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-const ItemContainer = styled.div`
-  color: ${Colors.subProfileTextColor};
-  /* font-size: ${fontSize[14]}; */
-  margin: 5px;
-`;
-
-
 
 const WorkspaceDetails = (props: WorkspaceDetailsProps): ReactElement => {
   const { type, users, icon, showHamburgerMenu } = props;

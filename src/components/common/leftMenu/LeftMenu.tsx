@@ -1,77 +1,26 @@
 import React, { ReactElement, useEffect } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
 import ChildElement from './ChildElement';
 import { fetchUserMe, fetchUserPhoto } from '../../../store/actions/userActions';
 import { connect, useSelector } from 'react-redux';
 import { StoreState } from '../../../store/reducers';
+import {
+  BottomContainer,
+  Container,
+  ProfileContainer,
+  TopContainer,
+  NameContainer,
+  JobTitleContainer,
+  ItemsContainer,
+} from '../../../styledHelpers/LeftMenuComponents';
 
 interface LeftMenuProps {
   fetchUserMe: Function;
   fetchUserPhoto: Function;
+  showHamburgerMenu: boolean;
 }
 
-const Container = styled.div`
-  width: 300px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 55px;
-`;
-
-const ProfileContainer = styled.div`
-  width: 240px;
-  height: 250px;
-  background-color: white;
-  margin-top: 25px;
-  border: 1px solid #EBEDF0;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-`;
-
-const TopContainer = styled.div`
-  width: 100%;
-  height: 150px;
-  border-bottom: 1px solid #EBEDF0;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const BottomContainer = styled.div`
-  flex: 1;
-  padding-right: 15px;
-  padding-left: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding-bottom: 15px;
-  padding-top: 15px;
-`;
-
-const NameContainer = styled.div`
-  color: ${Colors.profileTextColor};
-  font-weight: 600;
-  margin-top: 10px;
-`;
-
-const JobTitleContainer = styled.div`
-  color: ${Colors.subProfileTextColor};
-`;
-
-const ItemsContainer = styled.div`
-  width: 240px;
-  display: flex;
-  justify-content: flex-start;
-  padding-left: 30px;
-  flex-direction: column;
-`;
-
 const LeftMenu = (props: LeftMenuProps): ReactElement => {
-  const { fetchUserMe, fetchUserPhoto } = props;
+  const { fetchUserMe, fetchUserPhoto, showHamburgerMenu } = props;
 
   const userMe = useSelector((state: StoreState) => state.user.user);
   const userPhotoUrl = useSelector((state: StoreState) => state.user.userPhotoUrl);
@@ -93,21 +42,43 @@ const LeftMenu = (props: LeftMenuProps): ReactElement => {
     console.log("UserPhoto: " + userPhotoUrl.url);
   }, [userPhotoUrl]);
 
-  
+  const bottomContainerPaddingStyles = {
+    paddingTop: showHamburgerMenu ? 30 : 15,
+    paddingBottom: showHamburgerMenu ? 15 : 15,
+    paddingLeft: showHamburgerMenu ? 30 : 15,
+    paddingRight: showHamburgerMenu ? 30 : 15
+  }
 
   return (
-    <Container>
-      <ProfileContainer>
-        <TopContainer>
+    <Container 
+      style={{ 
+        width: showHamburgerMenu ? '90%' : 300, 
+        marginTop: showHamburgerMenu ? 0 : 55
+      }}
+    >
+      <ProfileContainer
+        style={{
+          width: showHamburgerMenu ? '100%' : 240,
+          height: showHamburgerMenu ? undefined : 250,
+        }}
+      >
+        <TopContainer
+          style={{
+            height: showHamburgerMenu ? undefined : 150,
+            paddingTop: showHamburgerMenu ? 30 : undefined,
+            paddingBottom: showHamburgerMenu ? 30 : undefined,
+          }}
+        >
           <img src={url} alt="" style={{ width: 70, height: 70, borderRadius: '50%'}} />
           <NameContainer>{name}</NameContainer>
           <JobTitleContainer>{company.name}</JobTitleContainer>
         </TopContainer>
-        <BottomContainer>
+        <BottomContainer style={bottomContainerPaddingStyles}>
           <ChildElement 
             title="Your network"
             leftIconPath="/media/icons/network.png"
             rightIconPath="/media/icons/user-plus.svg"
+            marginBottom={showHamburgerMenu ? 20 : undefined}
             withRightIcon={true}
             navigateTo="/test"
           />
@@ -115,34 +86,62 @@ const LeftMenu = (props: LeftMenuProps): ReactElement => {
             title="Your Publications"
             leftIconPath="/media/icons/publications.svg"
             rightIconPath="/media/icons/plus.svg"
+            marginBottom={showHamburgerMenu ? 20 : undefined}
             withRightIcon={true}
             navigateTo="/test"
           />
+          { showHamburgerMenu &&
+            <React.Fragment>
+              <ChildElement 
+                title="Publications"
+                leftIconPath="/media/icons/publications.svg"
+                withRightIcon={false}
+                marginBottom={20}
+                navigateTo="/test"
+              />
+              <ChildElement 
+                title="Ecosystem"
+                leftIconPath="/media/icons/ecosystem.svg"
+                withRightIcon={false}
+                marginBottom={20}
+                navigateTo="/test"
+              />
+              <ChildElement 
+                title="Entities"
+                leftIconPath="/media/icons/entities2.svg"
+                withRightIcon={false}
+                marginBottom={20}
+                navigateTo="/test"
+              />
+            </React.Fragment>
+          }
         </BottomContainer>
       </ProfileContainer>
-      <ItemsContainer>
-        <ChildElement 
-          title="Publications"
-          leftIconPath="/media/icons/publications.svg"
-          withRightIcon={false}
-          marginBottom={20}
-          navigateTo="/test"
-        />
-        <ChildElement 
-          title="Ecosystem"
-          leftIconPath="/media/icons/ecosystem.svg"
-          withRightIcon={false}
-          marginBottom={20}
-          navigateTo="/test"
-        />
-        <ChildElement 
-          title="Entities"
-          leftIconPath="/media/icons/entities2.svg"
-          withRightIcon={false}
-          marginBottom={20}
-          navigateTo="/test"
-        />
-      </ItemsContainer>
+      { !showHamburgerMenu &&
+        <ItemsContainer>
+          <ChildElement 
+            title="Publications"
+            leftIconPath="/media/icons/publications.svg"
+            withRightIcon={false}
+            marginBottom={20}
+            navigateTo="/test"
+          />
+          <ChildElement 
+            title="Ecosystem"
+            leftIconPath="/media/icons/ecosystem.svg"
+            withRightIcon={false}
+            marginBottom={20}
+            navigateTo="/test"
+          />
+          <ChildElement 
+            title="Entities"
+            leftIconPath="/media/icons/entities2.svg"
+            withRightIcon={false}
+            marginBottom={20}
+            navigateTo="/test"
+          />
+        </ItemsContainer>
+      }
     </Container>
   );
 }

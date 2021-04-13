@@ -1,8 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { StoreState } from '../../../store/reducers';
 import { Colors } from '../../../styledHelpers/Colors';
-import { fontSize } from '../../../styledHelpers/FontSizes';
 import MainViewElement from './MainViewElement';
 import PublicationList from './PublicationList';
 import { connect, useSelector } from 'react-redux';
@@ -10,46 +8,17 @@ import { User } from '../../../store/actions/userActions';
 import { Publication } from '../../../store/actions/publicationActions';
 import { Photo } from '../../../store/actions/photoActions';
 import { PublicationDto } from '../../../entities/headerInterfaces/publication';
+import {
+  Container,
+  LeftContainer,
+  LeftWrapper,
+  RightContainer,
+  RightWrapper
+} from '../../../styledHelpers/PublicationViewComponents';
 
 interface PublicationListProps {
   showHamburgerMenu: boolean;
 }
-
-
-const Container = styled.div`
-  width: 90%;
-  margin-top: 25px;
-  display: flex;
-  /* flex-direction: row; */
-`;
-
-const LeftContainer = styled.div`
-  /* width: 30%; */
-  background-color: red;
-
-`;
-
-const LeftWrapper = styled.div`
-  height: 100%;
-`;
-
-const RightContainer = styled.div`
-  /* width: 70%; */
-  background-color: ${Colors.white};
-  padding-top: 10px;
-  padding-bottom: 10px;
-`;
-
-const RightWrapper = styled.div`
-  flex: 1;
-  height: 100%;
-  display: flex;
-  padding-left: 20px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding-right: 20px;
-`;
 
 const PublicationView = (props: PublicationListProps): ReactElement => {
   const [collection, setCollection] = useState<PublicationDto[]>([]);

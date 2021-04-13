@@ -1,18 +1,12 @@
 import React, { ReactElement } from 'react';
-import styled from 'styled-components';
 import { PublicationDto } from '../../../entities/headerInterfaces/publication';
 import PublicationComponent from './PublicationComponent';
+import { Container } from '../../../styledHelpers/PublicationListComponents';
 
 interface PublicationListProps {
   collection: PublicationDto[];
   showHamburgerMenu: boolean;
 }
-
-const Container = styled.div`
-  width: 100%;
-  display: block;
-  /* padding-right: 20px; */
-`;
 
 const PublicationList = (props: PublicationListProps): ReactElement => {
   const { collection, showHamburgerMenu } = props;

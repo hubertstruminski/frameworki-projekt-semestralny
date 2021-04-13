@@ -52,7 +52,7 @@ function App() {
         <Container>
           <Header showHamburgerMenu={showHamburgerMenu} />
           <Wrapper style={{flexDirection: rowFlexDirection ? 'row' : 'column'}}>
-            { !showHamburgerMenu && <LeftMenu />}
+            { !showHamburgerMenu && <LeftMenu showHamburgerMenu={showHamburgerMenu} />}
             <Switch>
               <Route 
                 exact 
