@@ -1,6 +1,5 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import { HeaderProps } from '../../../entities/headerInterfaces/header';
-import house2 from '../../../svgs/house2';
 import HeaderInput from './HeaderInput';
 import { Link } from 'react-router-dom';
 import { 
@@ -12,26 +11,59 @@ import {
   CircleWhiteDiv,
   CounterContainer
 } from '../../../styledHelpers/HeaderComponents';
-
+import DropdownMenu from '../menu/DropdownMenu';
 
 const Header = (props: HeaderProps): ReactElement => {
-  const { showHamburgerMenu } = props;
-  
-  useEffect(() => {
-    
-  }, []);
+  const { 
+    showHamburgerMenu, 
+    wrapperRef, 
+    toggleDropdown,
+    dropdownOpen,
+    dropdownTitle,
+    dropdownUrl,
+    setDropdownTitle,
+    setDropdownUrl 
+  } = props;
+
+  const arrowDownContainerStyles = {
+    width: showHamburgerMenu ? 50 : 250,
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingLeft: 15,
+    paddingRight: 15
+  }
 
   return (
     <Container>
       <PartialContainer>
         <img style={{ margin: '15px' }} src={process.env.PUBLIC_URL + '/media/logo.png'} alt="" width="35" height="35" />
-        { house2() }
-        <TextContainer style={{margin: '15px'}}>
-          <Link style={{ textDecoration: 'none' }} to="/">Home</Link>
-        </TextContainer>
-        <ArrowDownMenuContainer style={{ width: showHamburgerMenu ? 50 : 150}}>
-          <img src={process.env.PUBLIC_URL + '/media/icons/arrow-down.svg'} alt="" />
-        </ArrowDownMenuContainer>
+        <div ref={wrapperRef}>
+          <ArrowDownMenuContainer 
+            style={arrowDownContainerStyles}
+            onClick={toggleDropdown}
+          >
+            <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center'}}>
+              <img src={process.env.PUBLIC_URL + dropdownUrl} alt="" />
+              <TextContainer style={{margin: '15px'}}>
+                <Link style={{ textDecoration: 'none' }} to="/">{dropdownTitle}</Link>
+              </TextContainer>
+            </div>
+            <img 
+              src={process.env.PUBLIC_URL + '/media/icons/arrow-down.svg'} 
+              alt=""
+            />
+          </ArrowDownMenuContainer>
+          { !showHamburgerMenu && dropdownOpen &&
+            <div style={{position: 'relative', zIndex: 1000}}>
+              <div style={{position: 'absolute', width: 250}}>
+                <DropdownMenu 
+                  setDropdownUrl={setDropdownUrl}
+                  setDropdownTitle={setDropdownTitle}
+                />
+              </div>
+            </div>
+          }
+        </div>
       </PartialContainer>
       { !showHamburgerMenu && <HeaderInput /> }
       <PartialContainer>

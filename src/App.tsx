@@ -11,10 +11,12 @@ import { reducers } from './store/reducers';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import HomePage from './components/unique/HomePage';
 import TestPage from './components/unique/testPage/TestPage';
+import useDropdown from 'react-dropdown-hook';
+import DropdownMenu from './components/common/menu/DropdownMenu';
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-color: ${Colors.background};
   display: flex;
 `;
@@ -22,7 +24,6 @@ const Container = styled.div`
 const Wrapper = styled.div`
   flex: 1;
   display: flex;
-  /* flex-direction: row; */
 `;
 
 const store = createStore(reducers, applyMiddleware(thunk));
@@ -30,6 +31,11 @@ const store = createStore(reducers, applyMiddleware(thunk));
 function App() {
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
   const [rowFlexDirection, setRowFlexDirection] = useState(true);
+
+  const [dropdownTitle, setDropdownTitle] = useState('Home');
+  const [dropdownUrl, setDropdownUrl] = useState('/media/icons/house2.svg');
+
+  const [wrapperRef, dropdownOpen, toggleDropdown] = useDropdown();
 
   useLayoutEffect(() => {
     window.addEventListener('resize', updateLayout);
@@ -50,7 +56,26 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Container>
-          <Header showHamburgerMenu={showHamburgerMenu} />
+          <Header 
+            showHamburgerMenu={showHamburgerMenu} 
+            wrapperRef={wrapperRef}
+            dropdownOpen={dropdownOpen}
+            toggleDropdown={toggleDropdown}
+            setDropdownUrl={setDropdownUrl}
+            setDropdownTitle={setDropdownTitle}
+            dropdownUrl={dropdownUrl}
+            dropdownTitle={dropdownTitle}
+          />
+          { showHamburgerMenu && dropdownOpen &&
+            <div style={{position: 'relative', marginTop: 55, zIndex: 1000 }}>
+              <div style={{position: 'fixed', width: '100%'}}>
+                <DropdownMenu 
+                  setDropdownUrl={setDropdownUrl}
+                  setDropdownTitle={setDropdownTitle}
+                />
+              </div>
+            </div>
+          }
           <Wrapper style={{flexDirection: rowFlexDirection ? 'row' : 'column'}}>
             { !showHamburgerMenu && <LeftMenu showHamburgerMenu={showHamburgerMenu} />}
             <Switch>
