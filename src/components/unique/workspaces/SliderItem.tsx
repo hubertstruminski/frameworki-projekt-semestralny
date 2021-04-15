@@ -11,8 +11,9 @@ import {
   TitleContainer,
   TopContainer,
 } from '../../../styledHelpers/SliderItemComponents';
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
-interface SliderItemProps {
+interface SliderItemProps extends RouteComponentProps {
   photoUrl: string;
   title: string;
   type: string;
@@ -24,8 +25,16 @@ interface SliderItemProps {
 }
 
 const SliderItem = (props: SliderItemProps): ReactElement => {
-  const { photoUrl, title, type, users, icon, days, showHamburgerMenu } = props;
+  const { photoUrl, title, type, users, icon, days, showHamburgerMenu, history } = props;
   console.log(photoUrl);
+
+  const onClick = () => {
+    history.push({
+      pathname: '/sliderItem',
+      state: { photoUrl, title, icon }
+    });
+  }
+
   return (
     <Container 
       style={{
@@ -33,6 +42,7 @@ const SliderItem = (props: SliderItemProps): ReactElement => {
         width: showHamburgerMenu ? 150 : 300,
         height: showHamburgerMenu ? 100: 200
       }}
+      onClick={onClick}
     >
       <IconContainer
         style={{
@@ -42,7 +52,7 @@ const SliderItem = (props: SliderItemProps): ReactElement => {
         }}
       >
         <img 
-          src={process.env.PUBLIC_URL + "/media/icons/entities2.png"} 
+          src={process.env.PUBLIC_URL + "/media/icons/entities2.svg"} 
           alt="" 
           style={{ 
             width: showHamburgerMenu ? 22.5 : 45, 
@@ -94,4 +104,4 @@ const SliderItem = (props: SliderItemProps): ReactElement => {
   );
 }
 
-export default SliderItem;
+export default withRouter(SliderItem);

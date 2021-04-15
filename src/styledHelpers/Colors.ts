@@ -11,4 +11,5 @@ export const Colors = {
     subProfileTextColor: '#B9BBBF',
     profileItemTextColor: '#7A8090',
     workspaceTitleColor: '#303952',
+    constantPartContainer: '#858585',
 }

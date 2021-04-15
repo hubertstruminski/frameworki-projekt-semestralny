@@ -13,6 +13,7 @@ import HomePage from './components/unique/HomePage';
 import TestPage from './components/unique/testPage/TestPage';
 import useDropdown from 'react-dropdown-hook';
 import DropdownMenu from './components/common/menu/DropdownMenu';
+import SliderPage from './components/unique/pages/SliderPage';
 
 const Container = styled.div`
   width: 100%;
@@ -89,6 +90,15 @@ function App() {
                 )}
               ></Route>
               <Route exact path="/test" component={() => (<TestPage />)}></Route>
+              <Route 
+                exact
+                path="/sliderItem" 
+                component={() => (
+                  <SliderPage 
+                    showHamburgerMenu={showHamburgerMenu} 
+                  />
+                )}
+              />
             </Switch>
           </Wrapper>
         </Container>
