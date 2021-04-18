@@ -14,10 +14,17 @@ interface ResumeListProps {
   resumes: Resume[];
   PER_PAGE: number;
   showHamburgerMenu: boolean;
+  isComponentsBar: boolean;
 }
 
 const ResumeList = (props: ResumeListProps): ReactElement => {
-  const { resumes, offset, PER_PAGE, showHamburgerMenu } = props;
+  const { 
+    resumes, 
+    offset, 
+    PER_PAGE, 
+    showHamburgerMenu, 
+    isComponentsBar 
+  } = props;
 
   const renderResumes = (offset: number) => {
     return resumes.slice(offset, offset + PER_PAGE).map((resume: Resume): ReactElement => {
@@ -30,6 +37,7 @@ const ResumeList = (props: ResumeListProps): ReactElement => {
           username={username}
           name={name}
           showHamburgerMenu={showHamburgerMenu}
+          isComponentsBar={isComponentsBar}
         />
       );
     });

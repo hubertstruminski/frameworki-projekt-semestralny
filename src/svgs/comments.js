@@ -5,8 +5,8 @@ function SvgComponent(props) {
     <svg
       // width={23}
       // height={21}
-      width={props.width}
-      height={props.height}
+      width={props.width ? props.width : 20}
+      height={props.height ? props.height : 20}
       viewBox="0 0 23 21"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

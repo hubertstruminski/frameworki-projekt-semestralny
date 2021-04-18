@@ -3,12 +3,15 @@ import { Dispatch } from 'redux';
 import { ActionTypes } from './actionTypes';
 
 export interface User {
-  id: number;
+  id?: number;
   name: string;
   company: {
     name: string;
+    bs?: string;
   },
   username?: string;
+  email?: string;
+  phone?: string;
 }
 
 export interface UserPhoto {
@@ -28,6 +31,11 @@ export interface FetchUserPhoto {
 export interface FetchAllUsers {
   type: ActionTypes.RETRIEVE_ALL_USERS;
   payload: User[];
+}
+
+export interface UpdateUserMe {
+  type: ActionTypes.UPDATE_USER_ME;
+  payload: User;
 }
 
 export const url = "https://jsonplaceholder.typicode.com/users/1";
@@ -64,3 +72,12 @@ export const fetchAllUsers = () => {
     });
   };
 };
+
+export const updateUser = (updatedUser: User) => {
+  return async (dispatch: Dispatch) => {
+    dispatch<UpdateUserMe>({
+      type: ActionTypes.UPDATE_USER_ME,
+      payload: updatedUser
+    });
+  };
+}

@@ -12,15 +12,16 @@ import {
   JobTitleContainer,
   ItemsContainer,
 } from '../../../styledHelpers/LeftMenuComponents';
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
-interface LeftMenuProps {
+interface LeftMenuProps extends RouteComponentProps {
   fetchUserMe: Function;
   fetchUserPhoto: Function;
   showHamburgerMenu: boolean;
 }
 
 const LeftMenu = (props: LeftMenuProps): ReactElement => {
-  const { fetchUserMe, fetchUserPhoto, showHamburgerMenu } = props;
+  const { fetchUserMe, fetchUserPhoto, showHamburgerMenu, history } = props;
 
   const userMe = useSelector((state: StoreState) => state.user.user);
   const userPhotoUrl = useSelector((state: StoreState) => state.user.userPhotoUrl);
@@ -49,6 +50,10 @@ const LeftMenu = (props: LeftMenuProps): ReactElement => {
     paddingRight: showHamburgerMenu ? 30 : 15
   }
 
+  const onProfileRedirect = () => {
+    history.push({ pathname: '/profile' });
+  }
+
   return (
     <Container 
       style={{ 
@@ -67,7 +72,9 @@ const LeftMenu = (props: LeftMenuProps): ReactElement => {
             height: showHamburgerMenu ? undefined : 150,
             paddingTop: showHamburgerMenu ? 30 : undefined,
             paddingBottom: showHamburgerMenu ? 30 : undefined,
+            cursor: 'pointer'
           }}
+          onClick={onProfileRedirect}
         >
           <img src={url} alt="" style={{ width: 70, height: 70, borderRadius: '50%'}} />
           <NameContainer>{name}</NameContainer>
@@ -154,4 +161,4 @@ function mapStateToProps(state: StoreState) {
 export default connect(mapStateToProps, { 
   fetchUserMe,
   fetchUserPhoto
-})(LeftMenu);
+})(withRouter(LeftMenu));

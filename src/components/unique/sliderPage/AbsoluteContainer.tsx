@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { RightContainer } from '../../../styledHelpers/PublicationComponents';
 
 interface AbsoluteContainerProps {
   children: ReactNode

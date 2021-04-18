@@ -15,11 +15,14 @@ import {
   TitleContainer,
   TopContainer
 } from '../../../styledHelpers/ResumeViewComponents';
+import BarContainer from './BarContainer';
 
 interface ResumeViewProps {
  title?: string;
  fetchAllComments: Function;
  showHamburgerMenu: boolean;
+ placeholderTitle: string;
+ isComponentsBar: boolean;
 }
 
 interface Resume {
@@ -36,7 +39,12 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchUsernameTerm, setSearchUsernameTerm] = useState<string>('');
 
-  const { fetchAllComments, showHamburgerMenu } = props;
+  const { 
+    fetchAllComments, 
+    showHamburgerMenu, 
+    placeholderTitle,
+    isComponentsBar 
+  } = props;
   
   const comments = useSelector((state: StoreState): Comment[] => state.comments.comments);
   const userList = useSelector((state: StoreState): User[] => state.user.userList);
@@ -100,12 +108,17 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
   return (
     <Container>
       <TopContainer>
-        <TitleContainer style={{ fontSize: showHamburgerMenu ? '2.5vw' : '1vw' }}>Resume your work</TitleContainer>
+        <TitleContainer style={{ fontSize: showHamburgerMenu ? '2.5vw' : '1vw' }}>{placeholderTitle}</TitleContainer>
         <FeaturesContainer>
           <Input placeholder="Filter by title..." value={searchTerm} onChange={editSearchTerm} />
           <FollowedButton showHamburgerMenu={showHamburgerMenu} setSearchTerm={setSearchUsernameTerm} />
         </FeaturesContainer>
       </TopContainer>
+      {
+        isComponentsBar && (
+          <BarContainer />
+        )
+      }
       <div className="pagination" style={{width: '100%'}}>
         <div style={{marginBottom: 25, width: '100%'}}>
           {/* { renderResumes(offset) } */}
@@ -114,6 +127,7 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
             resumes={dynamicSearch()} 
             PER_PAGE={PER_PAGE}
             showHamburgerMenu={showHamburgerMenu} 
+            isComponentsBar={isComponentsBar}
           />
         </div>
       </div>
@@ -132,6 +146,10 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
       />
     </Container>
   );
+}
+
+ResumeView.defaultProps = {
+  
 }
 
 function mapStateToProps(state: StoreState) {

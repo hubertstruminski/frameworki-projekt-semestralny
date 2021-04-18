@@ -27,7 +27,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-height: 100px;
+  /* min-height: 100px; */
+  padding-bottom: 25px;
+  padding-top: 20px;
 `;
 
 const LeftContainer = styled.div`
@@ -35,14 +37,16 @@ const LeftContainer = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  height: 100px;
+  /* height: 100px; */
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 const RightContainer = styled.div`
   display: flex;
   flex: 0.9;
   align-items: flex-start;
-  height: 100px;
+  /* height: 100px; */
   color: white;
   flex-direction: column;
   padding-right: 20px;
@@ -54,7 +58,7 @@ const InternalContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   padding-right: 20px;
   color: ${Colors.black};
   font-size: 1.5vw;
@@ -77,7 +81,7 @@ const SliderPlaceholder = (props: SliderPlaceholderProps) => {
         </LeftContainer>
         <RightContainer>
           <InternalContainer>
-            <div>{title}</div>
+            <div style={{ fontSize: '1.25vw'}}>{title}</div>
             <img src={process.env.PUBLIC_URL + '/media/icons/cog.svg'} alt="" />
           </InternalContainer>
           <BodyContainer>

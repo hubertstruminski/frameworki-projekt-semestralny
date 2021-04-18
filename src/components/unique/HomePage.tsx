@@ -131,7 +131,11 @@ const HomePage = (props: HomePageProps) => {
           </Slider>
         {/* </div> */}
       </div>
-      <ResumeView showHamburgerMenu={showHamburgerMenu} />
+      <ResumeView 
+        showHamburgerMenu={showHamburgerMenu} 
+        placeholderTitle="Resume your work"
+        isComponentsBar={false}
+      />
     </Container>
   );
 }
