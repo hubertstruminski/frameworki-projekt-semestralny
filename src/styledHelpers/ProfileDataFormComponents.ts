@@ -4,7 +4,8 @@ export const inputStyles = {
   marginBottom: 10,
   padding: 5,
   borderRadius: 5,
-  border: 'none'
+  border: 'none',
+  width: '70%'
 }
 
 export const buttonStyles = {

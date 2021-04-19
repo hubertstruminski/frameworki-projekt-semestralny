@@ -12,6 +12,7 @@ const Container = styled.div`
   flex-direction: row;
   display: flex;
   align-items: center;
+  font-size: 0.8vw;
 `;
 
 const SingleButton = (props: SingleButtonProps) => {

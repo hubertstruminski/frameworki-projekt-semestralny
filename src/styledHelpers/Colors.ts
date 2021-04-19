@@ -14,4 +14,5 @@ export const Colors = {
     constantPartContainer: '#858585',
     profilePropertiesBackground: '#E6F0F3',
     profilePropertiesColor: '#60A2B3',
+    moreLabelColor: '#6FABBB',
 }

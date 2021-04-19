@@ -1,9 +1,9 @@
 import React, { ChangeEvent, ReactElement, ReactNode, useState } from 'react';
+import styled from 'styled-components';
 import { Colors } from '../../../../styledHelpers/Colors';
-import {  
+import {
   Cell,
   Container,
-  MoreContainer,
   Row,
   TableContainer,
   TableWrapper,
@@ -13,38 +13,47 @@ import {
   inputStyles
 } from '../../../../styledHelpers/ProposalsComponents';
 
-interface ProposalsProps {
+interface InternalReviewsProps {
   isFormVisible: boolean;
 }
 
-interface Proposal {
+interface Review {
   name?: string;
   entity?: string;
   location?: string;
   expertise?: string;
   date?: string;
-  firm?: string;
 }
 
-const PROPOSALS_DATA: Proposal[] = [
-  { name: 'Operation Tindeen', entity: 'Renault Cordova', location: 'France', expertise: '#Tax', date: '20/01/2018', firm: 'Racine' },
-  { name: 'Op. Prometheus', entity: 'Renault HQ', location: 'USA', expertise: '#M&A', date: '18/02/2019', firm: 'Clifford chance'},
-  { name: 'Op. Latandre', entity: 'Renault Brno', location: 'Italia', expertise: '#Social', date: '18/02/2019', firm: 'SVZ'},
-]
+const MoreContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: ${Colors.black};
+  font-size: 0.9vw;
+  margin-left: 30px;
+  font-weight: 700;
+`;
 
-const Proposals = (props: ProposalsProps): ReactElement => {
+const REVIEW_DATA: Review[] = [
+  { name: 'Operation Tindeen', entity: 'Renault Cordova', location: 'France', expertise: '#Tax', date: '20/01/2018' },
+  { name: 'Op. Prometheus', entity: 'Renault HQ', location: 'USA', expertise: '#M&A', date: '18/02/2019' },
+  { name: 'Op. Latandre', entity: 'Renault Brno', location: 'Italia', expertise: '#Social', date: '18/02/2019' },
+];
+
+const InternalReviews = (props: InternalReviewsProps): ReactElement => {
   const [name, setName] = useState('');
   const [entity, setEntity] = useState('');
   const [location, setLocation] = useState('');
   const [expertise, setExpertise] = useState('');
   const [date, setDate] = useState('');
-  const [firm, setFirm] = useState('');
 
-  const [proposals, setProposals] = useState(PROPOSALS_DATA);
+  const [reviews, setReviews] = useState(REVIEW_DATA);
   const { isFormVisible } = props;
 
   const onRemoveItem = (indexToRemove: number) => {
-    setProposals((data: Proposal[]) => data.filter((proposal: Proposal, index: number): boolean => index !== indexToRemove));
+    setReviews((data: Review[]) => data.filter((review: Review, index: number): boolean => index !== indexToRemove));
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -65,15 +74,12 @@ const Proposals = (props: ProposalsProps): ReactElement => {
       case 5:
         setDate(newValue);
         break;
-      case 6:
-        setFirm(newValue);
-        break;
     }
   }
 
   const renderRows = (): ReactNode=> {
-    return proposals.map((proposal: Proposal, index: number): ReactNode => {
-      const { date, entity, expertise, firm, location, name } = proposal;
+    return reviews.map((review: Review, index: number): ReactNode => {
+      const { date, entity, expertise, location, name } = review;
       return (
         <Row>
           <Cell>{name}</Cell>
@@ -81,7 +87,6 @@ const Proposals = (props: ProposalsProps): ReactElement => {
           <Cell>{location}</Cell>
           <Cell>{expertise}</Cell>
           <Cell>{date}</Cell>
-          <Cell>{firm}</Cell>
           { isFormVisible &&
             <Cell>
               <img 
@@ -104,20 +109,18 @@ const Proposals = (props: ProposalsProps): ReactElement => {
       location: location, 
       expertise: expertise, 
       date: date, 
-      firm: firm
     }
-    setProposals((oldArray: Proposal[]) => [...oldArray, newElement]);
+    setReviews((oldArray: Review[]) => [...oldArray, newElement]);
     setName('');
     setEntity('');
     setLocation('');
     setExpertise('');
     setDate('');
-    setFirm('');
   }
-
+  
   return (
     <Container>
-      <TitleContainer>Proposals</TitleContainer>
+      <TitleContainer>Internal reviews</TitleContainer>
       <TableWrapper>
         <TableContainer>
           <Row style={{ borderBottom: `1px solid ${Colors.subProfileTextColor}`}}>
@@ -126,7 +129,6 @@ const Proposals = (props: ProposalsProps): ReactElement => {
             <ThCell>Location</ThCell>
             <ThCell>Expertise</ThCell>
             <ThCell>Date</ThCell>
-            <ThCell>Firm</ThCell>
             { isFormVisible &&
               <ThCell>Delete</ThCell>
             }
@@ -140,16 +142,15 @@ const Proposals = (props: ProposalsProps): ReactElement => {
             <input type="text" placeholder="Location..." style={inputStyles} value={location} onChange={(e) => onChange(e, 3)} />
             <input type="text" placeholder="Expertise..." style={inputStyles} value={expertise} onChange={(e) => onChange(e, 4)} />
             <input type="text" placeholder="Date..." style={inputStyles} value={date} onChange={(e) => onChange(e, 5)} />
-            <input type="text" placeholder="Firm..." style={inputStyles} value={firm} onChange={(e) => onChange(e, 6)} />
             <button style={buttonStyles} onClick={onSubmit}>Add</button>
           </div>
         }
         <MoreContainer>
-          See more proposals
+          See more Reviews
         </MoreContainer>
       </TableWrapper>
     </Container>
   );
 }
 
-export default Proposals;
+export default InternalReviews;

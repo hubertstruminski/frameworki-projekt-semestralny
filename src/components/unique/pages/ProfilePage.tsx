@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import ButtonsContainer from '../profilePage/ButtonsContainer';
@@ -9,6 +9,7 @@ import { fetchUserMe, fetchUserPhoto } from '../../../store/actions/userActions'
 import ProfileDataContainer from '../profilePage/ProfileDataContainer';
 import ProfileDataForm from '../profilePage/ProfileDataForm';
 import BottomProfileDataContainer from '../profilePage/BottomProfileDataContainer';
+import LeftMenu from '../../common/leftMenu/LeftMenu';
 
 interface ProfilePageProps extends RouteComponentProps {
   showHamburgerMenu: boolean;
@@ -26,7 +27,6 @@ const Container = styled.div`
 `;
 
 const TopContainer = styled.div`
-  width: 50%;
   border: 1px solid ${Colors.subProfileTextColor};
   margin-top: 30px;
 `;
@@ -52,13 +52,16 @@ const ImageContainer = styled.div`
 const ProfileLinkSpan = styled.span`
   margin-top: 10px;
   color: ${Colors.profileTextColor};
+  font-size: 0.8vw;
 `;
 
 const ProfilePage = (props: ProfilePageProps) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [city, setCity] = useState('New-york');
+  const [width, setWidth] = useState('50%');
+  const [imgSize, setImgSize] = useState(100);
 
-  const { fetchUserMe, fetchUserPhoto, showHamburgerMenu, history } = props;
+  const { fetchUserMe, fetchUserPhoto, showHamburgerMenu } = props;
 
   const userMe = useSelector((state: StoreState) => state.user.user);
   const userPhotoUrl = useSelector((state: StoreState) => state.user.userPhotoUrl);
@@ -66,10 +69,13 @@ const ProfilePage = (props: ProfilePageProps) => {
   const { name, company, id, email, phone, company: { bs } } = userMe;
   const { url } = userPhotoUrl;
 
+  useLayoutEffect(() => {
+    window.addEventListener('resize', updateLayout);
+    return () => window.removeEventListener('resize', updateLayout);
+  }, []);
+
   useEffect(() => {
     fetchUserMe();
-    console.log("Profile page");
-    console.log(userMe);
   }, [fetchUserMe]);
 
   useEffect(() => {
@@ -82,16 +88,33 @@ const ProfilePage = (props: ProfilePageProps) => {
     setIsFormVisible(!isFormVisible);
   }
 
+  const updateLayout = () => {
+    if(window.innerWidth < 900) {
+      setWidth('80%');
+      setImgSize(40);
+    } else if(window.innerWidth < 1050) {
+      setWidth('70%');
+      setImgSize(60);
+    } else if(window.innerWidth < 1350) {
+      setWidth('60%');
+      setImgSize(80);
+    } else {
+      setWidth('50%');
+      setImgSize(100);
+    }
+  }
+
   return (
     <Container>
-      <TopContainer>
+      { showHamburgerMenu && <LeftMenu showHamburgerMenu={showHamburgerMenu} />}
+      <TopContainer style={{ width: width }}>
         <ButtonsContainer />
         <InternalContainer>
           <ImageContainer>
             <img 
               src={url} 
               alt="" 
-              style={{ width: 100, height: 100, borderRadius: 50 }}
+              style={{ width: imgSize, height: imgSize, borderRadius: imgSize / 2 }}
             />
             <ProfileLinkSpan>See profile</ProfileLinkSpan>
           </ImageContainer>
@@ -115,7 +138,7 @@ const ProfilePage = (props: ProfilePageProps) => {
           }
         </InternalContainer>
       </TopContainer>
-      <BottomProfileDataContainer />
+      <BottomProfileDataContainer width={width} />
     </Container>
   );
 }

@@ -30,6 +30,7 @@ const ItemContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-size: 0.85vw;
 `;
 
 const InlineProperties = (props: InlinePropertiesProps) => {
@@ -86,7 +87,7 @@ const InlineProperties = (props: InlinePropertiesProps) => {
       </WrapInlineContainer>
       <div style={{ marginLeft: isMainElement ? 20 : undefined }}>
         { isFormVisible && (
-          <>
+          <div style={{ width: isMainElement ? '30%' : undefined }}>
             <input 
               type="text" 
               value={newElement} 
@@ -99,7 +100,7 @@ const InlineProperties = (props: InlinePropertiesProps) => {
             >
               Add
             </button>
-          </>
+          </div>
         )}
       </div>
     </>

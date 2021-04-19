@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler, ReactElement, useState } from 'react';
+import React, { ChangeEvent, ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../../styledHelpers/Colors';
 
@@ -40,7 +40,7 @@ const FileTaker = (props: FileTakerProps): ReactElement => {
     const files = e.currentTarget.files;
 
     if(files && files[0]) {
-      const { name, type } = files[0];
+      const { name } = files[0];
       setFileName(name);
     }
   }

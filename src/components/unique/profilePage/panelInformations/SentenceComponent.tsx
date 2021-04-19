@@ -36,13 +36,6 @@ const SentenceComponent = (props: SentenceComponentProps): ReactElement => {
   } = props;
 
   const [valueForm, setValueForm] = useState(value);
-  
-  const cancelIconStyles = {
-    width: 20,
-    height: 20,
-    transform: 'rotate(45deg)',
-    cursor: 'pointer'
-  }
 
   const inputStyles = {
     border: 'none',

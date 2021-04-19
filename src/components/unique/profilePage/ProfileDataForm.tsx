@@ -1,4 +1,4 @@
-import Reat, { useState } from 'react';
+import React, { useState } from 'react';
 import { User, updateUser } from '../../../store/actions/userActions';
 import { StoreState } from '../../../store/reducers';
 import {
@@ -70,14 +70,10 @@ const ProfileDataForm = (props: ProfileDataFormProps) => {
     newUser.email = emailForm;
     newUser.phone = phoneForm;
 
-
     updateUser(newUser);
-
     setCity(cityForm);
     onEditProfileDataClick();
   }
-
-  
 
   return (
     <Container>

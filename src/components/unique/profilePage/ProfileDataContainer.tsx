@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import {  

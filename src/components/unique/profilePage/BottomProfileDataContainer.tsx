@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
-import InlineProperties from './InlineProperties';
 import PanelInformations from './panelInformations/PanelInformations';
 import Properties from './Properties';
+import AmountFees from './proposals/AmountFees';
+import InternalReviews from './proposals/InternalReviews';
 import Proposals from './proposals/Proposals';
 
 interface BottomProfileDataContainerProps {
-
+  width: string;
 }
 
 const Container = styled.div`
-  width: 50%;
+  /* width: 50%; */
   border-right: 1px solid ${Colors.subProfileTextColor};
   border-left: 1px solid ${Colors.subProfileTextColor};
   border-bottom: 1px solid ${Colors.subProfileTextColor};
@@ -28,8 +29,10 @@ const BorderDiv = styled.div`
 const BottomProfileDataContainer = (props: BottomProfileDataContainerProps) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
+  const { width } = props;
+
   return (
-    <Container>
+    <Container style={{ width: width }}>
       <Properties 
         isFormVisible={isFormVisible} 
         setIsFormVisible={setIsFormVisible}
@@ -38,6 +41,10 @@ const BottomProfileDataContainer = (props: BottomProfileDataContainerProps) => {
       <PanelInformations isFormVisible={isFormVisible} />
       <BorderDiv />
       <Proposals isFormVisible={isFormVisible} />
+      <BorderDiv />
+      <InternalReviews isFormVisible={isFormVisible} />
+      <BorderDiv />
+      <AmountFees isFormVisible={isFormVisible} />
     </Container>
   );
 }
