@@ -15,4 +15,6 @@ export const Colors = {
     profilePropertiesBackground: '#E6F0F3',
     profilePropertiesColor: '#60A2B3',
     moreLabelColor: '#6FABBB',
+    switchButtonBackgroundColor: '#EAECF5',
+    rigidButtonTextColor: '#2A3F9D'
 }

@@ -118,7 +118,7 @@ const LeftMenu = (props: LeftMenuProps): ReactElement => {
                 leftIconPath="/media/icons/entities2.svg"
                 withRightIcon={false}
                 marginBottom={20}
-                navigateTo="/test"
+                navigateTo="/entities"
               />
             </React.Fragment>
           }
@@ -145,7 +145,7 @@ const LeftMenu = (props: LeftMenuProps): ReactElement => {
             leftIconPath="/media/icons/entities2.svg"
             withRightIcon={false}
             marginBottom={20}
-            navigateTo="/test"
+            navigateTo="/entities"
           />
         </ItemsContainer>
       }

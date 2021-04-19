@@ -15,6 +15,7 @@ import useDropdown from 'react-dropdown-hook';
 import DropdownMenu from './components/common/menu/DropdownMenu';
 import SliderPage from './components/unique/pages/SliderPage';
 import ProfilePage from './components/unique/pages/ProfilePage';
+import EntititiesPage from './components/unique/pages/EntitiesPage';
 
 const Container = styled.div`
   width: 100%;
@@ -111,6 +112,15 @@ function App() {
                 path="/profile"
                 component={() => (
                   <ProfilePage 
+                    showHamburgerMenu={showHamburgerMenu}
+                  />
+                )}
+              />
+              <Route 
+                exact
+                path="/entities"
+                component={() => (
+                  <EntititiesPage 
                     showHamburgerMenu={showHamburgerMenu}
                   />
                 )}
