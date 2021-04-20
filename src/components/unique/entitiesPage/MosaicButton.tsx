@@ -6,6 +6,7 @@ interface MosaicButtonProps {
   isPushed: boolean;
   appendText?: boolean;
   iconUrl: string;
+  setIsMosaicLayout: Function;
 }
 
 const Container = styled.div`
@@ -25,13 +26,19 @@ const TextContainer = styled.span`
 `;
 
 const MosaicButton = (props: MosaicButtonProps): ReactElement => {
-  const { isPushed, appendText, iconUrl } = props;
+  const { isPushed, appendText, iconUrl, setIsMosaicLayout } = props;
+
+  const onClick = () => {
+    setIsMosaicLayout(isPushed);
+  }
+
   return (
     <Container 
       style={{ 
         backgroundColor: 
           isPushed ? Colors.switchButtonBackgroundColor : Colors.white 
       }}
+      onClick={onClick}
     >
       <img
         src={process.env.PUBLIC_URL + iconUrl}

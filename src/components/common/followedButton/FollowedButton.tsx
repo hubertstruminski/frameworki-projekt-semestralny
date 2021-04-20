@@ -8,15 +8,17 @@ import {
   SmallerContainer,
   SmallestContainer
 } from '../../../styledHelpers/FollowedButtonComponents';
+import { Colors } from '../../../styledHelpers/Colors';
 
 interface FollowedButtonProps {
   onClick?: () => {};
   showHamburgerMenu: boolean;
   setSearchTerm: Function;
+  isOutline?: boolean;
 }
 
 const FollowedButton = (props: FollowedButtonProps) => {
-  const { showHamburgerMenu, setSearchTerm } = props;
+  const { showHamburgerMenu, setSearchTerm, isOutline } = props;
   const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
   
   const userMe = useSelector((state: StoreState) => state.user.user);
@@ -29,7 +31,15 @@ const FollowedButton = (props: FollowedButtonProps) => {
 
   return (
     <div ref={wrapperRef}>
-      <Container onClick={toggleDropdown}>
+      <Container 
+        onClick={toggleDropdown}
+        style={{ 
+          border: isOutline ? `1.5px solid ${Colors.profileTextColor}` : 'none',
+          borderRadius: isOutline ? 5 : undefined,
+          padding: isOutline ? 5 : undefined,
+          marginLeft: isOutline ? 20 : undefined
+        }}
+      >
         (
         <SmallerContainer>(</SmallerContainer>
         <SmallestContainer>o</SmallestContainer>

@@ -1,11 +1,13 @@
-import React, { ReactElement } from 'react';
+import React, { ChangeEvent, ReactElement, useState, useEffect, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import LeftMenu from '../../common/leftMenu/LeftMenu';
-import FilterButton from '../entitiesPage/FilterButton';
-import MosaicButton from '../entitiesPage/MosaicButton';
-import RigidButton from '../entitiesPage/RigidButton';
+import LeftBar from '../entitiesPage/LeftBar';
+import RightBar from '../entitiesPage/RightBar';
 import SwitchButton from '../entitiesPage/SwitchButton';
+import { connect, useSelector } from 'react-redux';
+import { StoreState } from '../../../store/reducers';
+import EntityComponent from '../entitiesPage/EntityComponent';
 
 interface EntitiesPageProps {
   showHamburgerMenu: boolean;
@@ -56,28 +58,94 @@ const BottomBarContainer = styled.div`
   margin-top: 5px;
 `;
 
-const DotsContainer = styled.div`
+const DataContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex: 1;
+  flex-direction: row;
   align-items: center;
-  padding: 5px;
-  margin-right: 5px;
-  color: ${Colors.black};
-  font-size: 1.5vw;
-  font-weight: 900;
-  margin-top: -15px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 `;
 
-const Border = styled.div`
-  border-right: 1px solid ${Colors.subProfileTextColor};
-  width: 1px;
-  height: 25px;
-`;
+interface Entity {
+  title: string;
+  body: string;
+  photoUrl: string;
+}
 
-
+const ENTITIES_DATA: Entity[] = [
+  { title: 'ABC generic company', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 1', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 2', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 3', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 1', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 2', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 3', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 4', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 5', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 4', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 6', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 7', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 6', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 7', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 45', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 77', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 8', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 9', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 89', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 97', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 10', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 11', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 31', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 41', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 12', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 13', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 11', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'Subsid Corp Ltd 21', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 14', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 15', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+  { title: 'World company SAS 16', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },
+];
 
 const EntititiesPage = (props: EntitiesPageProps): ReactElement => {
+  const [isMosaicLayout, setIsMosaicLayout] = useState(true);
+  const [entities, setEntities] = useState<Entity[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const { showHamburgerMenu } = props;
+
+  const photos = useSelector((state: StoreState) => state.photos.photos);
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { currentTarget: { value } } = e;
+    setSearchTerm(value);
+  }
+
+  useEffect(() => {
+    const result: Entity[] = [];
+
+    ENTITIES_DATA.forEach((item: Entity, index: number): void => {
+      let { photoUrl, title, body } = item;
+      if(photos[index]) {
+        photoUrl = photos[index].url;
+      }
+      result.push({ photoUrl, title, body });
+    });
+    setEntities(result);
+  }, [photos]);
+
+  const renderEntities = (): ReactNode => {
+    return entities.map((entity: Entity, index: number): ReactNode => {
+      const { body, title, photoUrl } = entity;
+      return (
+        <EntityComponent 
+          title={title}
+          body={body}
+          photoUrl={photoUrl}
+        />
+      );
+    });
+  }
+
   return (
     <Container>
       <Wrapper>
@@ -91,24 +159,32 @@ const EntititiesPage = (props: EntitiesPageProps): ReactElement => {
               style={{ width: 12.5, height: 12.5, marginTop: -5 }}
             />
           </LabelContainer>
-          <SwitchButton />
+          <SwitchButton 
+            isMosaicLayout={isMosaicLayout}
+            setIsMosaicLayout={setIsMosaicLayout}
+          />
         </TopBarContainer>
         <BottomBarContainer>
-          <div style={{ display: 'flex', flexDirection: 'row'}}>
-            <RigidButton />
-            <DotsContainer>...</DotsContainer>
-            <Border />
-            <FilterButton text="Sort" iconUrl="/media/icons/sort.svg" appendText />
-            <FilterButton text="Filters" iconUrl="/media/icons/filter.svg" appendText />
-            <Border />
-            <FilterButton isMarginLeft iconUrl="/media/icons/full-screen.svg" />
-            <Border />
-            <FilterButton text="Share" iconUrl="/media/icons/share.svg" appendText />
-          </div>
+          <LeftBar />
+          <RightBar 
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            showHamburgerMenu={showHamburgerMenu}
+            onChange={onChange}
+          />
         </BottomBarContainer>
+        <DataContainer>
+          { renderEntities() }
+        </DataContainer>
       </Wrapper>
     </Container>
   );
 }
 
-export default EntititiesPage;
+function mapStateToProps(state: StoreState) {
+  return {};
+}
+
+export default connect(mapStateToProps, { 
+
+})(EntititiesPage);

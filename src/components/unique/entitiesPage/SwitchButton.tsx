@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import MosaicButton from './MosaicButton';
 
 interface SwitchButtonProps {
-
+  isMosaicLayout: boolean;
+  setIsMosaicLayout: Function;
 }
 
 const Container = styled.div`
@@ -14,16 +15,19 @@ const Container = styled.div`
 `;
 
 const SwitchButton = (props: SwitchButtonProps): ReactElement => {
+  const { isMosaicLayout, setIsMosaicLayout } = props;
   return (
     <Container>
       <MosaicButton 
-        isPushed 
+        isPushed={isMosaicLayout} 
         appendText
         iconUrl="/media/icons/windows.svg" 
+        setIsMosaicLayout={setIsMosaicLayout}
       />
       <MosaicButton 
-        isPushed={false}
+        isPushed={!isMosaicLayout}
         iconUrl="/media/icons/menu.svg"
+        setIsMosaicLayout={setIsMosaicLayout}
       />
     </Container>
   );
