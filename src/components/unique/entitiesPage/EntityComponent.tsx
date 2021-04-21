@@ -6,6 +6,7 @@ interface EntityComponentProps {
   photoUrl: string;
   title: string;
   body: string;
+  isMosaicLayout: boolean;
 }
 
 const Container = styled.div`
@@ -22,7 +23,7 @@ const Container = styled.div`
 `;
 
 const PhotoContainer = styled.div`
-  flex: 0.3;
+  /* flex: 0.3; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +32,7 @@ const PhotoContainer = styled.div`
 
 const RightContainer = styled.div`
   display: flex;
-  flex: 0.7;
+  /* flex: 0.7; */
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
@@ -49,28 +50,52 @@ const TitleSpan = styled.div`
 
 const BodySpan = styled.div`
   color: ${Colors.subProfileTextColor};
-  font-size: 0.75vw;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 14%;
 `;
 
 
 const EntityComponent = (props: EntityComponentProps) => {
-  const { photoUrl, title, body } = props;
+  const { photoUrl, title, body, isMosaicLayout } = props;
   return (
-    <Container>
-      <PhotoContainer>
+    <Container
+      style={{
+        width: isMosaicLayout ? '23.5%' : '100%',
+        height: isMosaicLayout ? undefined : 105,
+      }}
+    >
+      <PhotoContainer
+        style={{ 
+          flex: isMosaicLayout ? 0.3 : 0.15,
+          
+        }}
+      >
         <img 
           src={photoUrl}
           alt=""
-          style={{ width: '100%', borderRadius: 5 }}
+          style={{ 
+            width: '100%', 
+            borderRadius: 5, 
+            height: isMosaicLayout ? undefined : 100,
+          }}
         />
       </PhotoContainer>
-      <RightContainer>
+      <RightContainer
+        style={{
+          flex: isMosaicLayout ? 0.7 : 0.85
+        }}
+      >
         <TitleSpan>{title}</TitleSpan>
-        <BodySpan>{body}</BodySpan>
+        <BodySpan
+          style={{
+            width: isMosaicLayout ? undefined : '100%',
+            fontSize: isMosaicLayout ? '0.75vw' : '0.95vw',
+            justifyContent: isMosaicLayout ? 'flex-start' : 'center',
+            marginTop: isMosaicLayout ? '14%' : undefined
+          }}
+        >
+          {body}
+        </BodySpan>
       </RightContainer>
     </Container>
   );

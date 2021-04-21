@@ -1,15 +1,20 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 
 interface MosaicButtonProps {
-  isPushed: boolean;
-  appendText?: boolean;
   iconUrl: string;
   setIsMosaicLayout: Function;
 }
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,32 +31,46 @@ const TextContainer = styled.span`
 `;
 
 const MosaicButton = (props: MosaicButtonProps): ReactElement => {
-  const { isPushed, appendText, iconUrl, setIsMosaicLayout } = props;
+  const [isEnabled, setIsEnabled] = useState(true);
+  const { iconUrl, setIsMosaicLayout } = props;
 
   const onClick = () => {
-    setIsMosaicLayout(isPushed);
+    setIsEnabled(!isEnabled);
   }
 
+  useEffect(() => {
+    setIsMosaicLayout(isEnabled);
+  }, [isEnabled, setIsMosaicLayout]);
+
   return (
-    <Container 
-      style={{ 
-        backgroundColor: 
-          isPushed ? Colors.switchButtonBackgroundColor : Colors.white 
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={process.env.PUBLIC_URL + iconUrl}
-        alt=""
+    <Container>
+      <ButtonContainer 
         style={{ 
-          width: 15, 
-          height: 15, 
-          marginRight: appendText ? 10 : undefined
+          backgroundColor: 
+            isEnabled ? Colors.switchButtonBackgroundColor : Colors.white 
         }}
-      />
-      { appendText &&
+        onClick={onClick}
+      >
+        <img
+          src={process.env.PUBLIC_URL + iconUrl}
+          alt=""
+          style={{ width: 15, height: 15, marginRight: 10 }}
+        />
         <TextContainer>Mosaic</TextContainer>
-      }
+      </ButtonContainer>
+      <ButtonContainer 
+        style={{ 
+          backgroundColor: 
+            isEnabled ? Colors.white : Colors.switchButtonBackgroundColor
+        }}
+        onClick={onClick}
+      >
+        <img
+          src={process.env.PUBLIC_URL + '/media/icons/menu.svg'}
+          alt=""
+          style={{ width: 15, height: 15 }}
+        />
+      </ButtonContainer>
     </Container>
   );
 }

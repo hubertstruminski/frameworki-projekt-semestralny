@@ -22,11 +22,12 @@ const RightBar = (props: RightBarProps): ReactElement => {
         value={searchTerm}
         onChange={onChange}
       />
-      <Border />
+      <Border style={{ marginRight: 20 }} />
       <FollowedButton 
         isOutline 
         setSearchTerm={setSearchTerm}
         showHamburgerMenu={showHamburgerMenu}
+        // setSearchTerm={setSearchUsernameTerm}
       />
     </BarContainer>
   );

@@ -7,6 +7,7 @@ interface FilterButtonProps {
  text?: string;
  appendText?: boolean;
  isMarginLeft?: boolean;
+ onClick?: Function;
 }
 
 const Container = styled.div`
@@ -24,9 +25,16 @@ const TextSpan = styled.span`
 `;
 
 const FilterButton = (props: FilterButtonProps): ReactElement => {
-  const { iconUrl, text, appendText, isMarginLeft } = props;
+  const { iconUrl, text, appendText, isMarginLeft, onClick } = props;
+
+  const onSubmit = () => {
+    if(onClick) {
+      onClick();
+    }
+  }
+
   return (
-    <Container>
+    <Container onClick={onSubmit}>
       <img 
         src={process.env.PUBLIC_URL + iconUrl} 
         alt=""
@@ -36,7 +44,6 @@ const FilterButton = (props: FilterButtonProps): ReactElement => {
           marginRight: appendText ? 5 : undefined,
           marginLeft: isMarginLeft ? 5 : undefined
         }}
-
       />
       { appendText &&
         <TextSpan>{text}</TextSpan>

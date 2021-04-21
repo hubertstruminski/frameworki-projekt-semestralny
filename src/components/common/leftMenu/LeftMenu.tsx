@@ -72,11 +72,19 @@ const LeftMenu = (props: LeftMenuProps): ReactElement => {
             height: showHamburgerMenu ? undefined : 150,
             paddingTop: showHamburgerMenu ? 30 : undefined,
             paddingBottom: showHamburgerMenu ? 30 : undefined,
-            cursor: 'pointer'
           }}
-          onClick={onProfileRedirect}
         >
-          <img src={url} alt="" style={{ width: 70, height: 70, borderRadius: '50%'}} />
+          <img 
+            src={url} 
+            alt="" 
+            style={{ 
+              width: 70, 
+              height: 70, 
+              borderRadius: '50%',
+              cursor: 'pointer'
+            }} 
+            onClick={onProfileRedirect}
+          />
           <NameContainer>{name}</NameContainer>
           <JobTitleContainer>{company.name}</JobTitleContainer>
         </TopContainer>

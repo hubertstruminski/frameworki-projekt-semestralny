@@ -48,3 +48,15 @@ code {
 a {
   color: #414144;
 }
+
+.fullscreen-enabled .fullScreenContainer {
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.fullscreen-enabled {
+  background: white;
+}

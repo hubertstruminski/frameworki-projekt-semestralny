@@ -1,16 +1,26 @@
-import React, { ChangeEvent, ReactElement, useState, useEffect, ReactNode } from 'react';
+import React, { 
+  ChangeEvent, 
+  ReactElement, 
+  useState, 
+  useEffect, 
+  ReactNode,
+  useLayoutEffect 
+} from 'react';
 import styled from 'styled-components';
 import { Colors } from '../../../styledHelpers/Colors';
 import LeftMenu from '../../common/leftMenu/LeftMenu';
 import LeftBar from '../entitiesPage/LeftBar';
 import RightBar from '../entitiesPage/RightBar';
-import SwitchButton from '../entitiesPage/SwitchButton';
 import { connect, useSelector } from 'react-redux';
 import { StoreState } from '../../../store/reducers';
 import EntityComponent from '../entitiesPage/EntityComponent';
+import MosaicButton from '../entitiesPage/MosaicButton';
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import { fetchAllPhotos } from '../../../store/actions/photoActions';
 
 interface EntitiesPageProps {
   showHamburgerMenu: boolean;
+  fetchAllPhotos: Function;
 }
 
 const Container = styled.div`
@@ -23,7 +33,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  width: 90%;
+  /* width: 90%; */
   background-color: ${Colors.white};
   margin-top: 30px;
 `;
@@ -56,6 +66,7 @@ const BottomBarContainer = styled.div`
   padding-left: 20px;
   padding-right: 20px;
   margin-top: 5px;
+  flex-wrap: wrap;
 `;
 
 const DataContainer = styled.div`
@@ -109,16 +120,41 @@ const ENTITIES_DATA: Entity[] = [
 
 const EntititiesPage = (props: EntitiesPageProps): ReactElement => {
   const [isMosaicLayout, setIsMosaicLayout] = useState(true);
+  const [isAscendingOrder, setIsAscendingOrder] = useState(true);
   const [entities, setEntities] = useState<Entity[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const { showHamburgerMenu } = props;
+
+  const handle = useFullScreenHandle();
+
+  const { showHamburgerMenu, fetchAllPhotos } = props;
 
   const photos = useSelector((state: StoreState) => state.photos.photos);
 
+  useLayoutEffect(() => {
+    window.addEventListener('resize', updateLayout);
+    return () => window.removeEventListener('resize', updateLayout);
+  }, []);
+
+  const updateLayout = () => {
+    if(window.innerWidth < 900) {
+      setIsMosaicLayout(false);
+    } else if(window.innerWidth < 1050) {
+      setIsMosaicLayout(false);
+    } else if(window.innerWidth < 1350) {
+      setIsMosaicLayout(false);
+    } else {
+      setIsMosaicLayout(true);
+    }
+  }
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { currentTarget: { value } } = e;
-    setSearchTerm(value);
+    setSearchTerm(value === null ? '' : value);
   }
+
+  useEffect(() => {
+    fetchAllPhotos();
+  }, [fetchAllPhotos]);
 
   useEffect(() => {
     const result: Entity[] = [];
@@ -133,14 +169,25 @@ const EntititiesPage = (props: EntitiesPageProps): ReactElement => {
     setEntities(result);
   }, [photos]);
 
+  const dynamicSearch = () => {
+    return entities.filter((entity: Entity): boolean => entity.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  }
+
   const renderEntities = (): ReactNode => {
-    return entities.map((entity: Entity, index: number): ReactNode => {
+    return dynamicSearch()
+    .sort((a, b) => isAscendingOrder ? (
+      a.title > b.title ? 1 : -1
+    ) : (
+      a.title < b.title ? 1 : -1
+    ))
+    .map((entity: Entity, index: number): ReactNode => {
       const { body, title, photoUrl } = entity;
       return (
         <EntityComponent 
           title={title}
           body={body}
           photoUrl={photoUrl}
+          isMosaicLayout={isMosaicLayout}
         />
       );
     });
@@ -148,35 +195,48 @@ const EntititiesPage = (props: EntitiesPageProps): ReactElement => {
 
   return (
     <Container>
-      <Wrapper>
-        { showHamburgerMenu && <LeftMenu showHamburgerMenu={showHamburgerMenu} />}
-        <TopBarContainer>
-          <LabelContainer>
-            <span style={{ marginRight: 10 }}>Entities</span>
-            <img 
-              src={process.env.PUBLIC_URL + '/media/icons/cog.svg'}
-              alt=""
-              style={{ width: 12.5, height: 12.5, marginTop: -5 }}
+      { showHamburgerMenu && <LeftMenu showHamburgerMenu={showHamburgerMenu} />}
+      <FullScreen handle={handle}>
+        <div style={{ width: '100%', display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Wrapper 
+          style={{
+            width: handle.active ? '100%' : '90%',
+            marginTop: showHamburgerMenu ? 10 : undefined
+          }}
+        >
+          <TopBarContainer>
+            <LabelContainer>
+              <span style={{ marginRight: 10 }}>Entities</span>
+              <img 
+                src={process.env.PUBLIC_URL + '/media/icons/cog.svg'}
+                alt=""
+                style={{ width: 12.5, height: 12.5, marginTop: -5 }}
+              />
+            </LabelContainer>
+            <MosaicButton 
+              iconUrl="/media/icons/windows.svg" 
+              setIsMosaicLayout={setIsMosaicLayout}
             />
-          </LabelContainer>
-          <SwitchButton 
-            isMosaicLayout={isMosaicLayout}
-            setIsMosaicLayout={setIsMosaicLayout}
-          />
-        </TopBarContainer>
-        <BottomBarContainer>
-          <LeftBar />
-          <RightBar 
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            showHamburgerMenu={showHamburgerMenu}
-            onChange={onChange}
-          />
-        </BottomBarContainer>
-        <DataContainer>
-          { renderEntities() }
-        </DataContainer>
-      </Wrapper>
+          </TopBarContainer>
+          <BottomBarContainer>
+            <LeftBar 
+              handle={handle}
+              setIsAscendingOrder={setIsAscendingOrder}
+              isAscendingOrder={isAscendingOrder}
+            />
+            <RightBar 
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              showHamburgerMenu={showHamburgerMenu}
+              onChange={onChange}
+            />
+          </BottomBarContainer>
+          <DataContainer>
+            { renderEntities() }
+          </DataContainer>
+        </Wrapper>
+        </div>
+      </FullScreen>
     </Container>
   );
 }
@@ -186,5 +246,5 @@ function mapStateToProps(state: StoreState) {
 }
 
 export default connect(mapStateToProps, { 
-
+  fetchAllPhotos
 })(EntititiesPage);

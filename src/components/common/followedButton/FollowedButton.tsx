@@ -37,7 +37,7 @@ const FollowedButton = (props: FollowedButtonProps) => {
           border: isOutline ? `1.5px solid ${Colors.profileTextColor}` : 'none',
           borderRadius: isOutline ? 5 : undefined,
           padding: isOutline ? 5 : undefined,
-          marginLeft: isOutline ? 20 : undefined
+          // marginLeft: isOutline ? 20 : undefined
         }}
       >
         (
