@@ -60,3 +60,7 @@ a {
 .fullscreen-enabled {
   background: white;
 }
+
+.disabledInputFilters::placeholder {
+  color: #414144;
+}

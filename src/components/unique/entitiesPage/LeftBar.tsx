@@ -13,6 +13,8 @@ interface LeftBarProps {
   handle: FullScreenHandle;
   setIsAscendingOrder: Function;
   isAscendingOrder: boolean;
+  setIsFiltersOpened: Function;
+  isFiltersOpened: boolean;
 }
 
 const DotsContainer = styled.div`
@@ -28,7 +30,13 @@ const DotsContainer = styled.div`
 `;
 
 const LeftBar = (props: LeftBarProps): ReactElement => {
-  const { handle, setIsAscendingOrder, isAscendingOrder } = props;
+  const { 
+    handle, 
+    setIsAscendingOrder, 
+    isAscendingOrder,
+    setIsFiltersOpened,
+    isFiltersOpened 
+  } = props;
 
   const shareUrl = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -50,6 +58,7 @@ const LeftBar = (props: LeftBarProps): ReactElement => {
         text="Filters" 
         iconUrl="/media/icons/filter.svg" 
         appendText 
+        onClick={() => setIsFiltersOpened(!isFiltersOpened)}
       />
       <Border />
       <FilterButton 

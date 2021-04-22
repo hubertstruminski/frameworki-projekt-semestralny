@@ -16,9 +16,10 @@
     "bootstrap": "^4.6.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
+    "react-collapse": "^5.1.0",
     "react-dom": "^17.0.1",
     "react-dropdown-hook": "^1.0.1",
-    "react-full-screen": "^1.0.2",
+    "react-full-screen": "git://github.com/snakesilk/react-fullscreen.git#master",
     "react-js-pagination": "^3.0.3",
     "react-paginate": "^7.1.2",
     "react-redux": "^7.2.3",
@@ -59,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-collapse": "^5.0.0",
     "@types/react-js-pagination": "^3.0.3",
     "@types/react-paginate": "^6.2.1",
     "@types/react-router-dom": "^5.1.7",

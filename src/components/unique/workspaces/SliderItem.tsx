@@ -52,7 +52,7 @@ const SliderItem = (props: SliderItemProps): ReactElement => {
         }}
       >
         <img 
-          src={process.env.PUBLIC_URL + "/media/icons/entities2.svg"} 
+          src={process.env.PUBLIC_URL + icon} 
           alt="" 
           style={{ 
             width: showHamburgerMenu ? 22.5 : 45, 

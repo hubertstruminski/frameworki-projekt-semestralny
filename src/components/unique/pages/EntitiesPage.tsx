@@ -17,6 +17,7 @@ import EntityComponent from '../entitiesPage/EntityComponent';
 import MosaicButton from '../entitiesPage/MosaicButton';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { fetchAllPhotos } from '../../../store/actions/photoActions';
+import ExpandableFilters from '../entitiesPage/ExpandableFilters';
 
 interface EntitiesPageProps {
   showHamburgerMenu: boolean;
@@ -33,7 +34,6 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  /* width: 90%; */
   background-color: ${Colors.white};
   margin-top: 30px;
 `;
@@ -123,6 +123,7 @@ const EntititiesPage = (props: EntitiesPageProps): ReactElement => {
   const [isAscendingOrder, setIsAscendingOrder] = useState(true);
   const [entities, setEntities] = useState<Entity[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isFiltersOpened, setIsFiltersOpened] = useState(false);
 
   const handle = useFullScreenHandle();
 
@@ -218,12 +219,29 @@ const EntititiesPage = (props: EntitiesPageProps): ReactElement => {
               setIsMosaicLayout={setIsMosaicLayout}
             />
           </TopBarContainer>
-          <BottomBarContainer>
-            <LeftBar 
-              handle={handle}
-              setIsAscendingOrder={setIsAscendingOrder}
-              isAscendingOrder={isAscendingOrder}
-            />
+          <BottomBarContainer 
+            style={{ 
+              alignItems: isFiltersOpened ? 'flex-start' : 'center'
+            }}
+          >
+            <div 
+              style={{
+                display: 'flex', 
+                alignItems: 'flex-start', 
+                flexDirection: 'column',
+                justifyContent: !isFiltersOpened ? 'center' : undefined
+              }}>
+              <LeftBar 
+                handle={handle}
+                setIsAscendingOrder={setIsAscendingOrder}
+                isAscendingOrder={isAscendingOrder}
+                setIsFiltersOpened={setIsFiltersOpened}
+                isFiltersOpened={isFiltersOpened}
+              />
+              { isFiltersOpened &&
+                <ExpandableFilters isOpened={isFiltersOpened} />
+              }
+            </div>
             <RightBar 
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}

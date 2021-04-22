@@ -17,6 +17,7 @@ const Container = styled.div`
   justify-content: space-between;
   padding: 5px;
   margin-right: 5px;
+  cursor: pointer;
 `;
 
 const TextSpan = styled.span`

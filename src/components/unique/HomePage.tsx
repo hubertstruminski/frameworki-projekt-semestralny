@@ -12,21 +12,14 @@ import "slick-carousel/slick/slick-theme.css";
 import ResumeView from './resume/ResumeView';
 import LeftMenu from '../common/leftMenu/LeftMenu';
 import { BasicContainer, Container } from '../../styledHelpers/HomePageComponents';
+import { Workspace } from '../../entities/homePage';
+import { WORKSPACES_DATA } from '../../mocks/homePageMocks';
 
 interface HomePageProps {
   fetchAllPublications: Function;
   fetchAllUsers: Function;
   fetchAllPhotos: Function;
   showHamburgerMenu: boolean;
-}
-
-export interface Workspace {
-  title: string;
-  type: string;
-  users: number;
-  days: number;
-  url: string;
-  icon: string;
 }
 
 const HomePage = (props: HomePageProps) => {
@@ -64,23 +57,7 @@ const HomePage = (props: HomePageProps) => {
   }, [fetchAllPublications, fetchAllUsers, fetchAllPhotos]);
 
   useEffect(() => {
-    const titles: Workspace[] = [
-      { title: "Client contract", type: "Contract", users: 150, days: 2, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Supplier contract", type: "Contract", users: 25, days: 2, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Corporate", type: "Corporate", users: 25, days: 2, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Group number", type: "B2B", users: 78, days: 3, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Client contract 2", type: "Contract", users: 161, days: 3, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Supplier contract 2", type: "Contract", users: 13, days: 3, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Corporate 2", type: "Corporate", users: 8, days: 3, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Group number 2", type: "B2B", users: 11, days: 4, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Client contract 3", type: "Contract", users: 254, days: 4, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Supplier contract 3", type: "Contract", users: 67, days: 5, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Corporate 3", type: "Corporate", users: 207, days: 5, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Group number 3", type: "B2B", users: 111, days: 6, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Client contract 4", type: "Contract", users: 98, days: 7, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Supplier contract 4", type: "Contract", users: 3, days: 7, url: '', icon: '/media/icons/entities2.svg' },
-      { title: "Corporate 4", type: "Corporate", users: 567, days: 8, url: '', icon: '/media/icons/entities2.svg' }
-    ];
+    const titles: Workspace[] = WORKSPACES_DATA;
     let index: number = 0 ;
     titles.forEach((title: Workspace): void => {
       if(photos[index]) {
