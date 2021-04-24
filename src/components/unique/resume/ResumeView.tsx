@@ -41,10 +41,6 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
   const { name } = userMe;
 
   useEffect(() => {
-    console.log(searchUsernameTerm);
-  }, [searchUsernameTerm]);
-
-  useEffect(() => {
     fetchAllComments();
   }, [fetchAllComments]);
 
@@ -73,7 +69,6 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
   useEffect(() => {
     const offset = activePage * PER_PAGE;
     setOffsetResumes(offset);
-    
   }, [activePage]);
 
   const editSearchTerm = (e: ChangeEvent<HTMLInputElement>) => {

@@ -7,9 +7,6 @@ import {
 import { withRouter } from "react-router-dom";
 import { ProfileItemProps } from '../../../entities/profileItem';
 
-
-
-
 const ProfileItem = (props: ProfileItemProps): ReactElement => {
   const { photoUrl, name, history } = props;
 

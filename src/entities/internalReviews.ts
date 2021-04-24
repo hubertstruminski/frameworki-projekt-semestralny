@@ -1,4 +1,6 @@
-export interface InternalReviewsProps {
+import { RouteComponentProps } from "react-router";
+
+export interface InternalReviewsProps extends RouteComponentProps {
   isFormVisible: boolean;
 }
 

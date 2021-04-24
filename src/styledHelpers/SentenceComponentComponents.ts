@@ -12,3 +12,12 @@ export const ValueSpan = styled.div`
   margin-top: 10px;
   font-size: 0.85vw;
 `;
+
+export const inputStyles = {
+  border: 'none',
+  color: `${Colors.subProfileTextColor}`,
+  padding: 5,
+  borderRadius: 5,
+  marginLeft: 20,
+  marginTop: 10
+}

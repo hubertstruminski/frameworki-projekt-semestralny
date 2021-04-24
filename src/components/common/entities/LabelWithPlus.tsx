@@ -3,16 +3,10 @@ import {
   LabelText
 } from '../../../styledHelpers/ExpandableFiltersComponents';
 import { LabelWithPlusProps } from '../../../entities/labelWithPlus';
+import { rotatedPlusStyles } from '../../../styledHelpers/LabelWithPlusComponents';
 
 const LabelWithPlus = (props: LabelWithPlusProps): ReactElement => {
   const { title } = props;
-  
-  const rotatedPlusStyles = {
-    width: 20,
-    height: 20,
-    transform: 'rotate(45deg)',
-    marginRight: 5
-  }  
 
   return (
     <React.Fragment>

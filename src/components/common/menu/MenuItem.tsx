@@ -6,7 +6,6 @@ import {
 import { withRouter } from "react-router-dom";
 import { MenuItemProps } from '../../../entities/menuItem';
 
-
 const MenuItem = (props: MenuItemProps): ReactElement => {
   const { 
     iconUrl, 

@@ -15,7 +15,6 @@ import {
 import { withRouter } from "react-router-dom";
 import { LeftMenuProps } from '../../../entities/leftMenu';
 
-
 const LeftMenu = (props: LeftMenuProps): ReactElement => {
   const { fetchUserMe, fetchUserPhoto, showHamburgerMenu, history } = props;
 

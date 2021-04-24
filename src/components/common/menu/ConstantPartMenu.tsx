@@ -8,7 +8,7 @@ import {
 import { 
   CONSTANT_MENU_ITEMS,
   IMenuItem, 
-} from '../../../mocks/MenuMocks';
+} from '../../../mocks/menuMocks';
 import { ConstantPartMenuProps } from '../../../entities/constantPartMenu';
 
 const ConstantPartMenu = (props: ConstantPartMenuProps): ReactElement => {

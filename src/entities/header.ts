@@ -1,6 +1,7 @@
 import React from "react";
+import { RouteComponentProps } from "react-router";
 
-export interface HeaderProps {
+export interface HeaderProps extends RouteComponentProps {
   title?: string
   isGray?: boolean;
   showHamburgerMenu: boolean;

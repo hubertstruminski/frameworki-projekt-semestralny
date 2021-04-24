@@ -16,6 +16,7 @@ import {
   RightWrapper
 } from '../../../styledHelpers/PublicationViewComponents';
 import { PublicationListProps } from '../../../entities/publicationView';
+import { withRouter } from 'react-router';
 
 const PublicationView = (props: PublicationListProps): ReactElement => {
   const [collection, setCollection] = useState<PublicationDto[]>([]);
@@ -24,7 +25,7 @@ const PublicationView = (props: PublicationListProps): ReactElement => {
   const userList = useSelector((state: StoreState) => state.user.userList);
   const photos = useSelector((state: StoreState) => state.photos.photos);
 
-  const { showHamburgerMenu } = props;
+  const { showHamburgerMenu, history } = props;
   
   useEffect(() => {
     const tmp: PublicationDto[] = []
@@ -61,7 +62,8 @@ const PublicationView = (props: PublicationListProps): ReactElement => {
   const moreStyles = {
     color: Colors.profileTextColor,
     fontWeight: 700,
-    fontSize: showHamburgerMenu ? '2.7vw' : '0.95vw'
+    fontSize: showHamburgerMenu ? '2.7vw' : '0.95vw',
+    cursor: 'pointer'
   }
 
   return (
@@ -81,7 +83,7 @@ const PublicationView = (props: PublicationListProps): ReactElement => {
         <RightWrapper>
           <span style={latestStyles}>Latest publications</span>
           <PublicationList collection={collection.slice(1, 4)} showHamburgerMenu={showHamburgerMenu} />
-          <span style={moreStyles}>See more publications</span>
+          <span onClick={() => history.push({ pathname: '/test' })} style={moreStyles}>See more publications</span>
         </RightWrapper>
       </RightContainer>
     </Container>
@@ -92,4 +94,4 @@ function mapStateToProps(state: StoreState) {
   return {};
 }
 
-export default connect(mapStateToProps, {  })(PublicationView);
+export default connect(mapStateToProps, {  })(withRouter(PublicationView));

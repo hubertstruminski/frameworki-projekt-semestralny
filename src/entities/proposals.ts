@@ -1,4 +1,6 @@
-export interface ProposalsProps {
+import { RouteComponentProps } from "react-router";
+
+export interface ProposalsProps extends RouteComponentProps {
   isFormVisible: boolean;
 }
 

@@ -1,7 +1,8 @@
 import React, { ReactElement, useState } from 'react';
 import {
   TitleSpan,
-  ValueSpan
+  ValueSpan,
+  inputStyles
 } from '../../../styledHelpers/SentenceComponentComponents';
 import { Colors } from '../../../styledHelpers/Colors';
 import { SentenceComponentProps } from '../../../entities/sentenceComponent';
@@ -18,15 +19,6 @@ const SentenceComponent = (props: SentenceComponentProps): ReactElement => {
   } = props;
 
   const [valueForm, setValueForm] = useState(value);
-
-  const inputStyles = {
-    border: 'none',
-    color: `${Colors.subProfileTextColor}`,
-    padding: 5,
-    borderRadius: 5,
-    marginLeft: 20,
-    marginTop: 10
-  }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;

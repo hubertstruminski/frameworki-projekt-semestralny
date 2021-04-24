@@ -13,12 +13,8 @@ import {
 } from '../../../../styledHelpers/ProposalsComponents';
 import { MoreContainer } from '../../../../styledHelpers/InternalReviewsComponents';
 import { InternalReviewsProps, Review } from '../../../../entities/internalReviews';
-
-const REVIEW_DATA: Review[] = [
-  { name: 'Operation Tindeen', entity: 'Renault Cordova', location: 'France', expertise: '#Tax', date: '20/01/2018' },
-  { name: 'Op. Prometheus', entity: 'Renault HQ', location: 'USA', expertise: '#M&A', date: '18/02/2019' },
-  { name: 'Op. Latandre', entity: 'Renault Brno', location: 'Italia', expertise: '#Social', date: '18/02/2019' },
-];
+import { REVIEW_DATA } from '../../../../mocks/internalReviewsMocks';
+import { withRouter } from 'react-router';
 
 const InternalReviews = (props: InternalReviewsProps): ReactElement => {
   const [name, setName] = useState('');
@@ -28,7 +24,7 @@ const InternalReviews = (props: InternalReviewsProps): ReactElement => {
   const [date, setDate] = useState('');
 
   const [reviews, setReviews] = useState(REVIEW_DATA);
-  const { isFormVisible } = props;
+  const { isFormVisible, history } = props;
 
   const onRemoveItem = (indexToRemove: number) => {
     setReviews((data: Review[]) => data.filter((review: Review, index: number): boolean => index !== indexToRemove));
@@ -123,7 +119,10 @@ const InternalReviews = (props: InternalReviewsProps): ReactElement => {
             <button style={buttonStyles} onClick={onSubmit}>Add</button>
           </div>
         }
-        <MoreContainer>
+        <MoreContainer
+          onClick={() => history.push({ pathname: '/test' })}
+          style={{ cursor: 'pointer' }}
+        >
           See more Reviews
         </MoreContainer>
       </TableWrapper>
@@ -131,4 +130,4 @@ const InternalReviews = (props: InternalReviewsProps): ReactElement => {
   );
 }
 
-export default InternalReviews;
+export default withRouter(InternalReviews);

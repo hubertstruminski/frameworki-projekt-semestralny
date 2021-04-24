@@ -8,10 +8,6 @@ import {
 } from '../../../styledHelpers/EntityComponentComponents';
 import { EntityComponentProps } from '../../../entities/entityComponent';
 
-
-
-
-
 const EntityComponent = (props: EntityComponentProps): ReactElement => {
   const { photoUrl, title, body, isMosaicLayout } = props;
   return (

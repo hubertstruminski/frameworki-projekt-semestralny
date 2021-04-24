@@ -11,14 +11,14 @@ import {
 import { Colors } from '../../../styledHelpers/Colors';
 import { FollowedButtonProps } from '../../../entities/followedButton';
 
-
 const FollowedButton = (props: FollowedButtonProps): ReactElement => {
   const { 
     showHamburgerMenu, 
     setSearchTerm, 
     isOutline, 
     setIsFollowedClicked, 
-    setActivePage 
+    setActivePage,
+    isDisabled 
   } = props;
 
   const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
@@ -27,14 +27,16 @@ const FollowedButton = (props: FollowedButtonProps): ReactElement => {
   const { name } = userMe;
 
   const searchResumes = (value: string) => {
-    setSearchTerm(value);
-    if(setIsFollowedClicked) {
-      setIsFollowedClicked(true);
+    if(!isDisabled) {
+      setSearchTerm(value);
+      if(setIsFollowedClicked) {
+        setIsFollowedClicked(true);
+      }
+      if(setActivePage) {
+        setActivePage(0);
+      }
+      closeDropdown();
     }
-    if(setActivePage) {
-      setActivePage(0);
-    }
-    closeDropdown();
   }
 
   return (
@@ -67,6 +69,10 @@ const FollowedButton = (props: FollowedButtonProps): ReactElement => {
       }
     </div>
   ); 
+}
+
+FollowedButton.defaultProps = {
+  isDisabled: false,
 }
 
 function mapStateToProps(state: StoreState) {

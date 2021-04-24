@@ -9,7 +9,7 @@ import {
   MENU_ITEMS_DATA, 
   IMenuItem, 
   MenuItemTypeEnum 
-} from '../../../mocks/MenuMocks';
+} from '../../../mocks/menuMocks';
 import MenuItem from './MenuItem';
 import { connect, useSelector } from 'react-redux';
 import { StoreState } from '../../../store/reducers';
@@ -25,6 +25,7 @@ import {
 import { WORKSPACES_DATA } from '../../../mocks/homePageMocks';
 import { Workspace } from '../../../entities/homePage';
 import { DropdownMenuProps } from '../../../entities/dropdownMenu';
+import { withRouter } from 'react-router';
 
 const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -38,7 +39,7 @@ const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
   const { name } = userMe;
   const { url } = userPhotoUrl;
 
-  const { setDropdownTitle, setDropdownUrl } = props;
+  const { setDropdownTitle, setDropdownUrl, history } = props;
 
   useEffect(() => {
     if(!isRetrieved) {
@@ -142,7 +143,10 @@ const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
         setDropdownTitle={setDropdownTitle}
         setDropdownUrl={setDropdownUrl}
       />
-      <LogoutContainer>
+      <LogoutContainer
+        onClick={() => history.push({ pathname: '/test' })}
+        style={{ cursor: 'pointer' }}
+      >
         <img 
           src={process.env.PUBLIC_URL + '/media/icons/logout.png'} 
           alt="" 
@@ -158,4 +162,4 @@ function mapStateToProps(state: StoreState) {
   return {};
 }
 
-export default connect(mapStateToProps, { })(DropdownMenu);
+export default connect(mapStateToProps, { })(withRouter(DropdownMenu));

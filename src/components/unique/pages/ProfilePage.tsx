@@ -23,7 +23,7 @@ const ProfilePage = (props: ProfilePageProps): ReactElement => {
   const [width, setWidth] = useState('50%');
   const [imgSize, setImgSize] = useState(100);
 
-  const { fetchUserMe, fetchUserPhoto, showHamburgerMenu } = props;
+  const { fetchUserMe, fetchUserPhoto, showHamburgerMenu, history } = props;
 
   const userMe = useSelector((state: StoreState) => state.user.user);
   const userPhotoUrl = useSelector((state: StoreState) => state.user.userPhotoUrl);
@@ -78,7 +78,12 @@ const ProfilePage = (props: ProfilePageProps): ReactElement => {
               alt="" 
               style={{ width: imgSize, height: imgSize, borderRadius: imgSize / 2 }}
             />
-            <ProfileLinkSpan>See profile</ProfileLinkSpan>
+            <ProfileLinkSpan 
+              onClick={() => history.push({ pathname: '/test' })}
+              style={{ cursor: 'pointer' }}
+            >
+              See profile
+            </ProfileLinkSpan>
           </ImageContainer>
           { !isFormVisible ? (
             <ProfileDataContainer 

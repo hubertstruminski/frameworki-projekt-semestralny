@@ -10,12 +10,10 @@ import {
 import { inputStyles } from '../../../../styledHelpers/ProfileDataFormComponents';
 import { cancelIconStyles, buttonStyles } from '../../../../styledHelpers/InlinePropertiesComponents';
 import { CorrespondantsProps } from '../../../../entities/correspondants';
+import { CORRESPONDANTS_DATA } from '../../../../mocks/correspondantsMocks';
 
 const Correspondants = (props: CorrespondantsProps): ReactElement => {
-  const [people, setPeople] = useState([
-    'Firstname Lastname',
-    'Firstname Lastname'
-  ]);
+  const [people, setPeople] = useState(CORRESPONDANTS_DATA);
   const [newElement, setNewElement] = useState('');
 
   const { isFormVisible } = props;

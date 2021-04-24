@@ -16,4 +16,5 @@ export const Container = styled.div`
 export const TextContainer = styled.div`
   color: ${Colors.black};
   margin-left: 15px;
+  cursor: pointer;
 `;

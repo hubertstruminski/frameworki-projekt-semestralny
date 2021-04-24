@@ -11,7 +11,6 @@ import LeftMenu from '../../common/leftMenu/LeftMenu';
 import { Container } from '../../../styledHelpers/SliderPageComponents';
 import { SliderItemState, SliderPageProps } from '../../../entities/sliderPage';
 
-
 const SliderPage = (props: SliderPageProps): ReactElement => {
   const location = useLocation<SliderItemState>();
   const { state: { photoUrl, title } } = location;

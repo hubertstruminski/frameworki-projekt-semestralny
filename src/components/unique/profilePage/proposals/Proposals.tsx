@@ -13,12 +13,8 @@ import {
   inputStyles
 } from '../../../../styledHelpers/ProposalsComponents';
 import { Proposal, ProposalsProps } from '../../../../entities/proposals';
-
-const PROPOSALS_DATA: Proposal[] = [
-  { name: 'Operation Tindeen', entity: 'Renault Cordova', location: 'France', expertise: '#Tax', date: '20/01/2018', firm: 'Racine' },
-  { name: 'Op. Prometheus', entity: 'Renault HQ', location: 'USA', expertise: '#M&A', date: '18/02/2019', firm: 'Clifford chance'},
-  { name: 'Op. Latandre', entity: 'Renault Brno', location: 'Italia', expertise: '#Social', date: '18/02/2019', firm: 'SVZ'},
-]
+import { PROPOSALS_DATA } from '../../../../mocks/proposalsMocks';
+import { withRouter } from 'react-router';
 
 const Proposals = (props: ProposalsProps): ReactElement => {
   const [name, setName] = useState('');
@@ -29,7 +25,7 @@ const Proposals = (props: ProposalsProps): ReactElement => {
   const [firm, setFirm] = useState('');
 
   const [proposals, setProposals] = useState(PROPOSALS_DATA);
-  const { isFormVisible } = props;
+  const { isFormVisible, history } = props;
 
   const onRemoveItem = (indexToRemove: number) => {
     setProposals((data: Proposal[]) => data.filter((proposal: Proposal, index: number): boolean => index !== indexToRemove));
@@ -132,7 +128,10 @@ const Proposals = (props: ProposalsProps): ReactElement => {
             <button style={buttonStyles} onClick={onSubmit}>Add</button>
           </div>
         }
-        <MoreContainer>
+        <MoreContainer 
+          onClick={() => history.push({ pathname: '/test' })}
+          style={{ cursor: 'pointer' }}
+        >
           See more proposals
         </MoreContainer>
       </TableWrapper>
@@ -140,4 +139,4 @@ const Proposals = (props: ProposalsProps): ReactElement => {
   );
 }
 
-export default Proposals;
+export default withRouter(Proposals);

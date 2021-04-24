@@ -3,9 +3,10 @@ import {
   Container
 } from '../../../styledHelpers/SingleButtonComponents';
 import { SingleButtonProps } from '../../../entities/singleButton';
+import { withRouter } from 'react-router';
 
 const SingleButton = (props: SingleButtonProps): ReactElement => {
-  const { iconUrl, title, isRotatedIcon } = props;
+  const { iconUrl, title, isRotatedIcon, history } = props;
 
   const buttonIconStyles = {
     width: 20,
@@ -15,7 +16,10 @@ const SingleButton = (props: SingleButtonProps): ReactElement => {
   }
 
   return (
-    <Container>
+    <Container 
+      onClick={() => history.push({ pathname: '/test' })}
+      style={{ cursor: 'pointer' }}
+    >
       <img 
         src={process.env.PUBLIC_URL + iconUrl} 
         alt=""
@@ -26,4 +30,4 @@ const SingleButton = (props: SingleButtonProps): ReactElement => {
   );
 }
 
-export default SingleButton;
+export default withRouter(SingleButton);

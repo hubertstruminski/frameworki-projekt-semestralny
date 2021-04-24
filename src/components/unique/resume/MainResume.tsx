@@ -6,7 +6,7 @@ import {
   MessageContainer,
   TitleContainer
 } from '../../../styledHelpers/MainResumeComponents';
-import { BAR_ITEMS_DATA } from '../../../mocks/BarItemMocks';
+import { BAR_ITEMS_DATA } from '../../../mocks/barItemMocks';
 import BarItem from '../../common/resume/BarItem';
 import Entities2 from '../../../svgs/entities2';
 import Ecosystem from '../../../svgs/ecosystem';

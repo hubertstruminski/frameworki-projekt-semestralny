@@ -1,20 +1,18 @@
 import React, { ReactElement, useState } from 'react';
 import PropertiesContainer from './PropertiesContainer';
 import { PropertiesProps } from '../../../entities/properties';
+import { 
+  ADMISSIONS_DATA, 
+  COUNTIES_DATA, 
+  EXPERTISES_DATA, 
+  SPECIALITIES_DATA 
+} from '../../../mocks/propertiesMocks';
 
 const Properties = (props: PropertiesProps): ReactElement => {
-  const [expertises, setExpertises] = useState(['Mergers and acquisition']);
-  const [specialities, setSpecialities] = useState([
-    'Cross border operation',
-    'Transaction over 500ME/$'
-  ]);
-  const [admissions, setAdmisssions] = useState([
-    'Paris bar association',
-    'Tunisian bar association'
-  ]);
-  const [counties, setCounties] = useState([
-    'Tunisia'
-  ]);
+  const [expertises, setExpertises] = useState(EXPERTISES_DATA);
+  const [specialities, setSpecialities] = useState(SPECIALITIES_DATA);
+  const [admissions, setAdmisssions] = useState(ADMISSIONS_DATA);
+  const [counties, setCounties] = useState(COUNTIES_DATA);
 
   const { isFormVisible, setIsFormVisible } = props;
 

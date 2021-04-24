@@ -5,4 +5,5 @@ export interface FollowedButtonProps {
   isOutline?: boolean;
   setIsFollowedClicked?: Function;
   setActivePage?: Function;
+  isDisabled?: boolean;
 }

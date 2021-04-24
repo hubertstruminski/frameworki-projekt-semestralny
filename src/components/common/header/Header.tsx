@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { HeaderProps } from '../../../entities/header';
 import HeaderInput from './HeaderInput';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { 
   Container,
   PartialContainer,
@@ -22,7 +22,8 @@ const Header = (props: HeaderProps): ReactElement => {
     dropdownTitle,
     dropdownUrl,
     setDropdownTitle,
-    setDropdownUrl 
+    setDropdownUrl,
+    history
   } = props;
 
   const arrowDownContainerStyles = {
@@ -33,10 +34,21 @@ const Header = (props: HeaderProps): ReactElement => {
     paddingRight: 15
   }
 
+  const onClick = () => {
+    history.push({ pathname: '/test' });
+  }
+
   return (
     <Container>
       <PartialContainer>
-        <img style={{ margin: '15px' }} src={process.env.PUBLIC_URL + '/media/logo.png'} alt="" width="35" height="35" />
+        <img 
+          style={{ margin: '15px', cursor: 'pointer' }} 
+          src={process.env.PUBLIC_URL + '/media/logo.png'} 
+          alt="" 
+          width="35" 
+          height="35"
+          onClick={onClick} 
+        />
         <div ref={wrapperRef}>
           <ArrowDownMenuContainer 
             style={arrowDownContainerStyles}
@@ -67,14 +79,23 @@ const Header = (props: HeaderProps): ReactElement => {
       </PartialContainer>
       { !showHamburgerMenu && <HeaderInput /> }
       <PartialContainer>
-        <CircleWhiteDiv>
+        <CircleWhiteDiv
+          style={{ cursor: 'pointer' }}
+          onClick={onClick}
+        >
           <img src={process.env.PUBLIC_URL + '/media/icons/house.svg'} alt="" />
         </CircleWhiteDiv>  
-        <CircleDiv>
+        <CircleDiv
+          style={{ cursor: 'pointer' }}
+          onClick={onClick}
+        >
           <CounterContainer>3</CounterContainer>
           <img src={process.env.PUBLIC_URL + '/media/icons/comments.svg'} alt="" />
         </CircleDiv>   
-        <CircleDiv>
+        <CircleDiv
+          style={{ cursor: 'pointer' }}
+          onClick={onClick}
+        >
           <CounterContainer>3</CounterContainer>
           <img src={process.env.PUBLIC_URL + '/media/icons/bell.svg'} alt="" />
         </CircleDiv>   
@@ -83,5 +104,5 @@ const Header = (props: HeaderProps): ReactElement => {
   );
 }
 
-export default Header;
+export default withRouter(Header);
 
