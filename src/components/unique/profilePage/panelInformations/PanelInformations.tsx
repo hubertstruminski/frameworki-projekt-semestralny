@@ -1,26 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import {
+  MainTitle
+} from '../../../../styledHelpers/PanelInformationsComponents';
 import { Colors } from '../../../../styledHelpers/Colors';
 import Correspondants from './Correspondants';
 import FileTaker from './FileTaker';
-import SentenceComponent from './SentenceComponent';
+import SentenceComponent from '../../../common/profile/SentenceComponent';
 
 interface PanelInformationsProps {
   isFormVisible: boolean;
 }
-
-const MainTitle = styled.div`
-  color: ${Colors.black};
-  font-weight: 700;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 1.1vw;
-  padding-left: 20px;
-  padding-top: 20px;
-`;
-
-
 
 const PanelInformations = (props: PanelInformationsProps) => {
   const { isFormVisible } = props;

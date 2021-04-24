@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react';
+import React, { ChangeEvent, ReactElement, useCallback, useEffect, useState } from 'react';
 import { fetchAllComments } from '../../../store/actions/commentActions';
 import { StoreState } from '../../../store/reducers';
 import FollowedButton from '../../common/followedButton/FollowedButton';
@@ -38,6 +38,8 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
   const [activePage, setActivePage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchUsernameTerm, setSearchUsernameTerm] = useState<string>('');
+  const [offsetResumes, setOffsetResumes] = useState(10);
+  const [isFollowedClicked, setIsFollowedClicked] = useState(false);
 
   const { 
     fetchAllComments, 
@@ -49,6 +51,9 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
   const comments = useSelector((state: StoreState): Comment[] => state.comments.comments);
   const userList = useSelector((state: StoreState): User[] => state.user.userList);
   const photos = useSelector((state: StoreState): Photo[] => state.photos.photos);
+  const userMe = useSelector((state: StoreState) => state.user.user);
+  
+  const { name } = userMe;
 
   useEffect(() => {
     console.log(searchUsernameTerm);
@@ -58,51 +63,60 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
     fetchAllComments();
   }, [fetchAllComments]);
 
-  useEffect(() => {
+  const processComments = useCallback(() => {
     const result: Resume[] = [];
     comments.forEach((comment: Comment): void => {
-      if(comment) {
         const { postId, body } = comment;
         const commentName = comment.name;
 
         const foundUser = userList.filter((user: User): boolean => user.id === postId);
-        if(foundUser[0] && foundUser[0].username) {
-          const { name, username } = foundUser[0];
+        const { name, username } = foundUser[0] || {};
 
-          const foundPhoto = photos.filter((photo: Photo): boolean => photo.id === postId);
-          if(foundPhoto[0]) {
-            const resumeObject: Resume = { body, commentName, name, username, photoUrl: foundPhoto[0].url };
-            result.push(resumeObject);
-          }
-        }  
-      }
+        const foundPhoto = photos.filter((photo: Photo): boolean => photo.id === postId);
+        const singlePhoto = foundPhoto[0] || {};
+
+        const resumeObject: Resume = { body, commentName, name, username, photoUrl: singlePhoto.url };
+        result.push(resumeObject);
     });
     setResumes(result);
-    console.log(result);
-  }, [comments, userList, photos]);
+  }, [comments, photos, userList]);
 
-  
+  useEffect(() => {
+    processComments();
+  }, [processComments]);
+
+  useEffect(() => {
+    const offset = activePage * PER_PAGE;
+    setOffsetResumes(offset);
+    
+  }, [activePage]);
 
   const editSearchTerm = (e: ChangeEvent<HTMLInputElement>) => {
     const { target: { value } } = e;
+    setIsFollowedClicked(false);
+    setActivePage(0);
     setSearchTerm(value === null ? '' : value);
   }
 
-  const handlePageChange = (data: any) => {
+  const handlePageChange = async (data: any) => {
     setActivePage(data.selected);
   }
 
   const dynamicSearch = () => {
-    return resumes.filter(
-      (resume: Resume): boolean => {
-        return resume.commentName.toLowerCase().includes(searchTerm.toLowerCase())
-        &&
-        resume.name.toLowerCase().includes(searchUsernameTerm.toLowerCase())
-      });
+    if(!isFollowedClicked) {
+      return resumes.filter((resume: Resume): 
+      boolean => resume.commentName?.toLowerCase().includes(searchTerm.toLowerCase()));
+    } else {
+      if(searchUsernameTerm === name) {
+        return resumes.filter((resume: Resume): 
+          boolean => resume.name?.toLowerCase().includes(name.toLowerCase()));
+      } else {
+        return resumes;
+      }
+    }
   }
 
   const PER_PAGE = 10;
-  const offset = activePage * PER_PAGE;
   const pageCount = Math.ceil(resumes.length / PER_PAGE);
 
   return (
@@ -111,7 +125,12 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
         <TitleContainer style={{ fontSize: showHamburgerMenu ? '2.5vw' : '1vw' }}>{placeholderTitle}</TitleContainer>
         <FeaturesContainer>
           <Input placeholder="Filter by title..." value={searchTerm} onChange={editSearchTerm} />
-          <FollowedButton showHamburgerMenu={showHamburgerMenu} setSearchTerm={setSearchUsernameTerm} />
+          <FollowedButton 
+            showHamburgerMenu={showHamburgerMenu} 
+            setSearchTerm={setSearchUsernameTerm}
+            setIsFollowedClicked={setIsFollowedClicked} 
+            setActivePage={setActivePage}
+          />
         </FeaturesContainer>
       </TopContainer>
       {
@@ -121,9 +140,8 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
       }
       <div className="pagination" style={{width: '100%'}}>
         <div style={{marginBottom: 25, width: '100%'}}>
-          {/* { renderResumes(offset) } */}
           <ResumeList 
-            offset={offset} 
+            offset={offsetResumes} 
             resumes={dynamicSearch()} 
             PER_PAGE={PER_PAGE}
             showHamburgerMenu={showHamburgerMenu} 
@@ -131,8 +149,9 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
           />
         </div>
       </div>
+      <div style={{ display: 'flex', justifyContent: 'center'}}>
       <ReactPaginate
-        marginPagesDisplayed={2}
+        marginPagesDisplayed={3}
         pageRangeDisplayed={5}
         previousLabel={"← Previous"}
         nextLabel={"Next →"}
@@ -143,7 +162,9 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
         nextLinkClassName={"pagination__link"}
         disabledClassName={"pagination__link--disabled"}
         activeClassName={"pagination__link--active"}
+        forcePage={activePage}
       />
+      </div>
     </Container>
   );
 }

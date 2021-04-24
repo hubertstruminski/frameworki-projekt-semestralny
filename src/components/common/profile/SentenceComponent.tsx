@@ -1,6 +1,9 @@
 import React, { ReactElement, useState } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../../styledHelpers/Colors';
+import {
+  TitleSpan,
+  ValueSpan
+} from '../../../styledHelpers/SentenceComponentComponents';
+import { Colors } from '../../../styledHelpers/Colors';
 
 interface SentenceComponentProps {
  title: string;
@@ -11,18 +14,6 @@ interface SentenceComponentProps {
  isFormVisible: boolean;
  isMainElement?: boolean;
 }
-
-const TitleSpan = styled.div` 
-  margin-top: 20px;
-  margin-left: 20px;
-`;
-
-const ValueSpan = styled.div`
-  color: ${Colors.black};
-  margin-left: 20px;
-  margin-top: 10px;
-  font-size: 0.85vw;
-`;
 
 const SentenceComponent = (props: SentenceComponentProps): ReactElement => {
   const { 

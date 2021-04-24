@@ -1,19 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
+import {
+  Container
+} from '../../../styledHelpers/SingleButtonComponents';
 
 interface SingleButtonProps {
   title?: string;
   iconUrl: string
   isRotatedIcon?: boolean;
 }
-
-const Container = styled.div`
-  margin: 10px;
-  flex-direction: row;
-  display: flex;
-  align-items: center;
-  font-size: 0.8vw;
-`;
 
 const SingleButton = (props: SingleButtonProps) => {
   const { iconUrl, title, isRotatedIcon } = props;

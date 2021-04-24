@@ -1,19 +1,19 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
-import { StoreState } from '../../store/reducers';
-import { fetchAllPublications } from '../../store/actions/publicationActions'
-import { fetchAllUsers } from '../../store/actions/userActions';
-import { fetchAllPhotos } from '../../store/actions/photoActions';
-import PublicationView from './publications/PublicationView';
-import SliderItem from './workspaces/SliderItem';
+import { StoreState } from '../../../store/reducers';
+import { fetchAllPublications } from '../../../store/actions/publicationActions'
+import { fetchAllUsers } from '../../../store/actions/userActions';
+import { fetchAllPhotos } from '../../../store/actions/photoActions';
+import PublicationView from '../publications/PublicationView';
+import SliderItem from '../../common/workspaces/SliderItem';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ResumeView from './resume/ResumeView';
-import LeftMenu from '../common/leftMenu/LeftMenu';
-import { BasicContainer, Container } from '../../styledHelpers/HomePageComponents';
-import { Workspace } from '../../entities/homePage';
-import { WORKSPACES_DATA } from '../../mocks/homePageMocks';
+import ResumeView from '../resume/ResumeView';
+import LeftMenu from '../../common/leftMenu/LeftMenu';
+import { BasicContainer, Container } from '../../../styledHelpers/HomePageComponents';
+import { Workspace } from '../../../entities/homePage';
+import { WORKSPACES_DATA } from '../../../mocks/homePageMocks';
 
 interface HomePageProps {
   fetchAllPublications: Function;
@@ -94,19 +94,17 @@ const HomePage = (props: HomePageProps) => {
         Workspaces
       </BasicContainer>
       <div style={{ maxWidth: sliderWidth, marginTop: 25}}>
-        {/* <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}> */}
-          <Slider  
-            infinite 
-            autoplay 
-            speed={1000} 
-            arrows={false}
-            slidesToShow={5}
-            variableWidth
-            adaptiveHeight
-          >
-            { renderSlider() }
-          </Slider>
-        {/* </div> */}
+        <Slider  
+          infinite 
+          autoplay 
+          speed={1000} 
+          arrows={false}
+          slidesToShow={5}
+          variableWidth
+          adaptiveHeight
+        >
+          { renderSlider() }
+        </Slider>
       </div>
       <ResumeView 
         showHamburgerMenu={showHamburgerMenu} 

@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
+import {
+  ItemContainer
+} from '../../../styledHelpers/MatterItemComponents';
 import AbsoluteContainer from './AbsoluteContainer';
 
 interface MatterItemProps {
@@ -13,14 +14,7 @@ interface MatterItemProps {
   isSmallScreen: boolean;
 }
 
-const ItemContainer = styled.div`
-  width: 25%;
-  background-color: ${Colors.white};
-  margin: 25px;
-  border-radius: 10px;
-  position: relative;
-  min-width: 175px;
-`;
+
 
 
 const MatterItem = (props: MatterItemProps) => {
@@ -33,7 +27,6 @@ const MatterItem = (props: MatterItemProps) => {
     minHeight,
     isSmallScreen
   } = props;
-
 
   return (
     <ItemContainer 

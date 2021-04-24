@@ -7,7 +7,7 @@ import {
   TitleContainer
 } from '../../../styledHelpers/MainResumeComponents';
 import { BAR_ITEMS_DATA } from '../../../mocks/BarItemMocks';
-import BarItem from './BarItem';
+import BarItem from '../../common/resume/BarItem';
 import Entities2 from '../../../svgs/entities2';
 import Ecosystem from '../../../svgs/ecosystem';
 import Comments from '../../../svgs/comments';
@@ -83,7 +83,6 @@ const MainResume = (props: MainResumeProps): ReactElement => {
         );
     }
   }
-
   
   return (
     <Container>
@@ -93,11 +92,13 @@ const MainResume = (props: MainResumeProps): ReactElement => {
         { !isComponentsBar ? (
           <React.Fragment>
             <ItemContainer>
-              <img 
-                src={photoUrl} 
-                alt="" 
-                style={{ borderRadius: 15/2, width: 15, height: 15, borderColor: 'green', borderWidth: 1}} 
-              />
+              { photoUrl &&
+                <img 
+                  src={photoUrl} 
+                  alt="" 
+                  style={{ borderRadius: 15/2, width: 15, height: 15, borderColor: 'green', borderWidth: 1}} 
+                />
+              }
             </ItemContainer>
             <ItemContainer style={inlineFontStyles}>{username}</ItemContainer>
             <ItemContainer style={{marginTop: -5}}>.</ItemContainer>

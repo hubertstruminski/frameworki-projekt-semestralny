@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-import BarItem from './BarItem';
+import { Container } from '../../../styledHelpers/BarContainerComponents';
+import BarItem from '../../common/resume/BarItem';
 import Entities2 from '../../../svgs/entities2';
 import Comments from '../../../svgs/comments';
 import Ecosystem from '../../../svgs/ecosystem';
@@ -16,15 +16,6 @@ export interface IBarItem {
   backgroundColor: string;
   title: string;
 }
-
-const Container = styled.div`
-  width: 100%;
-  flex-direction: row;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-`;
 
 const BarContainer = (props: BarContainerProps) => {
   return (

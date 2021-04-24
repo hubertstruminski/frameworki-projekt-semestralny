@@ -1,61 +1,18 @@
 import React, { ReactElement, ReactNode, useState } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../../styledHelpers/Colors';
+import {
+  ImgContainer,
+  Item,
+  ItemContainer,
+  RowContainer,
+  TextSpan,
+  TitleSpan
+} from '../../../../styledHelpers/CorrespondantsComponents';
 import { inputStyles } from '../../../../styledHelpers/ProfileDataFormComponents';
 import { cancelIconStyles, buttonStyles } from '../../../../styledHelpers/InlinePropertiesComponents';
 
 interface CorrespondantsProps {
   isFormVisible: boolean;
 }
-
-const TitleSpan = styled.div` 
-  margin-top: 20px;
-  margin-left: 20px;
-  font-weight: 700;
-  color: ${Colors.black};
-  font-size: 0.9vw;
-`;
-
-const ItemContainer = styled.div`
-  background-color: ${Colors.subProfileTextColor};
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-`;
-
-const ImgContainer = styled.div`
-  background-color: red;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  margin-right: 5px;
-`;
-
-const TextSpan = styled.div`
-  color: ${Colors.black};
-  font-weight: 700;
-  font-size: 0.9vw;
-  margin-right: 25px;
-`;
-
-const Item = styled.div`
-  color: ${Colors.black};
-  font-size: 0.8vw;
-  margin-right: 20px;
-`;
-
-const RowContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
 
 const Correspondants = (props: CorrespondantsProps): ReactElement => {
   const [people, setPeople] = useState([

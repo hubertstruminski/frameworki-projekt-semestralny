@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import styled from 'styled-components';
+import { Container } from '../../../styledHelpers/BarItemComponents';
 
 interface BarItemProps {
  isIconVisible?: boolean;
@@ -9,16 +9,6 @@ interface BarItemProps {
  title: string;
  isMargin?: boolean;
 }
-
-const Container = styled.div`
-  flex-direction: row;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
-  /* margin: 10px; */
-  border-radius: 5px;
-`;
 
 const BarItem = (props: BarItemProps) => {
   const { 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
-import { ActionTypes } from './actionTypes';
+import { ActionTypes, API_URL } from './actionTypes';
 
 export interface Photo {
  albumId: number;
@@ -17,7 +17,7 @@ export interface FetchAllPhotos {
 
 export const fetchAllPhotos = () => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<Photo[]>("https://jsonplaceholder.typicode.com/photos");
+    const response = await axios.get<Photo[]>(`${API_URL}/photos`);
 
     dispatch<FetchAllPhotos>({
       type: ActionTypes.RETRIEVE_ALL_PHOTOS,

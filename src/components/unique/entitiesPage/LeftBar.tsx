@@ -1,12 +1,13 @@
 import React, { ReactElement } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
+import {
+  DotsContainer
+} from '../../../styledHelpers/LeftBarComponents';
 import RigidButton from './RigidButton';
 import {  
   BarContainer,
   Border
 } from '../../../styledHelpers/EntitiesPageComponents';
-import FilterButton from './FilterButton';
+import FilterButton from '../../common/entities/FilterButton';
 import { FullScreenHandle } from 'react-full-screen';
 
 interface LeftBarProps {
@@ -16,18 +17,6 @@ interface LeftBarProps {
   setIsFiltersOpened: Function;
   isFiltersOpened: boolean;
 }
-
-const DotsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  margin-right: 5px;
-  color: ${Colors.black};
-  font-size: 1.5vw;
-  font-weight: 900;
-  margin-top: -15px;
-`;
 
 const LeftBar = (props: LeftBarProps): ReactElement => {
   const { 

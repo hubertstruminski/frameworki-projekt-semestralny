@@ -1,29 +1,12 @@
 import React, { ChangeEvent, ReactElement, useState } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../../styledHelpers/Colors';
+import {
+  Container,
+  TextSpan
+} from '../../../../styledHelpers/FileTakerComponents';
 
 interface FileTakerProps {
   isFormVisible: boolean;
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  flex: 1;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  padding: 10px;
-  background-color: ${Colors.subProfileTextColor};
-  border-radius: 5px;
-`;
-
-const TextSpan = styled.span`
-  color: ${Colors.black};
-  font-size: 0.85vw;
-`;
 
 const FileTaker = (props: FileTakerProps): ReactElement => {
   const [fileName, setFileName] = useState('Attachment_lorem-ipsum25425.jpg');

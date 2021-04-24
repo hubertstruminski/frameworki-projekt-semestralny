@@ -1,8 +1,11 @@
 import React, { useLayoutEffect, useState } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
+import { 
+  Container, 
+  Wrapper, 
+  LabelContainer 
+} from '../../../styledHelpers/MattersContainerComponents';
 import Entities2 from '../../../svgs/entities2';
-import MatterItem from '../sliderPage/MatterItem';
+import MatterItem from '../../common/slider/MatterItem';
 import Ecosystem from '../../../svgs/ecosystem';
 import Comments from '../../../svgs/comments';
 
@@ -10,33 +13,7 @@ interface MattersContainerProps {
 
 }
 
-const Container = styled.div`
-  width: 90%;
-  background-color: ${Colors.constantPartContainer};
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 10px;
-  margin-top: 35px;
-`;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  min-height: 300px;
-`;
-
-const LabelContainer = styled.div`
-  margin-left: 30px;
-  color: ${Colors.subProfileTextColor};
-  font-size: 1.2vw;
-  margin-top: 10px;
-  font-weight: 700;
-`;
 
 const MattersContainer = (props: MattersContainerProps) => {
   const [bigIconSize, setBigIconSize] = useState(150);

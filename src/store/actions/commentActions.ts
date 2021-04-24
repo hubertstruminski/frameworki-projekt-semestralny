@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
-import { ActionTypes } from './actionTypes';
+import { ActionTypes, API_URL } from './actionTypes';
 
 export interface Comment {
   postId: number;
@@ -15,7 +15,7 @@ export interface FetchAllComments {
 
 export const fetchAllComments = () => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<Comment[]>("https://jsonplaceholder.typicode.com/comments");
+    const response = await axios.get<Comment[]>(`${API_URL}/comments`);
 
     dispatch<FetchAllComments>({
       type: ActionTypes.RETRIEVE_ALL_COMMENTS,

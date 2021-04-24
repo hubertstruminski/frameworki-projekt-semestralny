@@ -6,14 +6,20 @@ import React, {
   ReactNode,
   useLayoutEffect 
 } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
+import {  
+  BottomBarContainer,
+  Container,
+  DataContainer,
+  LabelContainer,
+  TopBarContainer,
+  Wrapper
+} from '../../../styledHelpers/EntitiesPageComponents';
 import LeftMenu from '../../common/leftMenu/LeftMenu';
 import LeftBar from '../entitiesPage/LeftBar';
 import RightBar from '../entitiesPage/RightBar';
 import { connect, useSelector } from 'react-redux';
 import { StoreState } from '../../../store/reducers';
-import EntityComponent from '../entitiesPage/EntityComponent';
+import EntityComponent from '../../common/entities/EntityComponent';
 import MosaicButton from '../entitiesPage/MosaicButton';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { fetchAllPhotos } from '../../../store/actions/photoActions';
@@ -23,60 +29,6 @@ interface EntitiesPageProps {
   showHamburgerMenu: boolean;
   fetchAllPhotos: Function;
 }
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  flex: 1;
-  margin-top: 55px;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-
-const Wrapper = styled.div`
-  background-color: ${Colors.white};
-  margin-top: 30px;
-`;
-
-const TopBarContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-`;
-
-const LabelContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  color: ${Colors.black};
-  font-weight: 700;
-  font-size: 1vw;
-`;
-
-const BottomBarContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-top: 5px;
-  flex-wrap: wrap;
-`;
-
-const DataContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-`;
 
 interface Entity {
   title: string;

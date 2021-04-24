@@ -1,59 +1,20 @@
 import React, { ReactElement } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
 import {Collapse} from 'react-collapse';
-import LabelWithPlus from './LabelWithPlus';
-import ArrowDownContainer from './ArrowDownContainer';
+import LabelWithPlus from '../../common/entities/LabelWithPlus';
+import ArrowDownContainer from '../../common/entities/ArrowDownContainer';
 import DisabledInput from '../../common/input/DisabledInput';
 import {
-  LabelText
+  LabelText,
+  Container,
+  InfoSpan,
+  ItemContainer,
+  ItemsContainer
 } from '../../../styledHelpers/ExpandableFiltersComponents';
 import Plus from '../../../svgs/plus';
 
 interface ExpandableFiltersProps {
   isOpened: boolean;
 }
-
-const Container = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  background-color: ${Colors.filtersBackground};
-  border-radius: 10px;
-  margin-top: 10px;
-  padding: 5px;
-  margin-bottom: 10px;
-`;
-
-const InfoSpan = styled.span`
-  margin-left: 10px;
-  margin-top: 10px;
-  color: ${Colors.subProfileTextColor};
-  font-size: 0.7vw;
-  width: 100%;
-`;
-
-const ItemsContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  flex-direction: column;
-`;
-
-const ItemContainer = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 25px;
-  margin-top: 10px;
-
-`;
-
-
 
 const ExpandableFilters = (props: ExpandableFiltersProps): ReactElement => {
   const { isOpened } = props;

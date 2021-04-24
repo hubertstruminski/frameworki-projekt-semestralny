@@ -1,10 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
 import {  
   Container,
   LeftContainer,
-  RightContainer
+  RightContainer,
+  TextContainer
 } from '../../../styledHelpers/ProfileDataContainerComponents';
 
 interface ProfileDataContainerProps {
@@ -16,12 +15,6 @@ interface ProfileDataContainerProps {
   email: string | undefined;
   phone: string | undefined;
 }
-
-const TextContainer = styled.span`
-  color: ${Colors.black};
-  font-size: 0.85vw;
-  margin: 3px;
-`;
 
 const ProfileDataContainer = (props: ProfileDataContainerProps) => {
   const { name, companyName, city, bs, email, onEditProfileDataClick, phone } = props;

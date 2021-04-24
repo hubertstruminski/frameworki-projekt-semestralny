@@ -4,7 +4,7 @@ import {
   TypeDiv,
   TypeSpan
 } from '../../../styledHelpers/PropertiesContainerComponents';
-import InlineProperties from './InlineProperties';
+import InlineProperties from '../../common/profile/InlineProperties';
 
 interface PropertiesContainerProps {
   expertises: string[];
@@ -33,7 +33,6 @@ const PropertiesContainer = (props: PropertiesContainerProps) => {
     onEditForm
   } = props;
 
-  
   return (
     <>
       <div>

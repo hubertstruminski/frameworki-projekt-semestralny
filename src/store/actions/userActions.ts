@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
-import { ActionTypes } from './actionTypes';
+import { ActionTypes, API_URL } from './actionTypes';
 
 export interface User {
   id?: number;
@@ -38,7 +38,7 @@ export interface UpdateUserMe {
   payload: User;
 }
 
-export const url = "https://jsonplaceholder.typicode.com/users/1";
+export const url = `${API_URL}/users/1`;
 
 export const fetchUserMe = () => {
   return async (dispatch: Dispatch) => {
@@ -53,7 +53,7 @@ export const fetchUserMe = () => {
 
 export const fetchUserPhoto = (id: number) => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<UserPhoto>(`https://jsonplaceholder.typicode.com/photos/${id}`);
+    const response = await axios.get<UserPhoto>(`${API_URL}/photos/${id}`);
 
     dispatch<FetchUserPhoto>({
       type: ActionTypes.RETRIEVE_USER_PHOTO,
@@ -64,7 +64,7 @@ export const fetchUserPhoto = (id: number) => {
 
 export const fetchAllUsers = () => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<User[]>("https://jsonplaceholder.typicode.com/users");
+    const response = await axios.get<User[]>(`${API_URL}/users`);
     
     dispatch<FetchAllUsers>({
       type: ActionTypes.RETRIEVE_ALL_USERS,

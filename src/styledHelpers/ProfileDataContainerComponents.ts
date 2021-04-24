@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Colors } from "./Colors";
 
 export const Container = styled.div`
   display: flex;
@@ -23,4 +24,10 @@ export const RightContainer = styled.div`
   flex: 0.5;
   flex-direction: column;
   padding-right: 17.5%;
+`;
+
+export const TextContainer = styled.span`
+  color: ${Colors.black};
+  font-size: 0.85vw;
+  margin: 3px;
 `;

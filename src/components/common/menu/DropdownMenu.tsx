@@ -5,78 +5,63 @@ import React, {
   useEffect, 
   useState 
 } from 'react';
-import styled from 'styled-components';
 import { 
   MENU_ITEMS_DATA, 
   IMenuItem, 
   MenuItemTypeEnum 
 } from '../../../mocks/MenuMocks';
-import { Colors } from '../../../styledHelpers/Colors';
 import MenuItem from './MenuItem';
 import { connect, useSelector } from 'react-redux';
 import { StoreState } from '../../../store/reducers';
-import ProfileItem from './ProfileItem';
 import { Container } from '../../../styledHelpers/InputComponents';
+import ConstantPartMenu from './ConstantPartMenu';
+import {
+  LogoutContainer,
+  MenuContainer,
+  TypeContainer,
+  imgLogoutStyles,
+  inputStyles
+} from '../../../styledHelpers/DropdownMenuComponents';
+import { WORKSPACES_DATA } from '../../../mocks/homePageMocks';
+import { Workspace } from '../../../entities/homePage';
 
 interface DropdownMenuProps {
   setDropdownUrl: Function;
   setDropdownTitle: Function;
 }
 
-const MenuContainer = styled.div`
-  width: 100%;
-  background-color: ${Colors.white};
-  padding: 5px;
-  border: 1px solid ${Colors.subProfileTextColor};
-`;
-
-const TypeContainer = styled.div`
-  width: 100%;
-  padding-left: 15px;
-  color: ${Colors.black};
-  padding-top: 12.5px;
-  padding-bottom: 12.5px;
-`;
-
-const LogoutContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid ${Colors.subProfileTextColor};
-  padding-top: 10px;
-  padding-bottom: 10px;
-  flex-direction: row;
-  color: ${Colors.subProfileTextColor};
-`;
-
-const LineBreakContainer = styled.div`
-  width: 100%;
-  border-top: 1px solid ${Colors.subProfileTextColor};
-  margin-top: 5px;
-`;
-
 const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
+  const [isRetrieved, setIsRetrieved] = useState<boolean>(false);
 
   const userMe = useSelector((state: StoreState) => state.user.user);
   const userPhotoUrl = useSelector((state: StoreState) => state.user.userPhotoUrl);
+  const photos = useSelector((state: StoreState) => state.photos.photos);
 
   const { name } = userMe;
   const { url } = userPhotoUrl;
 
   const { setDropdownTitle, setDropdownUrl } = props;
 
-  const imgLogoutStyles = {
-    width: 20,
-    height: 20,
-    marginRight: 20
-  }
-
   useEffect(() => {
-    setMenuItems(MENU_ITEMS_DATA);
-  }, []);
+    if(!isRetrieved) {
+      let result: IMenuItem[] = [];
+      result = MENU_ITEMS_DATA; 
+      WORKSPACES_DATA.forEach((item: Workspace, index: number): void => {
+        const { title, icon } = item;
+  
+        const element: IMenuItem = { type: MenuItemTypeEnum.WORKSPACES, iconUrl: icon, routeUrl: '/sliderItem', title, photoUrl: '' };
+        
+        if(photos[index]) {
+          element.photoUrl = photos[index].url
+        }
+        result.push(element);
+      });
+      setMenuItems(result);
+      setIsRetrieved(true);
+    }
+  }, [photos, isRetrieved]);
 
   const editSearchTerm = (e: ChangeEvent<HTMLInputElement>) => {
     const { target: { value } } = e;
@@ -90,21 +75,11 @@ const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
     });
   }
 
-  const inputStyles = {
-    border: 0, 
-    outline: 'none',  
-    color: Colors.headerInputColor,
-    fontWeight: 400,
-    padding: 5,
-    width: '100%'
-  }
-
-  const renderContent = (startIndex: number, endIndex: number): ReactNode => {
+  const renderContent = (): ReactNode => {
     let isPlatform = true;
     let isWorkspaces = true;
-    let isAccount = true;
-    return dynamicSearch().slice(startIndex, endIndex).map((menuItem: IMenuItem): ReactNode => {
-      const { iconUrl, routeUrl, title, type } = menuItem;
+    return dynamicSearch().map((menuItem: IMenuItem): ReactNode => {
+      const { iconUrl, routeUrl, title, type, photoUrl } = menuItem;
       if(isPlatform && type === MenuItemTypeEnum.PLATFORM) {
         isPlatform = false;
         return (
@@ -130,25 +105,8 @@ const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
               title={title}
               setDropdownTitle={setDropdownTitle}
               setDropdownUrl={setDropdownUrl}
-            />
-          </React.Fragment>
-        );
-      } else if(isAccount && type === MenuItemTypeEnum.ACCOUNT) {
-        isAccount = false;
-        return (
-          <React.Fragment>
-            <LineBreakContainer />
-            <TypeContainer>Account</TypeContainer>
-            <ProfileItem 
-              photoUrl={url}
-              name={name}
-            />
-            <MenuItem 
-              iconUrl={iconUrl}
-              routeUrl={routeUrl}
-              title={title}
-              setDropdownTitle={setDropdownTitle}
-              setDropdownUrl={setDropdownUrl}
+              photoUrl={photoUrl}
+              icon={iconUrl}
             />
           </React.Fragment>
         );
@@ -160,6 +118,8 @@ const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
             title={title}
             setDropdownTitle={setDropdownTitle}
             setDropdownUrl={setDropdownUrl}
+            photoUrl={photoUrl}
+            icon={iconUrl}
           />
         );
       }
@@ -177,10 +137,15 @@ const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
           onChange={editSearchTerm}
         />
       </Container>
-      <div style={{ overflowY: 'scroll', overflowX: 'hidden' }}>
-      { renderContent(0, 10) }
+      <div style={{ overflowY: 'scroll', overflowX: 'hidden', maxHeight: 400 }}>
+      { renderContent() }
       </div>
-      { renderContent(10, 12) }
+      <ConstantPartMenu 
+        name={name}
+        url={url}
+        setDropdownTitle={setDropdownTitle}
+        setDropdownUrl={setDropdownUrl}
+      />
       <LogoutContainer>
         <img 
           src={process.env.PUBLIC_URL + '/media/icons/logout.png'} 

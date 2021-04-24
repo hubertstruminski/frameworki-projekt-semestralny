@@ -1,5 +1,4 @@
 import React, { ChangeEvent, ReactElement, ReactNode, useState } from 'react';
-import styled from 'styled-components';
 import { Colors } from '../../../../styledHelpers/Colors';
 import {
   Cell,
@@ -12,6 +11,7 @@ import {
   buttonStyles,
   inputStyles
 } from '../../../../styledHelpers/ProposalsComponents';
+import { MoreContainer } from '../../../../styledHelpers/InternalReviewsComponents';
 
 interface InternalReviewsProps {
   isFormVisible: boolean;
@@ -24,17 +24,6 @@ interface Review {
   expertise?: string;
   date?: string;
 }
-
-const MoreContainer = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: ${Colors.black};
-  font-size: 0.9vw;
-  margin-left: 30px;
-  font-weight: 700;
-`;
 
 const REVIEW_DATA: Review[] = [
   { name: 'Operation Tindeen', entity: 'Renault Cordova', location: 'France', expertise: '#Tax', date: '20/01/2018' },

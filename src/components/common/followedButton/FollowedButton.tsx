@@ -15,10 +15,19 @@ interface FollowedButtonProps {
   showHamburgerMenu: boolean;
   setSearchTerm: Function;
   isOutline?: boolean;
+  setIsFollowedClicked?: Function;
+  setActivePage?: Function;
 }
 
 const FollowedButton = (props: FollowedButtonProps) => {
-  const { showHamburgerMenu, setSearchTerm, isOutline } = props;
+  const { 
+    showHamburgerMenu, 
+    setSearchTerm, 
+    isOutline, 
+    setIsFollowedClicked, 
+    setActivePage 
+  } = props;
+
   const [wrapperRef, dropdownOpen, toggleDropdown, closeDropdown] = useDropdown();
   
   const userMe = useSelector((state: StoreState) => state.user.user);
@@ -26,6 +35,12 @@ const FollowedButton = (props: FollowedButtonProps) => {
 
   const searchResumes = (value: string) => {
     setSearchTerm(value);
+    if(setIsFollowedClicked) {
+      setIsFollowedClicked(true);
+    }
+    if(setActivePage) {
+      setActivePage(0);
+    }
     closeDropdown();
   }
 
@@ -37,7 +52,6 @@ const FollowedButton = (props: FollowedButtonProps) => {
           border: isOutline ? `1.5px solid ${Colors.profileTextColor}` : 'none',
           borderRadius: isOutline ? 5 : undefined,
           padding: isOutline ? 5 : undefined,
-          // marginLeft: isOutline ? 20 : undefined
         }}
       >
         (

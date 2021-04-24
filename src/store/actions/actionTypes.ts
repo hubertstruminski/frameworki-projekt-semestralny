@@ -11,6 +11,10 @@ export const RETRIEVE_ALL_PHOTOS = "RETRIEVE_ALL_PHOTOS";
 export const RETRIEVE_ALL_COMMENTS = "RETRIEVE_ALL_COMMENTS";
 export const UPDATE_USER_ME = "UPDATE_USER_ME";
 
+// export const API_URL = "https://jsonplaceholder.typicode.com";
+export const API_URL = "https://jsonplaceholder.cypress.io";
+
+
 export enum ActionTypes {
   RETRIEVE_USER_ME,
   RETRIEVE_USER_PHOTO,

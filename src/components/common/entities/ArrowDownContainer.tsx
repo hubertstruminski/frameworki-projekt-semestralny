@@ -1,21 +1,14 @@
 import React, { ReactElement } from 'react';
-import styled from 'styled-components';
 import {
   LabelText
 } from '../../../styledHelpers/ExpandableFiltersComponents';
 import ArrowDown from '../../../svgs/arrowDown';
+import { Container } from '../../../styledHelpers/ArrowDownContainerComponents';
 
 interface ArrowDownContainerProps {
   title: string;
   isJSComponent?: boolean;
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 20px;
-`;
 
 const ArrowDownContainer = (props: ArrowDownContainerProps): ReactElement => {
   const { title, isJSComponent } = props;

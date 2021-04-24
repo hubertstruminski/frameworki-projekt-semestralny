@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
-import { ActionTypes } from './actionTypes';
+import { ActionTypes, API_URL } from './actionTypes';
 
 export interface Publication {
  userId: number;
@@ -16,7 +16,7 @@ export interface FetchAllPublications {
 
 export const fetchAllPublications = () => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<Publication[]>("https://jsonplaceholder.typicode.com/posts");
+    const response = await axios.get<Publication[]>(`${API_URL}/posts`);
 
     dispatch<FetchAllPublications>({
       type: ActionTypes.RETRIEVE_ALL_PUBLICATIONS,

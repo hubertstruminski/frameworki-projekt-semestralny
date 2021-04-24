@@ -4,11 +4,7 @@ import {
   inputStyles
 } from '../../../styledHelpers/HeaderInputComponents';
 
-interface HeaderInputProps {
-
-}
-
-const HeaderInput = (props: HeaderInputProps): ReactElement => {
+const HeaderInput = (props: any): ReactElement => {
   return (
     <Container>
       <input

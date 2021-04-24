@@ -1,11 +1,7 @@
 import React from 'react';
 import { Container } from '../../../styledHelpers/TestPageComponents';
 
-interface TestPageProps {
-
-}
-
-const TestPage = (props: TestPageProps) => {
+const TestPage = (props: any) => {
   return (
     <Container>
       <h1>Test Page!</h1>

@@ -27,6 +27,8 @@ const ResumeList = (props: ResumeListProps): ReactElement => {
   } = props;
 
   const renderResumes = (offset: number) => {
+    console.log("GRAHAM");
+    console.log(resumes);
     return resumes.slice(offset, offset + PER_PAGE).map((resume: Resume): ReactElement => {
       const { commentName, photoUrl, username, name, body } = resume;
       return (

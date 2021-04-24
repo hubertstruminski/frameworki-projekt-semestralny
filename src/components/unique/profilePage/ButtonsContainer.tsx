@@ -1,18 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import SingleButton from '../profilePage/SingleButton';
+import { Container } from '../../../styledHelpers/ButtonsContainerComponents';
+import SingleButton from '../../common/profile/SingleButton';
 
 interface ButtonsContainerProps {
 
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 1;
-`;
+
 
 const ButtonsContainer = (props: ButtonsContainerProps) => {
   return (

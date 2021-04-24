@@ -40,7 +40,8 @@ const SliderItem = (props: SliderItemProps): ReactElement => {
       style={{
         minWidth: showHamburgerMenu ? 100 : 200, 
         width: showHamburgerMenu ? 150 : 300,
-        height: showHamburgerMenu ? 100: 200
+        height: showHamburgerMenu ? 100: 200,
+        cursor: 'pointer'
       }}
       onClick={onClick}
     >

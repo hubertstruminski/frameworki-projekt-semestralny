@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import { useLocation } from "react-router-dom";
 import SliderPlaceholder from '../sliderPage/SliderPlaceholder';
 import MattersContainer from '../sliderPage/MattersContainer';
@@ -9,6 +8,7 @@ import { fetchAllPhotos } from '../../../store/actions/photoActions';
 import { StoreState } from '../../../store/reducers';
 import { connect } from 'react-redux';
 import LeftMenu from '../../common/leftMenu/LeftMenu';
+import { Container } from '../../../styledHelpers/SliderPageComponents';
 
 interface SliderPageProps {
   showHamburgerMenu: boolean;
@@ -18,19 +18,9 @@ interface SliderPageProps {
 
 interface SliderItemState {
   icon: string;
-  photoUrl: string;
+  photoUrl?: string;
   title: string;
 }
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  flex: 1;
-  margin-top: 55px;
-  flex-direction: column;
-`;
-
-
 
 const SliderPage = (props: SliderPageProps) => {
   const location = useLocation<SliderItemState>();

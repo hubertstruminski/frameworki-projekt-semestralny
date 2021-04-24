@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react';
-import styled from 'styled-components';
-import { Colors } from '../../../styledHelpers/Colors';
+import {
+  Container,
+  TextSpan
+} from '../../../styledHelpers/FilterButtonComponents';
 
 interface FilterButtonProps {
  iconUrl: string;
@@ -10,20 +12,7 @@ interface FilterButtonProps {
  onClick?: Function;
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
-  margin-right: 5px;
-  cursor: pointer;
-`;
 
-const TextSpan = styled.span`
-  color: ${Colors.subProfileTextColor};
-  font-size: 0.75vw;
-`;
 
 const FilterButton = (props: FilterButtonProps): ReactElement => {
   const { iconUrl, text, appendText, isMarginLeft, onClick } = props;

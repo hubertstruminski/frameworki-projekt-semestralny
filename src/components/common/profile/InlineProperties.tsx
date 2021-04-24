@@ -1,8 +1,11 @@
 import React, { ReactNode, useState } from 'react';
-import styled from 'styled-components';
+import { 
+  ItemContainer,
+  WrapInlineContainer,
+  buttonStyles,
+  cancelIconStyles
+} from '../../../styledHelpers/InlinePropertiesComponents';
 import { inputStyles } from '../../../styledHelpers/ProfileDataFormComponents';
-import { Colors } from '../../../styledHelpers/Colors';
-import { cancelIconStyles, buttonStyles } from '../../../styledHelpers/InlinePropertiesComponents';
 
 interface InlinePropertiesProps {
   data: string[];
@@ -10,28 +13,6 @@ interface InlinePropertiesProps {
   setState?: Function;
   isFormVisible: boolean;
 }
-
-const WrapInlineContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-`;
-
-const ItemContainer = styled.div`
-  background-color: ${Colors.profilePropertiesBackground};
-  color: ${Colors.profilePropertiesColor};
-  padding: 5px;
-  border-radius: 5px;
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.85vw;
-`;
 
 const InlineProperties = (props: InlinePropertiesProps) => {
   const [newElement, setNewElement] = useState('');

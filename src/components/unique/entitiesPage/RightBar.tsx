@@ -27,7 +27,6 @@ const RightBar = (props: RightBarProps): ReactElement => {
         isOutline 
         setSearchTerm={setSearchTerm}
         showHamburgerMenu={showHamburgerMenu}
-        // setSearchTerm={setSearchUsernameTerm}
       />
     </BarContainer>
   );

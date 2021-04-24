@@ -6,8 +6,6 @@ interface PropertiesProps {
   setIsFormVisible: Function;
 }
 
-
-
 const Properties = (props: PropertiesProps): ReactElement => {
   const [expertises, setExpertises] = useState(['Mergers and acquisition']);
   const [specialities, setSpecialities] = useState([

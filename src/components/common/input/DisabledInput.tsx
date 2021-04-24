@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Colors } from '../../../styledHelpers/Colors';
+import { inputStyles } from '../../../styledHelpers/DisabledInputComponents';
 
 interface DisabledInputProps {
   placeholder: string;
@@ -7,15 +7,6 @@ interface DisabledInputProps {
 
 const DisabledInput = (props: DisabledInputProps): ReactElement => {
   const { placeholder } = props;
-
-  const inputStyles = {
-    borderRadius: 5,
-    padding: 5,
-    backgroundColor: Colors.subProfileTextColor,
-    border: 'none',
-    width: '20%',
-    marginRight: 10
-  }
 
   return (
     <input

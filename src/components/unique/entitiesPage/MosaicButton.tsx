@@ -1,5 +1,9 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import {
+  ButtonContainer,
+  Container,
+  TextContainer
+} from '../../../styledHelpers/MosaicButtonComponents';
 import { Colors } from '../../../styledHelpers/Colors';
 
 interface MosaicButtonProps {
@@ -7,28 +11,7 @@ interface MosaicButtonProps {
   setIsMosaicLayout: Function;
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  border: 1px solid ${Colors.subProfileTextColor};
-  cursor: pointer;
-`;
-
-const TextContainer = styled.span`
-  color: ${Colors.profileTextColor};
-  font-weight: 700;
-  font-size: 0.75vw;
-`;
 
 const MosaicButton = (props: MosaicButtonProps): ReactElement => {
   const [isEnabled, setIsEnabled] = useState(true);
