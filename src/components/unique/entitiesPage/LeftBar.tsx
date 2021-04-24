@@ -8,15 +8,7 @@ import {
   Border
 } from '../../../styledHelpers/EntitiesPageComponents';
 import FilterButton from '../../common/entities/FilterButton';
-import { FullScreenHandle } from 'react-full-screen';
-
-interface LeftBarProps {
-  handle: FullScreenHandle;
-  setIsAscendingOrder: Function;
-  isAscendingOrder: boolean;
-  setIsFiltersOpened: Function;
-  isFiltersOpened: boolean;
-}
+import { LeftBarProps } from '../../../entities/leftBar';
 
 const LeftBar = (props: LeftBarProps): ReactElement => {
   const { 

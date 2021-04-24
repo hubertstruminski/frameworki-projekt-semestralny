@@ -16,22 +16,7 @@ import {
   TopContainer
 } from '../../../styledHelpers/ResumeViewComponents';
 import BarContainer from './BarContainer';
-
-interface ResumeViewProps {
- title?: string;
- fetchAllComments: Function;
- showHamburgerMenu: boolean;
- placeholderTitle: string;
- isComponentsBar: boolean;
-}
-
-interface Resume {
-  body: string;
-  commentName: string;
-  name: string;
-  username: string | undefined;
-  photoUrl: string;
-}
+import { Resume, ResumeViewProps } from '../../../entities/resumeView';
 
 const ResumeView = (props: ResumeViewProps): ReactElement => {
   const [resumes, setResumes] = useState<Resume[]>([]);

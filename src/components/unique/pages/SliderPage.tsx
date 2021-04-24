@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import SliderPlaceholder from '../sliderPage/SliderPlaceholder';
 import MattersContainer from '../sliderPage/MattersContainer';
@@ -9,20 +9,10 @@ import { StoreState } from '../../../store/reducers';
 import { connect } from 'react-redux';
 import LeftMenu from '../../common/leftMenu/LeftMenu';
 import { Container } from '../../../styledHelpers/SliderPageComponents';
+import { SliderItemState, SliderPageProps } from '../../../entities/sliderPage';
 
-interface SliderPageProps {
-  showHamburgerMenu: boolean;
-  fetchAllUsers: Function;
-  fetchAllPhotos: Function;
-}
 
-interface SliderItemState {
-  icon: string;
-  photoUrl?: string;
-  title: string;
-}
-
-const SliderPage = (props: SliderPageProps) => {
+const SliderPage = (props: SliderPageProps): ReactElement => {
   const location = useLocation<SliderItemState>();
   const { state: { photoUrl, title } } = location;
   

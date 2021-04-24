@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import {
   BorderDiv,
   Container
@@ -8,14 +8,9 @@ import Properties from './Properties';
 import AmountFees from './proposals/AmountFees';
 import InternalReviews from './proposals/InternalReviews';
 import Proposals from './proposals/Proposals';
+import { BottomProfileDataContainerProps } from '../../../entities/bottomProfileDataContainer';
 
-interface BottomProfileDataContainerProps {
-  width: string;
-}
-
-
-
-const BottomProfileDataContainer = (props: BottomProfileDataContainerProps) => {
+const BottomProfileDataContainer = (props: BottomProfileDataContainerProps): ReactElement => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const { width } = props;

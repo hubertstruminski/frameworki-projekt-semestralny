@@ -11,10 +11,7 @@ import {
   ItemsContainer
 } from '../../../styledHelpers/ExpandableFiltersComponents';
 import Plus from '../../../svgs/plus';
-
-interface ExpandableFiltersProps {
-  isOpened: boolean;
-}
+import { ExpandableFiltersProps } from '../../../entities/expandableFilters';
 
 const ExpandableFilters = (props: ExpandableFiltersProps): ReactElement => {
   const { isOpened } = props;

@@ -6,13 +6,7 @@ import {
 import { Colors } from '../../../styledHelpers/Colors';
 import ArrowDown from '../../../svgs/arrowDown';
 
-interface RigidButtonProps {
-
-}
-
-
-
-const RigidButton = (props: RigidButtonProps): ReactElement => {
+const RigidButton = (): ReactElement => {
   return (
     <Container>
       <DotContainer>

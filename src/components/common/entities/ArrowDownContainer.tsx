@@ -4,11 +4,8 @@ import {
 } from '../../../styledHelpers/ExpandableFiltersComponents';
 import ArrowDown from '../../../svgs/arrowDown';
 import { Container } from '../../../styledHelpers/ArrowDownContainerComponents';
+import { ArrowDownContainerProps } from '../../../entities/arrowDownContainer';
 
-interface ArrowDownContainerProps {
-  title: string;
-  isJSComponent?: boolean;
-}
 
 const ArrowDownContainer = (props: ArrowDownContainerProps): ReactElement => {
   const { title, isJSComponent } = props;

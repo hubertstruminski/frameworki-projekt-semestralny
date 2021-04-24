@@ -10,17 +10,7 @@ import {
   buttonStyles,
   inputStyles
 } from '../../../../styledHelpers/ProposalsComponents';
-
-interface AmountFeesProps {
- isFormVisible: boolean;
-}
-
-interface Fee {
-  year?: string;
-  costCenter?: string;
-  totalAmount?: string;
-  lawFirm?: string;
-}
+import { AmountFeesProps, Fee } from '../../../../entities/amountFees';
 
 const FEES_DATA: Fee[] = [
   { year: '2019', costCenter: 'CS 153', totalAmount: '3 500', lawFirm: 'Clifford chance' },

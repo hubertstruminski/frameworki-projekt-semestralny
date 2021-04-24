@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { HeaderProps } from '../../../entities/headerInterfaces/header';
+import { HeaderProps } from '../../../entities/header';
 import HeaderInput from './HeaderInput';
 import { Link } from 'react-router-dom';
 import { 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useState, useLayoutEffect, ReactElement } from 'react';
 import {
   Container,
   ImageContainer,
@@ -7,7 +7,7 @@ import {
   TopContainer
 } from '../../../styledHelpers/ProfilePageComponents';
 import ButtonsContainer from '../profilePage/ButtonsContainer';
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect, useSelector } from 'react-redux';
 import { StoreState } from '../../../store/reducers';
 import { fetchUserMe, fetchUserPhoto } from '../../../store/actions/userActions';
@@ -15,14 +15,9 @@ import ProfileDataContainer from '../profilePage/ProfileDataContainer';
 import ProfileDataForm from '../profilePage/ProfileDataForm';
 import BottomProfileDataContainer from '../profilePage/BottomProfileDataContainer';
 import LeftMenu from '../../common/leftMenu/LeftMenu';
+import { ProfilePageProps } from '../../../entities/profilePage';
 
-interface ProfilePageProps extends RouteComponentProps {
-  showHamburgerMenu: boolean;
-  fetchUserMe: Function;
-  fetchUserPhoto: Function;
-}
-
-const ProfilePage = (props: ProfilePageProps) => {
+const ProfilePage = (props: ProfilePageProps): ReactElement => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [city, setCity] = useState('New-york');
   const [width, setWidth] = useState('50%');

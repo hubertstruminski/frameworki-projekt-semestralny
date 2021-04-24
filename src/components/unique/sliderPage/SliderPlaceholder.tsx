@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
   BodyContainer,
   InternalContainer,
@@ -8,13 +8,9 @@ import {
   TopContainer,
   Wrapper
 } from '../../../styledHelpers/SliderPlaceholderComponents';
+import { SliderPlaceholderProps } from '../../../entities/sliderPlaceholder';
 
-interface SliderPlaceholderProps {
-  photoUrl?: string;
-  title: string;
-}
-
-const SliderPlaceholder = (props: SliderPlaceholderProps) => {
+const SliderPlaceholder = (props: SliderPlaceholderProps): ReactElement => {
   const { photoUrl, title } = props;
   return (
     <TopContainer>

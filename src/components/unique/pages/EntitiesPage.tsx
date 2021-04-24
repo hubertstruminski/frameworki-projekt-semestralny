@@ -24,17 +24,8 @@ import MosaicButton from '../entitiesPage/MosaicButton';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { fetchAllPhotos } from '../../../store/actions/photoActions';
 import ExpandableFilters from '../entitiesPage/ExpandableFilters';
+import { EntitiesPageProps, Entity } from '../../../entities/entitiesPage';
 
-interface EntitiesPageProps {
-  showHamburgerMenu: boolean;
-  fetchAllPhotos: Function;
-}
-
-interface Entity {
-  title: string;
-  body: string;
-  photoUrl: string;
-}
 
 const ENTITIES_DATA: Entity[] = [
   { title: 'ABC generic company', body: 'Caracas 1050, Distrito Capital, Venezuela', photoUrl: '' },

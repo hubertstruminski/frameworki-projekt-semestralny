@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import useDropdown from 'react-dropdown-hook';
 import { StoreState } from '../../../store/reducers';
 import { connect, useSelector } from 'react-redux';
@@ -9,17 +9,10 @@ import {
   SmallestContainer
 } from '../../../styledHelpers/FollowedButtonComponents';
 import { Colors } from '../../../styledHelpers/Colors';
+import { FollowedButtonProps } from '../../../entities/followedButton';
 
-interface FollowedButtonProps {
-  onClick?: () => {};
-  showHamburgerMenu: boolean;
-  setSearchTerm: Function;
-  isOutline?: boolean;
-  setIsFollowedClicked?: Function;
-  setActivePage?: Function;
-}
 
-const FollowedButton = (props: FollowedButtonProps) => {
+const FollowedButton = (props: FollowedButtonProps): ReactElement => {
   const { 
     showHamburgerMenu, 
     setSearchTerm, 

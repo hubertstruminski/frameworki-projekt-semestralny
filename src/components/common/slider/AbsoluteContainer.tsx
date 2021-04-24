@@ -1,13 +1,7 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
+import { AbsoluteContainerProps } from '../../../entities/absoluteContainer';
 
-interface AbsoluteContainerProps {
-  children: ReactNode
-  right?: number;
-  top?: number;
-  left?: number;
-}
-
-const AbsoluteContainer = (props: AbsoluteContainerProps) => {
+const AbsoluteContainer = (props: AbsoluteContainerProps): ReactElement => {
   const { children, right, top, left } = props;
   return (
     <div 

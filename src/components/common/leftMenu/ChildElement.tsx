@@ -5,15 +5,8 @@ import {
   TitleContainer,
   RightIconContainer
 } from '../../../styledHelpers/ChildElementComponents';
+import { ChildElementProps } from '../../../entities/childElement';
 
-interface ChildElementProps {
-  leftIconPath: string;
-  title: string;
-  rightIconPath?: string;
-  withRightIcon: boolean;
-  marginBottom?: number;
-  navigateTo: string;
-}
 
 const ChildElement = (props: ChildElementProps): ReactElement => {
   const { 

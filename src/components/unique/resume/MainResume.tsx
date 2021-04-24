@@ -13,16 +13,7 @@ import Ecosystem from '../../../svgs/ecosystem';
 import Comments from '../../../svgs/comments';
 import Bell from '../../../svgs/bell';
 import { randomInteger } from '../../../tools/tools';
-
-interface MainResumeProps {
-  commentName: string;
-  body: string;
-  photoUrl: string;
-  username: string | undefined;
-  name: string;
-  showHamburgerMenu: boolean;
-  isComponentsBar: boolean;
-}
+import { MainResumeProps } from '../../../entities/mainResume';
 
 const MainResume = (props: MainResumeProps): ReactElement => {
   const { 

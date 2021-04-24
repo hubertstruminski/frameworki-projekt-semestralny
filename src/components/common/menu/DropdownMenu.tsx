@@ -24,11 +24,7 @@ import {
 } from '../../../styledHelpers/DropdownMenuComponents';
 import { WORKSPACES_DATA } from '../../../mocks/homePageMocks';
 import { Workspace } from '../../../entities/homePage';
-
-interface DropdownMenuProps {
-  setDropdownUrl: Function;
-  setDropdownTitle: Function;
-}
+import { DropdownMenuProps } from '../../../entities/dropdownMenu';
 
 const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>('');

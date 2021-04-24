@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactElement, ReactNode, useState } from 'react';
 import { 
   ItemContainer,
   WrapInlineContainer,
@@ -6,15 +6,9 @@ import {
   cancelIconStyles
 } from '../../../styledHelpers/InlinePropertiesComponents';
 import { inputStyles } from '../../../styledHelpers/ProfileDataFormComponents';
+import { InlinePropertiesProps } from '../../../entities/inlineProperties';
 
-interface InlinePropertiesProps {
-  data: string[];
-  isMainElement?: boolean;
-  setState?: Function;
-  isFormVisible: boolean;
-}
-
-const InlineProperties = (props: InlinePropertiesProps) => {
+const InlineProperties = (props: InlinePropertiesProps): ReactElement => {
   const [newElement, setNewElement] = useState('');
 
   const { data, isMainElement, setState, isFormVisible } = props;

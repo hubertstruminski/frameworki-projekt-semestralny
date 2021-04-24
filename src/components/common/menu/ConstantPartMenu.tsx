@@ -9,13 +9,7 @@ import {
   CONSTANT_MENU_ITEMS,
   IMenuItem, 
 } from '../../../mocks/MenuMocks';
-
-interface ConstantPartMenuProps {
-  name: string;
-  url: string;
-  setDropdownTitle: Function;
-  setDropdownUrl: Function;
-}
+import { ConstantPartMenuProps } from '../../../entities/constantPartMenu';
 
 const ConstantPartMenu = (props: ConstantPartMenuProps): ReactElement => {
   const { name, url, setDropdownTitle, setDropdownUrl } = props;

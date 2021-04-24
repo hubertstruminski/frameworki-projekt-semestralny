@@ -12,17 +12,10 @@ import "slick-carousel/slick/slick-theme.css";
 import ResumeView from '../resume/ResumeView';
 import LeftMenu from '../../common/leftMenu/LeftMenu';
 import { BasicContainer, Container } from '../../../styledHelpers/HomePageComponents';
-import { Workspace } from '../../../entities/homePage';
+import { Workspace, HomePageProps } from '../../../entities/homePage';
 import { WORKSPACES_DATA } from '../../../mocks/homePageMocks';
 
-interface HomePageProps {
-  fetchAllPublications: Function;
-  fetchAllUsers: Function;
-  fetchAllPhotos: Function;
-  showHamburgerMenu: boolean;
-}
-
-const HomePage = (props: HomePageProps) => {
+const HomePage = (props: HomePageProps): ReactElement => {
   const [sliderWidth, setSliderWidth] = useState<number>((window.innerWidth * 0.9)- 285);
   const { 
     fetchAllPublications, 

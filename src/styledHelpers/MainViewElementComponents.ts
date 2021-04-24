@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Colors } from "./Colors";
 import { fontSize } from "./FontSizes";
-import { MainViewElementProps } from '../components/unique/publications/MainViewElement';
+import { MainViewElementProps } from '../entities/mainViewElement';
 
 export const Container = styled.div`
   height: 100%;

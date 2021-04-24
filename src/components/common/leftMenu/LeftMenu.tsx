@@ -12,13 +12,9 @@ import {
   JobTitleContainer,
   ItemsContainer,
 } from '../../../styledHelpers/LeftMenuComponents';
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { LeftMenuProps } from '../../../entities/leftMenu';
 
-interface LeftMenuProps extends RouteComponentProps {
-  fetchUserMe: Function;
-  fetchUserPhoto: Function;
-  showHamburgerMenu: boolean;
-}
 
 const LeftMenu = (props: LeftMenuProps): ReactElement => {
   const { fetchUserMe, fetchUserPhoto, showHamburgerMenu, history } = props;

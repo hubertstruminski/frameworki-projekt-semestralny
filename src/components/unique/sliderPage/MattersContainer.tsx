@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { ReactElement, useLayoutEffect, useState } from 'react';
 import { 
   Container, 
   Wrapper, 
@@ -9,13 +9,7 @@ import MatterItem from '../../common/slider/MatterItem';
 import Ecosystem from '../../../svgs/ecosystem';
 import Comments from '../../../svgs/comments';
 
-interface MattersContainerProps {
-
-}
-
-
-
-const MattersContainer = (props: MattersContainerProps) => {
+const MattersContainer = (): ReactElement => {
   const [bigIconSize, setBigIconSize] = useState(150);
   const [height, setHeight] = useState(200);
   const [isSmallScreen, setIsSmallScreen] = useState(false);

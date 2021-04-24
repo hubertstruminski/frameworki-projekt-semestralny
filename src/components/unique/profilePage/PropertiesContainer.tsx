@@ -1,25 +1,13 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { 
   MainTypeDiv,
   TypeDiv,
   TypeSpan
 } from '../../../styledHelpers/PropertiesContainerComponents';
 import InlineProperties from '../../common/profile/InlineProperties';
+import { PropertiesContainerProps } from '../../../entities/propertiesContainer';
 
-interface PropertiesContainerProps {
-  expertises: string[];
-  specialities: string[];
-  admissions: string[];
-  counties: string[];
-  setExpertises: Function;
-  setSpecialities: Function;
-  setAdmisssions: Function;
-  setCounties: Function;
-  isFormVisible: boolean;
-  onEditForm: Function;
-}
-
-const PropertiesContainer = (props: PropertiesContainerProps) => {
+const PropertiesContainer = (props: PropertiesContainerProps): ReactElement => {
   const { 
     expertises, 
     admissions, 

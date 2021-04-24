@@ -4,16 +4,7 @@ import {
   ValueSpan
 } from '../../../styledHelpers/SentenceComponentComponents';
 import { Colors } from '../../../styledHelpers/Colors';
-
-interface SentenceComponentProps {
- title: string;
- value: string;
- color?: string;
- fontSize?: string;
- isBold?: boolean;
- isFormVisible: boolean;
- isMainElement?: boolean;
-}
+import { SentenceComponentProps } from '../../../entities/sentenceComponent';
 
 const SentenceComponent = (props: SentenceComponentProps): ReactElement => {
   const { 

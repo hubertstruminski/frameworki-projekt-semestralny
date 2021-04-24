@@ -3,14 +3,7 @@ import {
   Container,
   ItemContainer
 } from '../../../styledHelpers/WorkspaceDetailsComponents';
-
-interface WorkspaceDetailsProps {
-  photoUrl: string;
-  type: string;
-  users: number;
-  icon: string;
-  showHamburgerMenu: boolean;
-}
+import { WorkspaceDetailsProps } from '../../../entities/workspaceDetails';
 
 const WorkspaceDetails = (props: WorkspaceDetailsProps): ReactElement => {
   const { type, users, icon, showHamburgerMenu } = props;

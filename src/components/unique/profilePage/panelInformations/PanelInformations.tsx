@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
   MainTitle
 } from '../../../../styledHelpers/PanelInformationsComponents';
@@ -6,12 +6,9 @@ import { Colors } from '../../../../styledHelpers/Colors';
 import Correspondants from './Correspondants';
 import FileTaker from './FileTaker';
 import SentenceComponent from '../../../common/profile/SentenceComponent';
+import { PanelInformationsProps } from '../../../../entities/panelInformations';
 
-interface PanelInformationsProps {
-  isFormVisible: boolean;
-}
-
-const PanelInformations = (props: PanelInformationsProps) => {
+const PanelInformations = (props: PanelInformationsProps): ReactElement => {
   const { isFormVisible } = props;
   return (
     <React.Fragment>

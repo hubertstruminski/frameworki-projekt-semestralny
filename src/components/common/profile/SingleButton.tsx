@@ -1,15 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
   Container
 } from '../../../styledHelpers/SingleButtonComponents';
+import { SingleButtonProps } from '../../../entities/singleButton';
 
-interface SingleButtonProps {
-  title?: string;
-  iconUrl: string
-  isRotatedIcon?: boolean;
-}
-
-const SingleButton = (props: SingleButtonProps) => {
+const SingleButton = (props: SingleButtonProps): ReactElement => {
   const { iconUrl, title, isRotatedIcon } = props;
 
   const buttonIconStyles = {

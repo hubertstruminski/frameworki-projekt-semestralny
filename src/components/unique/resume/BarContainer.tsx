@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Container } from '../../../styledHelpers/BarContainerComponents';
 import BarItem from '../../common/resume/BarItem';
 import Entities2 from '../../../svgs/entities2';
@@ -6,18 +6,7 @@ import Comments from '../../../svgs/comments';
 import Ecosystem from '../../../svgs/ecosystem';
 import Bell from '../../../svgs/bell';
 
-interface BarContainerProps {
-
-}
-
-export interface IBarItem {
-  isIconVisible: boolean;
-  color: string;
-  backgroundColor: string;
-  title: string;
-}
-
-const BarContainer = (props: BarContainerProps) => {
+const BarContainer = (): ReactElement => {
   return (
     <Container>
       <BarItem 

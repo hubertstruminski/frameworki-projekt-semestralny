@@ -3,17 +3,9 @@ import {
   Container,
   TextContainer
 } from '../../../styledHelpers/MenuItemComponents';
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { MenuItemProps } from '../../../entities/menuItem';
 
-interface MenuItemProps extends RouteComponentProps {
-  iconUrl: string;
-  routeUrl: string;
-  title: string;
-  setDropdownTitle: Function;
-  setDropdownUrl: Function;
-  photoUrl?: string;
-  icon?: string;
-}
 
 const MenuItem = (props: MenuItemProps): ReactElement => {
   const { 

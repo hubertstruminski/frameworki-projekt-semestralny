@@ -1,14 +1,9 @@
-import React, { ChangeEventHandler, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import {
   Container,
   inputStyles
 } from '../../../styledHelpers/InputComponents';
-
-interface InputProps {
-  placeholder: string;
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-}
+import { InputProps } from '../../../entities/input';
 
 const Input = (props: InputProps): ReactElement => {
   const { placeholder, value, onChange } = props;

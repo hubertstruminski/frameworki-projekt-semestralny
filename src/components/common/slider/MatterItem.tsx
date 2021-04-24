@@ -1,23 +1,11 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import {
   ItemContainer
 } from '../../../styledHelpers/MatterItemComponents';
 import AbsoluteContainer from './AbsoluteContainer';
+import { MatterItemProps } from '../../../entities/matterItem';
 
-interface MatterItemProps {
-  smallIcon: ReactNode;
-  bigIcon: ReactNode;
-  firstTitle: string;
-  secondTitle: string;
-  body: string;
-  minHeight: number;
-  isSmallScreen: boolean;
-}
-
-
-
-
-const MatterItem = (props: MatterItemProps) => {
+const MatterItem = (props: MatterItemProps): ReactElement => {
   const { 
     smallIcon, 
     bigIcon, 

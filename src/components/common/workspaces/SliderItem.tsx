@@ -11,18 +11,8 @@ import {
   TitleContainer,
   TopContainer,
 } from '../../../styledHelpers/SliderItemComponents';
-import { RouteComponentProps, withRouter } from "react-router-dom";
-
-interface SliderItemProps extends RouteComponentProps {
-  photoUrl: string;
-  title: string;
-  type: string;
-  users: number;
-  icon: string;
-  days: number;
-  isRelative: boolean;
-  showHamburgerMenu: boolean;
-}
+import { withRouter } from "react-router-dom";
+import { SliderItemProps }  from '../../../entities/sliderItem';
 
 const SliderItem = (props: SliderItemProps): ReactElement => {
   const { photoUrl, title, type, users, icon, days, showHamburgerMenu, history } = props;

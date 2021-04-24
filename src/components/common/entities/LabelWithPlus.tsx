@@ -2,10 +2,7 @@ import React, { ReactElement } from 'react';
 import {  
   LabelText
 } from '../../../styledHelpers/ExpandableFiltersComponents';
-
-interface LabelWithPlusProps {
-  title: string;
-}
+import { LabelWithPlusProps } from '../../../entities/labelWithPlus';
 
 const LabelWithPlus = (props: LabelWithPlusProps): ReactElement => {
   const { title } = props;

@@ -1,16 +1,8 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import { Container } from '../../../styledHelpers/BarItemComponents';
+import { BarItemProps } from '../../../entities/barItem';
 
-interface BarItemProps {
- isIconVisible?: boolean;
- icon?: ReactNode;
- color: string;
- backgroundColor: string;
- title: string;
- isMargin?: boolean;
-}
-
-const BarItem = (props: BarItemProps) => {
+const BarItem = (props: BarItemProps): ReactElement => {
   const { 
     isIconVisible, 
     icon,

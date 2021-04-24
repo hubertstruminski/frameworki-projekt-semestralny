@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Container } from '../../../styledHelpers/TestPageComponents';
 
-const TestPage = (props: any) => {
+const TestPage = (): ReactElement => {
   return (
     <Container>
       <h1>Test Page!</h1>

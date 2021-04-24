@@ -1,12 +1,8 @@
 import React, { ReactElement } from 'react';
-import { PublicationDto } from '../../../entities/headerInterfaces/publication';
+import { PublicationDto } from '../../../entities/publication';
 import PublicationComponent from './PublicationComponent';
 import { Container } from '../../../styledHelpers/PublicationListComponents';
-
-interface PublicationListProps {
-  collection: PublicationDto[];
-  showHamburgerMenu: boolean;
-}
+import { PublicationListProps } from '../../../entities/publicationList';
 
 const PublicationList = (props: PublicationListProps): ReactElement => {
   const { collection, showHamburgerMenu } = props;

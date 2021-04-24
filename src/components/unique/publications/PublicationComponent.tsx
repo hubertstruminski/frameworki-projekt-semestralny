@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { PublicationDto } from '../../../entities/headerInterfaces/publication';
+import { PublicationProps } from '../../../entities/publicationComponent';
 import { Colors } from '../../../styledHelpers/Colors';
 import {
   BodyContainer,
@@ -9,11 +9,6 @@ import {
   LeftContainer,
   RightContainer
 } from '../../../styledHelpers/PublicationComponents';
-
-interface PublicationProps {
-  publication: PublicationDto;
-  showHamburgerMenu: boolean;
-}
 
 const PublicationComponent = (props: PublicationProps): ReactElement => {
   const { publication: { body, name, urls }, showHamburgerMenu } = props;

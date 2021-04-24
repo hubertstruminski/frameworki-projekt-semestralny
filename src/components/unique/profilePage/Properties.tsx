@@ -1,10 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import PropertiesContainer from './PropertiesContainer';
-
-interface PropertiesProps {
-  isFormVisible: boolean;
-  setIsFormVisible: Function;
-}
+import { PropertiesProps } from '../../../entities/properties';
 
 const Properties = (props: PropertiesProps): ReactElement => {
   const [expertises, setExpertises] = useState(['Mergers and acquisition']);

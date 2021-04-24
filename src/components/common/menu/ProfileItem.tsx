@@ -4,12 +4,9 @@ import {
   LinkSpan,
   NameContainer
 } from '../../../styledHelpers/ProfileItemComponents';
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { ProfileItemProps } from '../../../entities/profileItem';
 
-interface ProfileItemProps extends RouteComponentProps {
-  photoUrl: string;
-  name: string;
-}
 
 
 

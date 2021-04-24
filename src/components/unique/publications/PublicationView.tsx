@@ -7,7 +7,7 @@ import { connect, useSelector } from 'react-redux';
 import { User } from '../../../store/actions/userActions';
 import { Publication } from '../../../store/actions/publicationActions';
 import { Photo } from '../../../store/actions/photoActions';
-import { PublicationDto } from '../../../entities/headerInterfaces/publication';
+import { PublicationDto } from '../../../entities/publication';
 import {
   Container,
   LeftContainer,
@@ -15,10 +15,7 @@ import {
   RightContainer,
   RightWrapper
 } from '../../../styledHelpers/PublicationViewComponents';
-
-interface PublicationListProps {
-  showHamburgerMenu: boolean;
-}
+import { PublicationListProps } from '../../../entities/publicationView';
 
 const PublicationView = (props: PublicationListProps): ReactElement => {
   const [collection, setCollection] = useState<PublicationDto[]>([]);

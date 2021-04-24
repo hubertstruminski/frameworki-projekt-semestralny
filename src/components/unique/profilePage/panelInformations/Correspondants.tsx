@@ -9,10 +9,7 @@ import {
 } from '../../../../styledHelpers/CorrespondantsComponents';
 import { inputStyles } from '../../../../styledHelpers/ProfileDataFormComponents';
 import { cancelIconStyles, buttonStyles } from '../../../../styledHelpers/InlinePropertiesComponents';
-
-interface CorrespondantsProps {
-  isFormVisible: boolean;
-}
+import { CorrespondantsProps } from '../../../../entities/correspondants';
 
 const Correspondants = (props: CorrespondantsProps): ReactElement => {
   const [people, setPeople] = useState([

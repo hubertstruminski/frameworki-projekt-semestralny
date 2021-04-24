@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { User, updateUser } from '../../../store/actions/userActions';
 import { StoreState } from '../../../store/reducers';
 import {
@@ -8,16 +8,9 @@ import {
 } from '../../../styledHelpers/ProfileDataContainerComponents';
 import { connect } from 'react-redux';
 import { buttonStyles, inputStyles } from '../../../styledHelpers/ProfileDataFormComponents'; 
+import { ProfileDataFormProps } from '../../../entities/profileDataForm';
 
-interface ProfileDataFormProps {
-  onEditProfileDataClick: Function;
-  setCity: Function;
-  userMe: User;
-  city: string;
-  updateUser: Function;
-}
-
-const ProfileDataForm = (props: ProfileDataFormProps) => {
+const ProfileDataForm = (props: ProfileDataFormProps): ReactElement => {
   const { onEditProfileDataClick, setCity, userMe, city, updateUser } = props;
   const { name, company: { bs }, email, phone, company } = userMe;
 

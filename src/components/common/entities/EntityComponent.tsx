@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
   BodySpan,
   Container,
@@ -6,18 +6,13 @@ import {
   RightContainer,
   TitleSpan
 } from '../../../styledHelpers/EntityComponentComponents';
-
-interface EntityComponentProps {
-  photoUrl: string;
-  title: string;
-  body: string;
-  isMosaicLayout: boolean;
-}
+import { EntityComponentProps } from '../../../entities/entityComponent';
 
 
 
 
-const EntityComponent = (props: EntityComponentProps) => {
+
+const EntityComponent = (props: EntityComponentProps): ReactElement => {
   const { photoUrl, title, body, isMosaicLayout } = props;
   return (
     <Container

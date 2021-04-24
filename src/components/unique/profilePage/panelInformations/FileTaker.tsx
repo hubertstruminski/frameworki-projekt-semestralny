@@ -3,10 +3,7 @@ import {
   Container,
   TextSpan
 } from '../../../../styledHelpers/FileTakerComponents';
-
-interface FileTakerProps {
-  isFormVisible: boolean;
-}
+import { FileTakerProps } from '../../../../entities/fileTaker';
 
 const FileTaker = (props: FileTakerProps): ReactElement => {
   const [fileName, setFileName] = useState('Attachment_lorem-ipsum25425.jpg');

@@ -12,18 +12,7 @@ import {
   inputStyles
 } from '../../../../styledHelpers/ProposalsComponents';
 import { MoreContainer } from '../../../../styledHelpers/InternalReviewsComponents';
-
-interface InternalReviewsProps {
-  isFormVisible: boolean;
-}
-
-interface Review {
-  name?: string;
-  entity?: string;
-  location?: string;
-  expertise?: string;
-  date?: string;
-}
+import { InternalReviewsProps, Review } from '../../../../entities/internalReviews';
 
 const REVIEW_DATA: Review[] = [
   { name: 'Operation Tindeen', entity: 'Renault Cordova', location: 'France', expertise: '#Tax', date: '20/01/2018' },

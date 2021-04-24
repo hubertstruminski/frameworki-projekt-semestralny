@@ -3,16 +3,7 @@ import {
   Container,
   TextSpan
 } from '../../../styledHelpers/FilterButtonComponents';
-
-interface FilterButtonProps {
- iconUrl: string;
- text?: string;
- appendText?: boolean;
- isMarginLeft?: boolean;
- onClick?: Function;
-}
-
-
+import { FilterButtonProps } from '../../../entities/filterButton';
 
 const FilterButton = (props: FilterButtonProps): ReactElement => {
   const { iconUrl, text, appendText, isMarginLeft, onClick } = props;

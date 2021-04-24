@@ -5,13 +5,7 @@ import {
   TextContainer
 } from '../../../styledHelpers/MosaicButtonComponents';
 import { Colors } from '../../../styledHelpers/Colors';
-
-interface MosaicButtonProps {
-  iconUrl: string;
-  setIsMosaicLayout: Function;
-}
-
-
+import { MosaicButtonProps } from '../../../entities/mosaicButton';
 
 const MosaicButton = (props: MosaicButtonProps): ReactElement => {
   const [isEnabled, setIsEnabled] = useState(true);

@@ -12,19 +12,7 @@ import {
   buttonStyles,
   inputStyles
 } from '../../../../styledHelpers/ProposalsComponents';
-
-interface ProposalsProps {
-  isFormVisible: boolean;
-}
-
-interface Proposal {
-  name?: string;
-  entity?: string;
-  location?: string;
-  expertise?: string;
-  date?: string;
-  firm?: string;
-}
+import { Proposal, ProposalsProps } from '../../../../entities/proposals';
 
 const PROPOSALS_DATA: Proposal[] = [
   { name: 'Operation Tindeen', entity: 'Renault Cordova', location: 'France', expertise: '#Tax', date: '20/01/2018', firm: 'Racine' },

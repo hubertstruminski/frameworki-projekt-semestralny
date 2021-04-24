@@ -1,22 +1,13 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {  
   Container,
   LeftContainer,
   RightContainer,
   TextContainer
 } from '../../../styledHelpers/ProfileDataContainerComponents';
+import { ProfileDataContainerProps } from '../../../entities/profileDataContainer';
 
-interface ProfileDataContainerProps {
-  name: string;
-  companyName: string;
-  city: string;
-  bs: string | undefined;
-  onEditProfileDataClick: Function;
-  email: string | undefined;
-  phone: string | undefined;
-}
-
-const ProfileDataContainer = (props: ProfileDataContainerProps) => {
+const ProfileDataContainer = (props: ProfileDataContainerProps): ReactElement => {
   const { name, companyName, city, bs, email, onEditProfileDataClick, phone } = props;
   
   const onEdit = () => {

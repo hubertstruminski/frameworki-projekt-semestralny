@@ -6,14 +6,7 @@ import {
   DetailsSpan,
   imgStyles
 } from '../../../styledHelpers/MainViewElementComponents';
-
-export interface MainViewElementProps {
-  userName?: string;
-  userPhotoUrl?: string;
-  body?: string;
-  backgroundImageUrl?: string;
-  showHamburgerMenu?: boolean;
-}
+import { MainViewElementProps } from '../../../entities/mainViewElement';
 
 const MainViewElement = (props: MainViewElementProps): ReactElement => {
   const { 

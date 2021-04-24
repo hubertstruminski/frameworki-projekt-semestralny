@@ -1,14 +1,8 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Container } from '../../../styledHelpers/ButtonsContainerComponents';
 import SingleButton from '../../common/profile/SingleButton';
 
-interface ButtonsContainerProps {
-
-}
-
-
-
-const ButtonsContainer = (props: ButtonsContainerProps) => {
+const ButtonsContainer = (): ReactElement => {
   return (
     <Container>
       <SingleButton 

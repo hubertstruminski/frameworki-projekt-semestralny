@@ -1,9 +1,6 @@
 import React, { ReactElement } from 'react';
 import { inputStyles } from '../../../styledHelpers/DisabledInputComponents';
-
-interface DisabledInputProps {
-  placeholder: string;
-}
+import { DisabledInputProps } from '../../../entities/disabledInput';
 
 const DisabledInput = (props: DisabledInputProps): ReactElement => {
   const { placeholder } = props;
