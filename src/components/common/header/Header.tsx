@@ -54,7 +54,13 @@ const Header = (props: HeaderProps): ReactElement => {
             style={arrowDownContainerStyles}
             onClick={toggleDropdown}
           >
-            <div style={{ flexDirection: 'row', display: 'flex', alignItems: 'center'}}>
+            <div 
+              style={{ 
+                flexDirection: 'row', 
+                display: 'flex', 
+                alignItems: 'center'
+              }}
+            >
               <img src={process.env.PUBLIC_URL + dropdownUrl} alt="" />
               <TextContainer style={{margin: '15px'}}>
                 <Link style={{ textDecoration: 'none' }} to="/">{dropdownTitle}</Link>

@@ -17,6 +17,7 @@ import {
 } from '../../../styledHelpers/ResumeViewComponents';
 import BarContainer from './BarContainer';
 import { Resume, ResumeViewProps } from '../../../entities/resumeView';
+import '../../../styledHelpers/resumeView.css';
 
 const ResumeView = (props: ResumeViewProps): ReactElement => {
   const [resumes, setResumes] = useState<Resume[]>([]);
@@ -147,10 +148,6 @@ const ResumeView = (props: ResumeViewProps): ReactElement => {
       </div>
     </Container>
   );
-}
-
-ResumeView.defaultProps = {
-  
 }
 
 function mapStateToProps(state: StoreState) {

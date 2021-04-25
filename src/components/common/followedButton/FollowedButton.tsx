@@ -54,8 +54,20 @@ const FollowedButton = (props: FollowedButtonProps): ReactElement => {
         <SmallestContainer>o</SmallestContainer>
         <SmallerContainer>)</SmallerContainer>
         ) 
-        <div style={{marginLeft: showHamburgerMenu ? 2 : 10, marginTop: 2, fontSize: showHamburgerMenu ? '2.5vw' : '0.9vw'}}>Followed</div>
-        <div style={{marginLeft: showHamburgerMenu ? 2 : 10, marginTop: -2}}>
+        <div 
+          style={{
+            marginLeft: showHamburgerMenu ? 2 : 10, 
+            marginTop: 2, 
+            fontSize: showHamburgerMenu ? '2.5vw' : '0.9vw'
+          }}>
+            Followed
+          </div>
+        <div 
+          style={{
+            marginLeft: showHamburgerMenu ? 2 : 10, 
+            marginTop: -2
+          }}
+        >
           <img src={process.env.PUBLIC_URL + "/media/icons/arrow-down.svg"} alt="" />
         </div>
       </Container>

@@ -12,44 +12,11 @@ code {
     monospace;
 }
 
-#searchLegalclusterInput::placeholder {
-  color: #989ba0;
-  text-align: center;
-}
-
-.pagination {
-  display: flex;
-  /* justify-content: space-between; */
-  list-style: none;
-  cursor: pointer;
-}
-
-.pagination a {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #6c7ac9;
-  color: #6c7ac9;
-}
-
-.pagination__link {
-  font-weight: bold;
-}
-
-.pagination__link--active a {
-  color: #fff;
-  background: #6c7ac9;
-}
-
-.pagination__link--disabled a {
-  color: rgb(198, 197, 202);
-  border: 1px solid rgb(198, 197, 202);
-}
-
 a {
   color: #414144;
 }
 
-.fullscreen-enabled .fullScreenContainer {
+/* .fullscreen-enabled .fullScreenContainer {
   background: white;
   display: flex;
   justify-content: center;
@@ -59,8 +26,4 @@ a {
 
 .fullscreen-enabled {
   background: white;
-}
-
-.disabledInputFilters::placeholder {
-  color: #414144;
-}
+} */

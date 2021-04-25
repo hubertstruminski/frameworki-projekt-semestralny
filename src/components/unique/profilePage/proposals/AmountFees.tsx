@@ -13,8 +13,6 @@ import {
 import { AmountFeesProps, Fee } from '../../../../entities/amountFees';
 import { FEES_DATA } from '../../../../mocks/amountFeeMocks';
 
-
-
 const AmountFees = (props: AmountFeesProps): ReactElement => {
   const [year, setYear] = useState('');
   const [costCenter, setCostCenter] = useState('');

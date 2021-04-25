@@ -6,7 +6,6 @@ import ArrowDown from '../../../svgs/arrowDown';
 import { Container } from '../../../styledHelpers/ArrowDownContainerComponents';
 import { ArrowDownContainerProps } from '../../../entities/arrowDownContainer';
 
-
 const ArrowDownContainer = (props: ArrowDownContainerProps): ReactElement => {
   const { title, isJSComponent } = props;
   

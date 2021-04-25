@@ -7,7 +7,6 @@ import {
 } from '../../../styledHelpers/ChildElementComponents';
 import { ChildElementProps } from '../../../entities/childElement';
 
-
 const ChildElement = (props: ChildElementProps): ReactElement => {
   const { 
     leftIconPath, 

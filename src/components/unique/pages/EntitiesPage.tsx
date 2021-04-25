@@ -26,6 +26,7 @@ import { fetchAllPhotos } from '../../../store/actions/photoActions';
 import ExpandableFilters from '../entitiesPage/ExpandableFilters';
 import { EntitiesPageProps, Entity } from '../../../entities/entitiesPage';
 import { ENTITIES_DATA } from '../../../mocks/entitiesPageMocks';
+import '../../../styledHelpers/entitiesPage.css';
 
 const EntititiesPage = (props: EntitiesPageProps): ReactElement => {
   const [isMosaicLayout, setIsMosaicLayout] = useState(true);

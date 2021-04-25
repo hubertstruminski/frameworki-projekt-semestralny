@@ -3,6 +3,7 @@ import {
   Container,
   inputStyles
 } from '../../../styledHelpers/HeaderInputComponents';
+import '../../../styledHelpers/headerInput.css';
 
 const HeaderInput = (): ReactElement => {
   return (

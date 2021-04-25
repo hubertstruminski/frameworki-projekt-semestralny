@@ -125,7 +125,14 @@ const DropdownMenu = (props: DropdownMenuProps): ReactElement => {
 
   return (
     <MenuContainer>
-      <Container style={{ marginLeft: 10, display: 'flex', flex: 1 }} onClick={(e) => e.stopPropagation()}>
+      <Container 
+        style={{ 
+          marginLeft: 10, 
+          display: 'flex', 
+          flex: 1
+        }} 
+        onClick={(e) => e.stopPropagation()}
+      >
         <input 
           type="text" 
           placeholder="Filter..." 
